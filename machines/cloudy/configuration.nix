@@ -7,6 +7,9 @@
   imports = [
     ../../modules/disko.nix
     ../../modules/shared.nix
+
+    ../../modules/synapse-admin.nix
+
     clan-core.clanModules.matrix-synapse
   ];
   # Put your username here for login
@@ -16,6 +19,15 @@
   # If you change the hostname, you need to update this line to root@<new-hostname>
   # This only works however if you have avahi running on your admin machine else use IP
   clan.core.networking.targetHost = "root@cloudy";
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      22
+      80
+      443
+    ];
+  };
 
   disko.devices.disk.main.device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_59179759";
 
@@ -40,42 +52,6 @@
         admin = true;
       };
     };
-  };
-
-  clan.core.vars.generators.matrix-synapse-captcha = {
-    prompts.captcha-private-key = {
-      type = "line";
-      description = "The private key for the captcha";
-    };
-    prompts.captcha-public-key = {
-      type = "line";
-      description = "The public key for the captcha";
-    };
-
-    files.captcha-config = {
-      secret = true;
-      owner = "matrix-synapse";
-    };
-
-    script = ''
-      echo "enable_registration_captcha: true" > $out/captcha-config
-      echo "recaptcha_public_key: $prompts/public-key" >> $out/captcha-config
-      echo "recaptcha_private_key: $prompts/private-key" >> $out/captcha-config
-    '';
-  };
-
-  services.matrix-synapse = {
-    settings = {
-      enable_registration = false;
-      log = {
-        root = {
-          level = "DEBUG";
-        };
-      };
-    };
-    extraConfigFiles = [
-      config.clan.core.vars.generators.matrix-synapse-captcha.files.captcha-config.path
-    ];
   };
 
   /*
