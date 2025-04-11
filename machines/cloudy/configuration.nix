@@ -54,6 +54,10 @@
     };
   };
 
+  services.matrix-synapse.settings = {
+    max_upload_size = "100M";
+  };
+
   /*
   After jon is deployed, uncomment the following line
   This will allow sara to share the VPN overlay network with jon
