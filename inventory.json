@@ -1,0 +1,9 @@
+{
+  "machines": {
+    "sparrow": {
+      "name": "sparrow",
+      "tags": [],
+      "deploy": {}
+    }
+  }
+}
