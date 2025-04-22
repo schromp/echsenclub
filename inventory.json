@@ -4,6 +4,11 @@
       "name": "sparrow",
       "tags": [],
       "deploy": {}
+    },
+    "quiescent": {
+      "name": "quiescent",
+      "tags": [],
+      "deploy": {}
     }
   }
 }
