@@ -1,4 +1,4 @@
-{ config, clan-core, ... }:
+{ config, clan-core, pkgs, ... }:
 {
   imports = [
     # Enables the OpenSSH server for remote access
@@ -26,4 +26,9 @@
     uid = 1000;
     openssh.authorizedKeys.keys = config.users.users.root.openssh.authorizedKeys.keys;
   };
+
+  environment.systemPackages = with pkgs; [
+    vim
+    git
+  ];
 }

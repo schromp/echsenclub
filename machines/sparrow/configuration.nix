@@ -6,11 +6,13 @@
     ./nextcloud.nix
     ./jellyfin.nix
     ./disko.nix
+    ./nginx.nix
   ];
 
   users.users.user.name = "lk";
 
   disko.devices.disk.main.device = "/dev/disk/by-id/wwn-0x50026b767b01bd9f";
+  boot.kernelModules = ["sg"];
 
   clan.core.networking.targetHost = "root@sparrow";
 
@@ -28,6 +30,7 @@
         53
         80
         443
+        8096
       ];
       allowedUDPPorts = [
         53
@@ -50,6 +53,7 @@
       interface = "enp0s31f6";
     };
   };
+
   services.openssh = {
     enable = true;
     ports = [22];
@@ -61,4 +65,11 @@
       PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
     };
   };
+
+  virtualisation.docker = {
+    enable = true;
+    autoPrune.enable = true;
+  };
+  # virtualisation.docker.storageDriver = "btrfs";
+  # virtualisation.oci-containers.backend = "docker";
 }
