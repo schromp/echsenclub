@@ -1,46 +1,51 @@
 {
   inputs.clan-core.url = "https://git.clan.lol/clan/clan-core/archive/main.tar.gz";
   inputs.nixpkgs.follows = "clan-core/nixpkgs";
+  inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-  outputs =
-    { self, clan-core, ... }:
-    let
-      # Usage see: https://docs.clan.lol
-      clan = clan-core.lib.buildClan {
-        inherit self;
-        # Ensure this is unique among all clans you want to use.
-        meta.name = "echsenclub";
+  outputs = {
+    self,
+    clan-core,
+    nixos-hardware,
+    ...
+  }: let
+    # Usage see: https://docs.clan.lol
+    clan = clan-core.lib.buildClan {
+      inherit self;
+      # Ensure this is unique among all clans you want to use.
+      meta.name = "echsenclub";
 
-        # All machines in ./machines will be imported.
+      # All machines in ./machines will be imported.
 
-        # Prerequisite: boot into the installer.
-        # See: https://docs.clan.lol/getting-started/installer
-        # local> mkdir -p ./machines/machine1
-        # local> Edit ./machines/<machine>/configuration.nix to your liking.
-        machines = {
-          # You can also specify additional machines here.
-          # somemachine = {
-          #  imports = [ ./some-machine/configuration.nix ];
-          # }
-        };
+      # Prerequisite: boot into the installer.
+      # See: https://docs.clan.lol/getting-started/installer
+      # local> mkdir -p ./machines/machine1
+      # local> Edit ./machines/<machine>/configuration.nix to your liking.
+      machines = {
+        # You can also specify additional machines here.
+        # somemachine = {
+        #  imports = [ ./some-machine/configuration.nix ];
+        # }
       };
-    in
-    {
-      inherit (clan) nixosConfigurations clanInternals;
-      # Add the Clan cli tool to the dev shell.
-      # Use "nix develop" to enter the dev shell.
-      devShells =
-        clan-core.inputs.nixpkgs.lib.genAttrs
-          [
-            "x86_64-linux"
-            "aarch64-linux"
-            "aarch64-darwin"
-            "x86_64-darwin"
-          ]
-          (system: {
-            default = clan-core.inputs.nixpkgs.legacyPackages.${system}.mkShell {
-              packages = [ clan-core.packages.${system}.clan-cli ];
-            };
-          });
+      inventory = {
+      };
     };
+  in {
+    inherit (clan) nixosConfigurations clanInternals;
+    # Add the Clan cli tool to the dev shell.
+    # Use "nix develop" to enter the dev shell.
+    devShells =
+      clan-core.inputs.nixpkgs.lib.genAttrs
+      [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ]
+      (system: {
+        default = clan-core.inputs.nixpkgs.legacyPackages.${system}.mkShell {
+          packages = [clan-core.packages.${system}.clan-cli];
+        };
+      });
+  };
 }
