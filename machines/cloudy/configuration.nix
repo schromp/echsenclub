@@ -19,6 +19,9 @@
   # If you change the hostname, you need to update this line to root@<new-hostname>
   # This only works however if you have avahi running on your admin machine else use IP
   clan.core.networking.targetHost = "root@cloudy";
+  clan.zerotier.moon.stableEndpoints = [
+    "157.180.37.119"
+  ];
 
   networking.firewall = {
     enable = true;

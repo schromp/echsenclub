@@ -2,6 +2,10 @@
   imports = [
     ../../modules/disko.nix
     ../../modules/shared.nix
+
+    ./nextcloud.nix
+    ./jellyfin.nix
+    ./disko.nix
   ];
 
   users.users.user.name = "lk";
@@ -17,11 +21,44 @@
   ];
 
   networking = {
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        22
+        53
+        80
+        443
+      ];
+      allowedUDPPorts = [
+        53
+      ];
+    };
+
+    nameservers = ["1.1.1.1"];
+
     interfaces."enp0s31f6" = {
-      ipv4.addresses = [{
-        address = "192.168.178.2";
-        prefixLength = 24;
-      }];
+      ipv4.addresses = [
+        {
+          address = "192.168.178.2";
+          prefixLength = 24;
+        }
+      ];
+    };
+
+    defaultGateway = {
+      address = "192.168.178.1";
+      interface = "enp0s31f6";
+    };
+  };
+  services.openssh = {
+    enable = true;
+    ports = [22];
+    settings = {
+      PasswordAuthentication = false;
+      AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
+      # UseDns = true;
+      # X11Forwarding = false;
+      PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
     };
   };
 }
