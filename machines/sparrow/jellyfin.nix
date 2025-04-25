@@ -31,9 +31,10 @@
       ARM_UID = "1001";
       ARM_GID = "1001";
     };
+    extraOptions = ["--gpus=all"];
     volumes = [
       "/home/arm:/home/arm"
-      # "/srv/media/movies:/home/arm/media/completed"
+      "/srv/media/movies:/home/arm/media/completed/movies"
       "/etc/arm/config:/etc/arm/config"
     ];
     devices = [
@@ -49,7 +50,7 @@
     isNormalUser = true;
     home = "/home/arm";
     group = "arm";
-    extraGroups = [ "jellyfin" ];
+    extraGroups = ["jellyfin"];
   };
 
   users.groups.arm = {

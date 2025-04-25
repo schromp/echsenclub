@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     ../../modules/disko.nix
     ../../modules/shared.nix
@@ -66,7 +70,18 @@
     };
   };
 
-  virtualisation.docker = {
+  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.nvidia.acceptLicense = true;
+  hardware.nvidia.open = false;
+  hardware.nvidia-container-toolkit.enable = true;
+  services.xserver.videoDrivers = ["nvidia"];
+
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [nvidia-vaapi-driver];
+  };
+
+  virtualisation.podman = {
     enable = true;
     autoPrune.enable = true;
   };
