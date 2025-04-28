@@ -1,0 +1,3 @@
+SMTPConfiguration:
+  SMTP:
+    Password: /tmp/vars-dz2rxc6s/prompts/hydroxide-bridge-pw
