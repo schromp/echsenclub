@@ -1,0 +1,3 @@
+SMTPConfiguration:
+  SMTP:
+    Password: /tmp/vars-n_q7fobg/prompts/hydroxide-bridge-pw
