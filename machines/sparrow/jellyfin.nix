@@ -34,7 +34,7 @@
     extraOptions = ["--gpus=all"];
     volumes = [
       "/home/arm:/home/arm"
-      "/srv/media/movies:/home/arm/media/completed/movies"
+      "/srv/media:/home/arm/media/completed"
       "/etc/arm/config:/etc/arm/config"
     ];
     devices = [

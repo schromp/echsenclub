@@ -7,7 +7,11 @@
     ../../modules/disko.nix
     ../../modules/shared.nix
 
+    ./postgres.nix
+    ./zitadel.nix
+    ./netbird.nix
     ./nextcloud.nix
+    ./hydroxide.nix
     ./jellyfin.nix
     ./disko.nix
     ./nginx.nix
@@ -34,7 +38,11 @@
         53
         80
         443
+        1025
+        5433
+        8082
         8096
+        9091
       ];
       allowedUDPPorts = [
         53
