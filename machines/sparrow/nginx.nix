@@ -10,6 +10,8 @@
     recommendedTlsSettings = true;
     virtualHosts = {
       "jellyfin.echsen.club" = {
+        useACMEHost = "jellyfin.echsen.club";
+        forceSSL = true;
         locations."/" = {
           proxyPass = "http://127.0.0.1:8096";
           proxyWebsockets = true;
@@ -22,16 +24,27 @@
         };
       };
       "netbird.echsen.club" = {
-        useACMEHost = "zitadel.echsen.club";
+        useACMEHost = "netbird.echsen.club";
         forceSSL = true;
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:28982";
+        http2 = true;
+        locations."/api" = {
+          proxyPass = "http://127.0.0.1:8011";
           proxyWebsockets = true;
         };
+        locations."/management.ManagementService/" = {
+          proxyPass = "http://127.0.0.1:8011";
+          proxyWebsockets = true;
+        };
+        locations."/signalexchange.SignalExchange/" = {
+          proxyPass = "http://127.0.0.1:8012";
+          proxyWebsockets = true;
+        };
+        # NOTE: the dashboard is configured through the nix module
       };
       "zitadel.echsen.club" = {
         useACMEHost = "zitadel.echsen.club";
         forceSSL = true;
+        http2 = true;
         locations."/" = {
           extraConfig = ''
             grpc_pass grpc://127.0.0.1:8082;
@@ -52,6 +65,11 @@
       environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
     };
     certs."netbird.echsen.club" = {
+      group = "nginx";
+      dnsProvider = "cloudflare";
+      environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
+    };
+    certs."jellyfin.echsen.club" = {
       group = "nginx";
       dnsProvider = "cloudflare";
       environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;

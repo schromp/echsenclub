@@ -18,10 +18,8 @@
         echo -n "$(pwgen -s 32 1)" > "$out"/zitadel-master-key
       '';
     };
-    "zitadel-db-password" = {
-      files."zitadel-db-password" = {
-        owner = "zitadel";
-        group = "zitadel";
+    "zitadel-admin-user" = {
+      files."zitadel-master-key" = {
         secret = false;
       };
       runtimeInputs = with pkgs; [
@@ -29,7 +27,7 @@
         pwgen
       ];
       script = ''
-        echo -n "$(pwgen -s 32 1)" > "$out"/zitadel-db-password
+        echo -n "$(pwgen -s 32 1)" > "$out"/zitadel-master-key
       '';
     };
   };
@@ -37,6 +35,8 @@
   environment.etc."zitadel/config.yaml" = {
     mode = "0755";
     text = ''
+      Log:
+        Level: Info
       ExternalDomain: zitadel.echsen.club
       Port: 8082
       TLS:
@@ -53,6 +53,8 @@
   environment.etc."zitadel/steps.yaml" = {
     mode = "0755";
     text = ''
+      Zitadel:
+        InstanceName: Zitadel
       Echsenclub:
         InstanceName: Echsenclub
         Org:
@@ -75,7 +77,7 @@
       "--config"
       "/etc/zitadel/config.yaml"
       "--config"
-      "${config.clan.core.vars.generators."hydroxide".files."hydroxide-zitadel-secret".path}"
+      "/run/hydroxide-zitadel.yaml"
       "--steps"
       "/etc/zitadel/steps.yaml"
       "--tlsMode"
@@ -85,6 +87,7 @@
     # ports = ["8082:8080"];
     volumes = [
       "${config.clan.core.vars.generators."zitadel-master-key".files."zitadel-master-key".path}:/run/masterfileKey"
+      "${config.clan.core.vars.generators."hydroxide".files."hydroxide-zitadel-secret".path}:/run/hydroxide-zitadel.yaml"
       "/etc/zitadel:/etc/zitadel"
     ];
     environment = {
@@ -110,5 +113,12 @@
       PGUSER = "postgres";
       POSTGRES_PASSWORD = "postgres";
     };
+    volumes = [
+      "/var/lib/postgresql-zitadel/data:/var/lib/postgresql/data"
+    ];
   };
+
+  systemd.tmpfiles.rules = [
+    "d /var/lib/postgresql-zitadel/data 0750 postgres postgres -"
+  ];
 }
