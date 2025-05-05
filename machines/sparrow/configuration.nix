@@ -49,7 +49,7 @@
       ];
     };
 
-    nameservers = ["1.1.1.1"];
+    # nameservers = ["192.168.178.3"];
 
     interfaces."enp0s31f6" = {
       ipv4.addresses = [
@@ -65,6 +65,12 @@
       interface = "enp0s31f6";
     };
   };
+
+  services.resolved.enable = false;
+
+  environment.etc."resolv.conf".text = ''
+    nameserver 192.168.178.3
+  '';
 
   services.openssh = {
     enable = true;

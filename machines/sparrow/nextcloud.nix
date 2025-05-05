@@ -16,7 +16,7 @@
   };
 
   services.nextcloud = {
-    enable = true;
+    enable = false;
     package = pkgs.nextcloud31;
     hostName = "nextcloud.echsen.club";
     extraApps = {
