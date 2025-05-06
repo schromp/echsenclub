@@ -15,6 +15,7 @@
     ./jellyfin.nix
     ./disko.nix
     ./nginx.nix
+    ./arr.nix
   ];
 
   users.users.user.name = "lk";
@@ -40,7 +41,12 @@
         443
         1025
         5433
+        8011
+        8013
         8082
+        8089 # sabnzbd
+        8090 # Sonarr
+        9092 # Prowlarr
         8096
         9091
       ];

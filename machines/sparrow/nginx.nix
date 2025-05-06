@@ -17,6 +17,41 @@
           proxyWebsockets = true;
         };
       };
+      "sabnzbd.echsen.club" = {
+        useACMEHost = "sabnzbd.echsen.club";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8089";
+        };
+      };
+      "sonarr.echsen.club" = {
+        useACMEHost = "sonarr.echsen.club";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8090";
+        };
+      };
+      "radarr.echsen.club" = {
+        useACMEHost = "radarr.echsen.club";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8093";
+        };
+      };
+      "prowlarr.echsen.club" = {
+        useACMEHost = "prowlarr.echsen.club";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8092";
+        };
+      };
+      "jellyseerr.echsen.club" = {
+        useACMEHost = "jellyseerr.echsen.club";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8091";
+        };
+      };
       "arm.echsen.club" = {
         locations."/" = {
           proxyPass = "http://127.0.0.1:28982";
@@ -69,7 +104,37 @@
       dnsProvider = "cloudflare";
       environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
     };
+    certs."turn-sparrow.netbird.echsen.club" = {
+      group = "nginx";
+      dnsProvider = "cloudflare";
+      environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
+    };
     certs."jellyfin.echsen.club" = {
+      group = "nginx";
+      dnsProvider = "cloudflare";
+      environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
+    };
+    certs."jellyseerr.echsen.club" = {
+      group = "nginx";
+      dnsProvider = "cloudflare";
+      environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
+    };
+    certs."sonarr.echsen.club" = {
+      group = "nginx";
+      dnsProvider = "cloudflare";
+      environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
+    };
+    certs."radarr.echsen.club" = {
+      group = "nginx";
+      dnsProvider = "cloudflare";
+      environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
+    };
+    certs."sabnzbd.echsen.club" = {
+      group = "nginx";
+      dnsProvider = "cloudflare";
+      environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
+    };
+    certs."prowlarr.echsen.club" = {
       group = "nginx";
       dnsProvider = "cloudflare";
       environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
