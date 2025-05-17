@@ -69,13 +69,37 @@
         locations."/management.ManagementService/" = {
           proxyPass = "http://127.0.0.1:8011";
           proxyWebsockets = true;
+          extraConfig = ''
+            grpc_pass grpc://localhost:33073;
+            grpc_read_timeout 1d;
+            grpc_send_timeout 1d;
+            grpc_socket_keepalive on;
+          '';
         };
         locations."/signalexchange.SignalExchange/" = {
           proxyPass = "http://127.0.0.1:8012";
           proxyWebsockets = true;
+          extraConfig = ''
+                if ($http_content_type = "application/grpc") {
+                    grpc_pass grpc://192.168.178.2:10000;
+                }
+            grpc_read_timeout 300s;
+            grpc_send_timeout 300s;
+            grpc_socket_keepalive on;
+            grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for; #helps getting the correct IP through npm to the server
+          '';
         };
         # NOTE: the dashboard is configured through the nix module
       };
+      # "signal-sparrow.netbird.echsen.club" = {
+      #   useACMEHost = "signal-sparrow.netbird.echsen.club";
+      #   forceSSL = true;
+      #   http2 = true;
+      #   locations."/" = {
+      #     proxyPass = "http://127.0.0.1:8013";
+      #     proxyWebsockets = true;
+      #   };
+      # };
       "zitadel.echsen.club" = {
         useACMEHost = "zitadel.echsen.club";
         forceSSL = true;
@@ -161,6 +185,7 @@
       files.acme-cf-env = {
         secret = true;
       };
+      share = true;
     };
   };
 }

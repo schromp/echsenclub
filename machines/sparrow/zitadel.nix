@@ -118,7 +118,7 @@
     ];
   };
 
-  systemd.tmpfiles.rules = [
-    "d /var/lib/postgresql-zitadel/data 0750 postgres postgres -"
-  ];
+  # systemd.tmpfiles.rules = [
+  #   "d /var/lib/postgresql-zitadel/data 0750 postgres postgres -"
+  # ];
 }

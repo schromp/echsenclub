@@ -2,7 +2,7 @@
   clan.core.vars.generators = {
     "netbird-turn-cloudy-password" = {
       files."turn-cloudy-password" = {
-        secret = true;
+        secret = false;
       };
       runtimeInputs = with pkgs; [
         openssl
@@ -11,7 +11,7 @@
         openssl rand -base64 32 > $out/turn-cloudy-password
       '';
 
-      share = true;
+      share = false;
     };
   };
 }
