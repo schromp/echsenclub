@@ -41,7 +41,7 @@
         443
         1025
         5433
-        8011
+        8011 # Netbird API
         8013
         8082
         8089 # sabnzbd
@@ -49,6 +49,8 @@
         9092 # Prowlarr
         8096
         9091
+        10000 # Netbird Signal
+        33073 # Netbird Management
       ];
       allowedUDPPorts = [
         53
