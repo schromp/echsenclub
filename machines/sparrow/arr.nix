@@ -40,6 +40,15 @@
       };
     };
 
+    readarr = {
+      enable = true;
+      user = "jellyfin";
+      group = "jellyfin";
+      settings.server = {
+        port = 8094;
+      };
+    };
+
     jellyseerr = {
       enable = true;
       port = 8091;

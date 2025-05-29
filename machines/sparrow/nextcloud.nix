@@ -16,7 +16,8 @@
   };
 
   services.nextcloud = {
-    enable = false;
+    enable = true;
+    https = true;
     package = pkgs.nextcloud31;
     hostName = "nextcloud.echsen.club";
     extraApps = {
@@ -28,6 +29,7 @@
 
     settings = {
       trusted_domains = ["nextcloud.echsen.club"];
+      datadirectory = "/srv/nextcloud";
     };
 
     config = {

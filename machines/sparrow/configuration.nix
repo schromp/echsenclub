@@ -13,6 +13,7 @@
     ./nextcloud.nix
     ./hydroxide.nix
     ./jellyfin.nix
+    ./audiobookshelf.nix
     ./disko.nix
     ./nginx.nix
     ./arr.nix
