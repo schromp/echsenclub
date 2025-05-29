@@ -126,6 +126,14 @@
           '';
         };
       };
+      "pdf.echsen.club" = {
+        useACMEHost = "pdf.echsen.club";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8100";
+          proxyWebsockets = true;
+        };
+      };
     };
   };
 
