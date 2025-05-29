@@ -16,6 +16,7 @@
     ./disko.nix
     ./nginx.nix
     ./arr.nix
+    # ./n8n.nix
   ];
 
   users.users.user.name = "lk";
