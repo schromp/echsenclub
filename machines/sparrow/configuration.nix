@@ -16,7 +16,9 @@
     ./disko.nix
     ./nginx.nix
     ./arr.nix
+    # ./maubot.nix
     # ./n8n.nix
+    # ./bar-assistant.nix
   ];
 
   users.users.user.name = "lk";
@@ -94,6 +96,9 @@
   };
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "olm-3.2.16" # This is needed for mautrix
+  ];
   # nixpkgs.config.nvidia.acceptLicense = true;
   hardware.nvidia.open = false;
   hardware.nvidia-container-toolkit.enable = true;

@@ -58,6 +58,14 @@
           proxyWebsockets = true;
         };
       };
+      "maubot.echsen.club" = {
+        useACMEHost = "maubot.echsen.club";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:29316";
+          proxyWebsockets = true;
+        };
+      };
       "n8n.echsen.club" = {
         useACMEHost = "n8n.echsen.club";
         forceSSL = true;
@@ -167,6 +175,11 @@
       environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
     };
     certs."prowlarr.echsen.club" = {
+      group = "nginx";
+      dnsProvider = "cloudflare";
+      environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
+    };
+    certs."maubot.echsen.club" = {
       group = "nginx";
       dnsProvider = "cloudflare";
       environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
