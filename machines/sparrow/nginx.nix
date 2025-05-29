@@ -105,7 +105,22 @@
             grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for; #helps getting the correct IP through npm to the server
           '';
         };
-        # NOTE: the dashboard is configured through the nix module
+      };
+      "bar.echsen.club" = {
+        useACMEHost = "bar.echsen.club";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:3000";
+          proxyWebsockets = true;
+        };
+        locations."/bar" = {
+          proxyPass = "http://127.0.0.1:3001";
+          proxyWebsockets = true;
+        };
+        locations."/search" = {
+          proxyPass = "http://127.0.0.1:3002";
+          proxyWebsockets = true;
+        };
       };
       # "signal-sparrow.netbird.echsen.club" = {
       #   useACMEHost = "signal-sparrow.netbird.echsen.club";
@@ -185,6 +200,11 @@
       environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
     };
     certs."n8n.echsen.club" = {
+      group = "nginx";
+      dnsProvider = "cloudflare";
+      environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
+    };
+    certs."bar.echsen.club" = {
       group = "nginx";
       dnsProvider = "cloudflare";
       environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;

@@ -109,6 +109,17 @@
     extraPackages = with pkgs; [nvidia-vaapi-driver];
   };
 
+  virtualisation = {
+    containers.storage.settings = {
+      storage = {
+        driver = "overlay";
+        runroot = "/run/containers/storage";
+        graphroot = "/var/lib/containers/storage";
+        rootless_storage_path = "/tmp/containers-$USER";
+        options.overlay.mountopt = "nodev,metacopy=on";
+      };
+    };
+  };
   virtualisation.podman = {
     enable = true;
     autoPrune.enable = true;
