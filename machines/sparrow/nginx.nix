@@ -17,6 +17,14 @@
           proxyWebsockets = true;
         };
       };
+      "audiobookshelf.echsen.club" = {
+        useACMEHost = "audiobookshelf.echsen.club";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8097";
+          proxyWebsockets = true;
+        };
+      };
       "sabnzbd.echsen.club" = {
         useACMEHost = "sabnzbd.echsen.club";
         forceSSL = true;
@@ -43,6 +51,13 @@
         forceSSL = true;
         locations."/" = {
           proxyPass = "http://127.0.0.1:8092";
+        };
+      };
+      "readarr.echsen.club" = {
+        useACMEHost = "readarr.echsen.club";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8094";
         };
       };
       "jellyseerr.echsen.club" = {
@@ -138,6 +153,11 @@
       dnsProvider = "cloudflare";
       environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
     };
+    certs."audiobookshelf.echsen.club" = {
+      group = "nginx";
+      dnsProvider = "cloudflare";
+      environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
+    };
     certs."jellyseerr.echsen.club" = {
       group = "nginx";
       dnsProvider = "cloudflare";
@@ -159,6 +179,16 @@
       environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
     };
     certs."prowlarr.echsen.club" = {
+      group = "nginx";
+      dnsProvider = "cloudflare";
+      environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
+    };
+    certs."readarr.echsen.club" = {
+      group = "nginx";
+      dnsProvider = "cloudflare";
+      environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
+    };
+    certs."pdf.echsen.club" = {
       group = "nginx";
       dnsProvider = "cloudflare";
       environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
