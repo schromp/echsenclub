@@ -30,6 +30,8 @@
 
     prowlarr = {
       enable = true;
+      user = "jellyfin";
+      group = "jellyfin";
       settings = {
         server = {
           urlbase = "prowlarr.echsen.club";
