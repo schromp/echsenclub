@@ -29,7 +29,7 @@
         useACMEHost = "sabnzbd.echsen.club";
         forceSSL = true;
         locations."/" = {
-          proxyPass = "http://127.0.0.1:8089";
+          proxyPass = "http://192.168.178.2:8089"; # FIX:
         };
       };
       "sonarr.echsen.club" = {
