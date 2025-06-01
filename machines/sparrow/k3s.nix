@@ -11,6 +11,11 @@
     extraFlags = ["--disable=traefik"]; # This is needed for bare metal nginx to function
   };
 
+  environment.systemPackages = with pkgs; [
+    kubernetes-helm
+    helmfile
+  ];
+
   clan.core.vars.generators = {
     "k3s-token" = {
       files."token" = {
