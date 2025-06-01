@@ -17,6 +17,7 @@
     ./disko.nix
     ./nginx.nix
     ./arr.nix
+    ./k3s.nix
   ];
 
   users.users.user.name = "lk";
@@ -42,6 +43,7 @@
         443
         1025
         5433
+        6443 # K3s
         8011 # Netbird API
         8013
         8082
