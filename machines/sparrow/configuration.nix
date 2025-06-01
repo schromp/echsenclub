@@ -47,6 +47,7 @@
         8011 # Netbird API
         8013
         8082
+        8080
         8089 # sabnzbd
         8090 # Sonarr
         8093
