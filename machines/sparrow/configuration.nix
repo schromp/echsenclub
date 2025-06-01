@@ -47,6 +47,7 @@
         8082
         8089 # sabnzbd
         8090 # Sonarr
+        8093
         9092 # Prowlarr
         8096
         9091
