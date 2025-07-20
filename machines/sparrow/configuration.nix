@@ -4,7 +4,6 @@
   ...
 }: {
   imports = [
-    ../../modules/disko.nix
     ../../modules/shared.nix
 
     ./postgres.nix
@@ -22,7 +21,6 @@
 
   users.users.user.name = "lk";
 
-  disko.devices.disk.main.device = "/dev/disk/by-id/wwn-0x50026b767b01bd9f";
   boot.kernelModules = ["sg"];
 
   clan.core.networking.targetHost = "root@sparrow";

@@ -5,7 +5,6 @@
   ...
 }: {
   imports = [
-    ../../modules/disko.nix
     ../../modules/shared.nix
 
     ../../modules/synapse-admin.nix
@@ -28,8 +27,6 @@
       443
     ];
   };
-
-  disko.devices.disk.main.device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_59179759";
 
   users.users.root.openssh.authorizedKeys.keys = [
     ''

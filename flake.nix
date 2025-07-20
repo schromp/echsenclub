@@ -2,36 +2,66 @@
   inputs.clan-core.url = "https://git.clan.lol/clan/clan-core/archive/main.tar.gz";
   inputs.nixpkgs.follows = "clan-core/nixpkgs";
   inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+  inputs.netbird-new-module.url = "github:NixOS/nixpkgs/pull/354032/head";
 
   outputs = {
     self,
     clan-core,
-    nixos-hardware,
     ...
-  }: let
-    # Usage see: https://docs.clan.lol
-    clan = clan-core.lib.buildClan {
+  } @ inputs: let
+    clan = clan-core.lib.clan {
       inherit self;
       # Ensure this is unique among all clans you want to use.
       meta.name = "echsenclub";
 
       # All machines in ./machines will be imported.
 
-      # Prerequisite: boot into the installer.
-      # See: https://docs.clan.lol/getting-started/installer
-      # local> mkdir -p ./machines/machine1
-      # local> Edit ./machines/<machine>/configuration.nix to your liking.
-      machines = {
-        # You can also specify additional machines here.
-        # somemachine = {
-        #  imports = [ ./some-machine/configuration.nix ];
-        # }
+      # modules."netbird" = import ./service-modules/netbird.nix;
+      inventory.instances = {
+        user-root = {
+          module = {
+            name = "users";
+            input = "clan-core";
+          };
+          roles.default.tags.all = {};
+          roles.default.settings = {
+            user = "root";
+            prompt = true;
+          };
+        };
+        user-lk = {
+          module = {
+            name = "users";
+            input = "clan-core";
+          };
+          roles.default.tags.all = {};
+          roles.default.settings = {
+            user = "lk";
+            prompt = true;
+          };
+        };
+        sshd-basic = {
+          module = {
+            name = "sshd";
+            input = "clan-core";
+          };
+          roles.server.tags.all = {};
+          roles.client.tags.all = {};
+        };
       };
-      inventory = {
-      };
+
+      # inventory.instances = {
+      #   "netbird" = {
+      #     roles.relay.machine = {
+      #       "cloudy" = {
+      #       };
+      #     };
+      #   };
+      # };
+      specialArgs = {inherit inputs;};
     };
   in {
-    inherit (clan) nixosConfigurations clanInternals;
+    inherit (clan.config) nixosConfigurations clanInternals;
     # Add the Clan cli tool to the dev shell.
     # Use "nix develop" to enter the dev shell.
     devShells =
@@ -44,7 +74,12 @@
       ]
       (system: {
         default = clan-core.inputs.nixpkgs.legacyPackages.${system}.mkShell {
-          packages = [clan-core.packages.${system}.clan-cli];
+          packages = let
+            pkgs = clan-core.inputs.nixpkgs.legacyPackages.${system};
+          in [
+            clan-core.packages.${system}.clan-cli
+            pkgs.opentofu
+          ];
         };
       });
   };
