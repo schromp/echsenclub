@@ -14,6 +14,7 @@
   environment.systemPackages = with pkgs; [
     kubernetes-helm
     helmfile
+    argocd
   ];
 
   clan.core.vars.generators = {
