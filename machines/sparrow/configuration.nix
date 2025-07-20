@@ -1,6 +1,7 @@
 {
-  lib,
   pkgs,
+  inputs,
+  config,
   ...
 }: {
   imports = [
@@ -17,6 +18,7 @@
     ./nginx.nix
     ./arr.nix
     ./k3s.nix
+    ./kavita.nix
   ];
 
   users.users.user.name = "lk";
@@ -51,6 +53,7 @@
         8093
         9092 # Prowlarr
         8096
+        8097
         9091
         10000 # Netbird Signal
         33073 # Netbird Management
