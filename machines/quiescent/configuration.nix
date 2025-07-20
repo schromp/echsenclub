@@ -1,6 +1,5 @@
 {nixos-hardware, ...}: {
   imports = [
-    # ../../modules/disko.nix
     ../../modules/shared.nix
     # nixos-hardware.nixosModules.raspberry-pi-3
 
@@ -8,8 +7,6 @@
   ];
 
   users.users.user.name = "lk";
-
-  # disko.devices.disk.main.device = "/dev/disk/by-id/mmc-SD16G_0x00009259";
 
   clan.core.networking.targetHost = "root@quiescent";
 
