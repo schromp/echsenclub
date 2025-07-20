@@ -21,7 +21,7 @@
         useACMEHost = "audiobookshelf.echsen.club";
         forceSSL = true;
         locations."/" = {
-          proxyPass = "http://127.0.0.1:8097";
+          proxyPass = "http://0.0.0.0:8097";
           proxyWebsockets = true;
         };
       };
