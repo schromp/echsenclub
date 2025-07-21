@@ -11,8 +11,6 @@
 
     clan-core.clanModules.matrix-synapse
   ];
-  # Put your username here for login
-  users.users.user.name = "lk";
 
   # Set this for clan commands use ssh i.e. `clan machines update`
   # If you change the hostname, you need to update this line to root@<new-hostname>
@@ -28,11 +26,11 @@
     ];
   };
 
-  users.users.root.openssh.authorizedKeys.keys = [
-    ''
-      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRat12+538VwG/IAv5R4AjdNYz/GATO7ULQnXtYC2HK lk@tower
-    ''
-  ];
+  # users.users.root.openssh.authorizedKeys.keys = [
+  #   ''
+  #     ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRat12+538VwG/IAv5R4AjdNYz/GATO7ULQnXtYC2HK lk@tower
+  #   ''
+  # ];
 
   environment.systemPackages = with pkgs; [
     git
@@ -55,12 +53,12 @@
     max_upload_size = "100M";
   };
 
-  services.netbird = {
-    server.coturn = {
-      enable = true;
-      domain = "coturn-cloudy.netbird.echsen.club";
-      passwordFile = config.clan.core.vars.generators."netbird-turn-cloudy-password".files."turn-cloudy-password".path;
-      useAcmeCertificates = true;
-    };
-  };
+  # services.netbird = {
+  #   server.coturn = {
+  #     enable = true;
+  #     domain = "coturn-cloudy.netbird.echsen.club";
+  #     passwordFile = config.clan.core.vars.generators."netbird-turn-cloudy-password".files."turn-cloudy-password".path;
+  #     useAcmeCertificates = true;
+  #   };
+  # };
 }

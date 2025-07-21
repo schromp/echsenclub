@@ -9,11 +9,11 @@
 
     ./postgres.nix
     ./zitadel.nix
-    ./netbird.nix
-    ./nextcloud.nix
+    # ./netbird.nix
+    # ./nextcloud.nix
     ./hydroxide.nix
     ./jellyfin.nix
-    ./audiobookshelf.nix
+    # ./audiobookshelf.nix
     ./disko.nix
     ./nginx.nix
     ./arr.nix
@@ -21,17 +21,10 @@
     ./kavita.nix
   ];
 
-  users.users.user.name = "lk";
 
   boot.kernelModules = ["sg"];
 
   clan.core.networking.targetHost = "root@sparrow";
-
-  users.users.root.openssh.authorizedKeys.keys = [
-    ''
-      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRat12+538VwG/IAv5R4AjdNYz/GATO7ULQnXtYC2HK lk@tower
-    ''
-  ];
 
   networking = {
     firewall = {

@@ -1,32 +1,49 @@
 {
   pkgs,
   config,
-  lib,
+  inputs,
   ...
-}: {
+}: let
+  netbird-domain = "netbird.echsen.club";
+in {
+  disabledModules = [
+    "services/networking/netbird/server.nix"
+    "services/networking/netbird/signal.nix"
+    "services/networking/netbird/management.nix"
+    "services/networking/netbird/dashboard.nix"
+    "services/networking/netbird/coturn.nix"
+  ];
+
   imports = [
-    ../../modules/password-turn.nix
+    # ../../modules/password-turn.nix
+    (inputs.netbird-new-module + "/nixos/modules/services/networking/netbird/server.nix")
+    (inputs.netbird-new-module + "/nixos/modules/services/networking/netbird/dashboard.nix")
+    (inputs.netbird-new-module + "/nixos/modules/services/networking/netbird/relay.nix")
+    (inputs.netbird-new-module + "/nixos/modules/services/networking/netbird/signal.nix")
+    (inputs.netbird-new-module + "/nixos/modules/services/networking/netbird/coturn.nix")
+    (inputs.netbird-new-module + "/nixos/modules/services/networking/netbird/proxy.nix")
   ];
 
   services.netbird = {
-    enable = true;
     server = {
       enable = true;
-      domain = "netbird.echsen.club";
-      # TODO:
-      # - Add the setup key to the declarative config
+      domain = "${netbird-domain}";
+
+      # proxy = {
+      #   enableNginx = true;
+      #   domain = "${netbird-domain}";
+      #   managementAddress = "127.0.0.1:8011";
+      #
+      # };
+
       management = {
+        port = 8011;
+        package = inputs.netbird-new-module.legacyPackages.${pkgs.system}.netbird-server;
+        # package = (inputs.netbird-new-module + "/nixos/pkgs/by-name/ne/netbird-server/package.nix");
+
         oidcConfigEndpoint = "https://zitadel.echsen.club/.well-known/openid-configuration";
-        turnDomain = "netbird.echsen.club";
-        logLevel = "DEBUG";
         settings = {
-          # https://github.com/netbirdio/netbird/blob/9762b39f29e63033bfbd8a5b68aa320db1ed4584/infrastructure_files/getting-started-with-zitadel.sh#L675
-          Signal = {
-            URI = "https://signal-sparrow.netbird.echsen.club";
-          };
-          DataStoreEncryptionKey = {
-            _secret = config.clan.core.vars.generators."netbird-data-store-encryption-key".files."encryption-key".path;
-          };
+          DataStoreEncryptionKey._secret = config.clan.core.vars.generators."netbird-data-store-encryption-key".files."encryption-key".path;
           IdpManagerConfig = {
             ManagerType = "zitadel";
             ClientConfig = {
@@ -43,13 +60,9 @@
             };
             SignkeyRefresh = true;
           };
-          DeviceAuthorizationFlow = {
-            Provider = "hosted";
-            ProviderConfig = {
-              Audience = "318708317172118018";
-              ClientID = "318708317172118018";
-              Scope = "openid";
-            };
+          ExtraConfig = {
+            Password._secret = config.clan.core.vars.generators."netbird-admin-password".files."password".path;
+            Username = "admin";
           };
           PKCEAuthorizationFlow = {
             ProviderConfig = {
@@ -68,7 +81,7 @@
           };
         };
       };
-      # https://zitadel.echsen.club/oauth/v2/authorize?client_id=netbird&redirect_uri=https://netbird.echsen.club/#callback&scope=openid profile email&response_type=code&audience=netbird&state=ksC84hhJGhfu1Bj8&nonce=bEP4mZT8GJzf&code_challenge=sTcLyNq4YtyNnZopW9qsywULqWsCC77ejbU_hp_MlhM&code_challenge_method=S256
+
       dashboard = {
         enable = true;
         enableNginx = true;
@@ -78,33 +91,18 @@
           AUTH_CLIENT_ID = "318708317172118018";
         };
       };
-      signal = {
-        enable = true;
-        port = 8013;
-        domain = "signal-sparrow.netbird.echsen.club";
-      };
-      #   coturn = {
-      #     enable = true;
-      #   };
-    };
 
-    clients = {
-      "echsengang" = {
-        openFirewall = true;
-        ui.enable = false;
-        port = 51820;
-        environment = {
-          NB_SETUP_KEY = config.clan.core.vars.generators."netbird-services-setup-key".files."netbird-services-setup-key".value;
-          NB_LOG_LEVEL = lib.mkForce "debug";
-        };
-        config = {
-          ManagementURL = {
-            Scheme = "https";
-            Opaque = "";
-            User = null;
-            Host = "netbird.echsen.club:443";
-          };
-        };
+      relay = {
+        package = inputs.netbird-new-module.legacyPackages.${pkgs.system}.netbird-server;
+        authSecretFile = config.clan.core.vars.generators."netbird-data-store-encryption-key".files."encryption-key".path; # TODO:
+      };
+
+      # coturn = {
+      #   enable = true;
+      #   passwordFile = config.clan.core.vars.generators."netbird-data-store-encryption-key".files."encryption-key".path; # TODO:
+      # };
+      signal = {
+        package = inputs.netbird-new-module.legacyPackages.${pkgs.system}.netbird-server;
       };
     };
   };
@@ -118,8 +116,21 @@
         openssl
       ];
       script = ''
-        openssl rand -base64 32 > $out/encryption-key
+        openssl rand -base64 32 > $out-server/encryption-key
       '';
+    };
+
+    "netbird-admin-password" = {
+      files."password" = {
+        secret = true;
+      };
+      runtimeInputs = with pkgs; [
+        openssl
+      ];
+      script = ''
+        openssl rand -base64 32 > $out/password
+      '';
+      share = false;
     };
 
     "netbird-zitadel-client-secret" = {

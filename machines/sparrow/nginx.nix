@@ -17,14 +17,14 @@
           proxyWebsockets = true;
         };
       };
-      "audiobookshelf.echsen.club" = {
-        useACMEHost = "audiobookshelf.echsen.club";
-        forceSSL = true;
-        locations."/" = {
-          proxyPass = "http://0.0.0.0:8097";
-          proxyWebsockets = true;
-        };
-      };
+      # "audiobookshelf.echsen.club" = {
+      #   useACMEHost = "audiobookshelf.echsen.club";
+      #   forceSSL = true;
+      #   locations."/" = {
+      #     proxyPass = "http://0.0.0.0:8097";
+      #     proxyWebsockets = true;
+      #   };
+      # };
       "sabnzbd.echsen.club" = {
         useACMEHost = "sabnzbd.echsen.club";
         forceSSL = true;
@@ -76,16 +76,16 @@
       "netbird.echsen.club" = {
         useACMEHost = "netbird.echsen.club";
         forceSSL = true;
-        http2 = true;
         locations."/api" = {
           proxyPass = "http://127.0.0.1:8011";
-          proxyWebsockets = true;
         };
         locations."/management.ManagementService/" = {
           proxyPass = "http://127.0.0.1:8011";
           proxyWebsockets = true;
           extraConfig = ''
-            grpc_pass grpc://localhost:33073;
+            client_body_timeout 1d;
+
+            grpc_pass grpc://127.0.0.1:8011;
             grpc_read_timeout 1d;
             grpc_send_timeout 1d;
             grpc_socket_keepalive on;
@@ -95,16 +95,15 @@
           proxyPass = "http://127.0.0.1:8012";
           proxyWebsockets = true;
           extraConfig = ''
-                if ($http_content_type = "application/grpc") {
-                    grpc_pass grpc://192.168.178.2:10000;
-                }
-            grpc_read_timeout 300s;
-            grpc_send_timeout 300s;
+            client_body_timeout 1d;
+
+            grpc_pass grpc://192.168.178.2:8012;
+            grpc_read_timeout 1d;
+            grpc_send_timeout 1d;
             grpc_socket_keepalive on;
-            grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for; #helps getting the correct IP through npm to the server
           '';
         };
-        # NOTE: the dashboard is configured through the nix module
+        # # NOTE: the dashboard is configured through the nix module
       };
       # "signal-sparrow.netbird.echsen.club" = {
       #   useACMEHost = "signal-sparrow.netbird.echsen.club";
