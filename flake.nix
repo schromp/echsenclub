@@ -16,19 +16,8 @@
 
       # All machines in ./machines will be imported.
 
-      # modules."netbird" = import ./service-modules/netbird.nix;
+      modules."netbird" = ./service-modules/netbird/netbird.nix;
       inventory.instances = {
-        user-root = {
-          module = {
-            name = "users";
-            input = "clan-core";
-          };
-          roles.default.tags.all = {};
-          roles.default.settings = {
-            user = "root";
-            prompt = true;
-          };
-        };
         user-lk = {
           module = {
             name = "users";
@@ -38,7 +27,19 @@
           roles.default.settings = {
             user = "lk";
             prompt = true;
+            groups = [
+              "wheel"
+            ];
           };
+        };
+        admin = {
+          module.name = "admin";
+          roles.default.settings = {
+            allowedKeys = {
+              key1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRat12+538VwG/IAv5R4AjdNYz/GATO7ULQnXtYC2HK lk@tower ";
+            };
+          };
+          roles.default.tags.all = {};
         };
         sshd-basic = {
           module = {
@@ -48,16 +49,17 @@
           roles.server.tags.all = {};
           roles.client.tags.all = {};
         };
+        netbird = {
+          module.name = "netbird";
+          module.input = "self";
+          roles.relay.machines.cloudy = {};
+          roles.relay.machines.sparrow = {};
+          roles.signal.machines.cloudy = {};
+          roles.signal.machines.sparrow = {};
+          roles.management.machines.sparrow = {};
+        };
       };
 
-      # inventory.instances = {
-      #   "netbird" = {
-      #     roles.relay.machine = {
-      #       "cloudy" = {
-      #       };
-      #     };
-      #   };
-      # };
       specialArgs = {inherit inputs;};
     };
   in {

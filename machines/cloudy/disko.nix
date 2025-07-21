@@ -1,23 +1,22 @@
 {lib, ...}: {
-  boot.loader.grub.efiSupport = lib.mkDefault true;
-  boot.loader.grub.efiInstallAsRemovable = lib.mkDefault true;
   disko.devices = {
     disk = {
-      "main" = {
-        name = "main-d3bbbb8fd5fbf79e031a33e9507444b1";
-        type = "disk";
+      main = {
         device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_59179759";
+        type = "disk";
         content = {
           type = "gpt";
           partitions = {
-            "boot" = {
-              size = "1M";
-              type = "EF02"; # for grub MBR
-              priority = 1;
+            bios_boot = {
+              type = "EF02";
+              start = "1MiB";
+              end = "2MiB";
+              content = null;
             };
-            "ESP" = {
-              size = "512M";
+            esp = {
               type = "EF00";
+              start = "2MiB";
+              end = "514MiB";
               content = {
                 type = "filesystem";
                 format = "vfat";
@@ -25,14 +24,15 @@
                 mountOptions = ["nofail"];
               };
             };
-            "root" = {
-              size = "100%";
+            root = {
+              type = "8300";
+              start = "514MiB";
+              end = "100%";
               content = {
                 type = "filesystem";
                 format = "ext4";
-                # format = "btrfs";
-                # format = "bcachefs";
                 mountpoint = "/";
+                mountOptions = ["nofail"];
               };
             };
           };

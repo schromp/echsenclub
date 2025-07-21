@@ -1,6 +1,6 @@
 {...}: {
   services.audiobookshelf = {
-    enable = true;
+    enable = false;
     host = "0.0.0.0";
     port = 8097;
     user = "audiobookshelf";
