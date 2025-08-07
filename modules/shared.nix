@@ -10,6 +10,7 @@
   users.users."lk" = {
     isNormalUser = true;
     group = "lk";
+    openssh.authorizedKeys.keys = config.users.users.root.openssh.authorizedKeys.keys;
   };
   users.groups.lk = {};
 

@@ -11,7 +11,7 @@
           ./secrets/datastore-encryption-key.nix
           ./secrets/relay-auth-secret.nix
           ./secrets/services-setup-key.nix
-          ./secrets/zitadel-secret.nix
+          ./secrets/keycloak-secret.nix
           ./management.nix
         ];
       };

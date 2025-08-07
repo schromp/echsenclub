@@ -3,6 +3,7 @@
   inputs.nixpkgs.follows = "clan-core/nixpkgs";
   inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   inputs.netbird-new-module.url = "github:NixOS/nixpkgs/pull/354032/head";
+  inputs.zitadel-new-module.url = "github:schromp/nixpkgs/zitadel-database";
 
   outputs = {
     self,
@@ -17,6 +18,7 @@
       # All machines in ./machines will be imported.
 
       modules."netbird" = ./service-modules/netbird/netbird.nix;
+      modules."acme" = ./service-modules/acme/acme.nix;
       inventory.instances = {
         user-lk = {
           module = {
@@ -53,10 +55,25 @@
           module.name = "netbird";
           module.input = "self";
           roles.relay.machines.cloudy = {};
-          roles.relay.machines.sparrow = {};
           roles.signal.machines.cloudy = {};
-          roles.signal.machines.sparrow = {};
-          roles.management.machines.sparrow = {};
+          roles.management.machines.cloudy = {};
+        };
+        acme = {
+          module = {
+            name = "acme";
+            input = "self";
+          };
+          roles.default.machines.cloudy = {
+            settings = {
+              email = "server@echsen.club";
+              domains = [
+                "sso.echsen.club"
+                "sso-admin.echsen.club"
+                "netbird.echsen.club"
+              ];
+              acceptTerms = true;
+            };
+          };
         };
       };
 

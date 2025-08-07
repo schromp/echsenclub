@@ -196,7 +196,8 @@
         "nixpkgs": [
           "clan-core",
           "nixpkgs"
-        ]
+        ],
+        "zitadel-new-module": "zitadel-new-module"
       }
     },
     "sops-nix": {
@@ -253,6 +254,22 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "zitadel-new-module": {
+      "locked": {
+        "lastModified": 1754051283,
+        "narHash": "sha256-trYicM3ecv5LCj6E+1XQEbj2JES2sqMY/QPrPE6LbpU=",
+        "owner": "schromp",
+        "repo": "nixpkgs",
+        "rev": "e1dbb35b5beba467c7552578c8afcb57ccd14ed7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "schromp",
+        "ref": "zitadel-database",
+        "repo": "nixpkgs",
         "type": "github"
       }
     }

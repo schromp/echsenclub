@@ -10,27 +10,35 @@
       port = 8011;
       package = inputs.netbird-new-module.legacyPackages.${pkgs.system}.netbird-server;
       # package = (inputs.netbird-new-module + "/nixos/pkgs/by-name/ne/netbird-server/package.nix");
-      turnDomain = "relay-netbird.echsen.club";
+      turnDomain = "netbird.echsen.club";
+      turnPort = 33080;
       dnsDomain = "netbird.echsen.club";
       domain = "netbird.echsen.club";
 
-      oidcConfigEndpoint = "https://zitadel.echsen.club/.well-known/openid-configuration";
+      oidcConfigEndpoint = "https://sso.echsen.club/realms/echsenclub/.well-known/openid-configuration";
       logLevel = "DEBUG";
       settings = {
         DataStoreEncryptionKey._secret = config.clan.core.vars.generators."netbird-data-store-encryption-key".files."encryption-key".path;
+        Relay = {
+          Addresses = ["netbird.echsen.club"];
+          Secret._secret = config.clan.core.vars.generators."netbird-relay-auth".files."password".path;
+        };
         IdpManagerConfig = {
-          ManagerType = "zitadel";
+          ManagerType = "keycloak";
           ClientConfig = {
-            Issuer = "https://zitadel.echsen.club/oauth/v2";
-            TokenEndpoint = "https://zitadel.echsen.club/oauth/v2/token";
-            ClientID = "netbird";
+            Issuer = "https://sso.echsen.club/realms/echsenclub";
+            TokenEndpoint = "https://sso.echsen.club/realms/echsenclub/protocol/openid-connect/token";
+            ClientID = "netbird-backend";
             ClientSecret = {
-              _secret = config.clan.core.vars.generators."netbird-zitadel-client-secret".files."netbird-zitadel-client-secret".path;
+              _secret = config.clan.core.vars.generators."keycloak-netbird-backend-client-secret".files."keycloak-netbird-backend-client-secret".path;
             };
             GrantType = "client_credentials";
+            Scope = "openid profile email offline_access api";
+            Audience = "netbird-client";
           };
           ExtraConfig = {
-            ManagementEndpoint = "https://zitadel.echsen.club/management/v1";
+            ManagementEndpoint = "https://sso.echsen.club/admin/realms/echsenclub";
+            AdminEndpoint = "https://sso.echsen.club/admin/realms/echsenclub";
           };
           SignkeyRefresh = true;
         };
@@ -40,9 +48,10 @@
         };
         PKCEAuthorizationFlow = {
           ProviderConfig = {
-            Audience = "318708317172118018";
-            ClientID = "318708317172118018";
+            Audience = "netbird-client";
+            ClientID = "netbird-client";
             Scope = "openid profile email offline_access api";
+            AuthorizationEndpoint = "https://sso.echsen.club/realms/echsenclub/protocol/openid-connect/auth";
             RedirectURLs = [
               "http://localhost:53000/"
               "http://localhost:54000/"
@@ -54,15 +63,15 @@
           };
         };
         DeviceAuthorizationFlow = {
-          Provider = "zitadel";
+          Provider = "keycloak";
           ProviderConfig = {
-            Audience = "318708317172118018";
-            ClientID = "318708317172118018";
-            Domain = "zitadel.echsen.club";
-            TokenEndpoint = null;
-            DeviceAuthEndpoint = "";
+            ClientID = "netbird-client";
+            Audience = "netbird-client";
+            Domain = "https://sso.echsen.club/realms/echsenclub";
+            TokenEndpoint = "https://sso.echsen.club/realms/echsenclub/protocol/openid-connect/token";
+            DeviceAuthEndpoint = "https://sso.echsen.club/realms/echsenclub/protocol/openid-connect/auth/device";
             Scope = "openid profile email offline_access api";
-            UseIDToken = false;
+            # UseIDToken = false;
           };
         };
       };
@@ -71,10 +80,12 @@
       enable = true;
       enableNginx = true;
       domain = "netbird.echsen.club";
-      managementServer = "";
+      managementServer = "https://netbird.echsen.club";
       settings = {
-        AUTH_AUTHORITY = "https://zitadel.echsen.club";
-        AUTH_CLIENT_ID = "318708317172118018";
+        AUTH_AUTHORITY = "https://sso.echsen.club/realms/echsenclub";
+        AUTH_CLIENT_ID = "netbird-client";
+        AUTH_SUPPORTED_SCOPES = "openid profile email api";
+        USE_AUTH0 = false;
       };
     };
   };

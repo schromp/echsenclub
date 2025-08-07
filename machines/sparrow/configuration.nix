@@ -8,7 +8,6 @@
     ../../modules/shared.nix
 
     ./postgres.nix
-    ./zitadel.nix
     # ./netbird.nix
     # ./nextcloud.nix
     ./hydroxide.nix
