@@ -9,6 +9,10 @@
 
     ../../modules/synapse-admin.nix
 
+    # ./zitadel.nix
+    ./keycloak.nix
+    ./nginx.nix
+
     clan-core.clanModules.matrix-synapse
   ];
 
@@ -37,7 +41,7 @@
     vim
   ];
 
-  clan.nginx.acme.email = "lennart@koziollek.com";
+  clan.nginx.acme.email = "server@echsen.club"; # This is legacy because matrix-synapse module is deprecated
   clan.matrix-synapse = {
     app_domain = "matrix.echsen.club";
     server_tld = "echsen.club";

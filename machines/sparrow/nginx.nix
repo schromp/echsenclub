@@ -4,6 +4,10 @@
   config,
   ...
 }: {
+  imports = [
+    ../../shared/cloudflare-api.nix
+  ];
+
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
@@ -103,6 +107,22 @@
             grpc_socket_keepalive on;
           '';
         };
+        locations."/relay".extraConfig = ''
+          proxy_pass http://192.168.178:33080;
+
+          # WebSocket support
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection "Upgrade";
+
+          # Timeout settings
+          proxy_read_timeout 3600s;
+          proxy_send_timeout 3600s;
+          proxy_connect_timeout 60s;
+
+          # Handle upstream errors
+          proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+        '';
         # # NOTE: the dashboard is configured through the nix module
       };
       # "signal-sparrow.netbird.echsen.club" = {
@@ -212,30 +232,6 @@
       group = "nginx";
       dnsProvider = "cloudflare";
       environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
-    };
-  };
-
-  clan.core.vars.generators = {
-    "acme-cloudflare-api-key" = {
-      prompts.cf-api-key.description = "The cloudflare api key";
-      prompts.cf-api-key.type = "hidden";
-      prompts.cf-api-key.persist = false;
-
-      prompts.cf-email.description = "The email of the cf account";
-      prompts.cf-email.persist = false;
-
-      script = ''
-        {
-          printf "CF_DNS_API_TOKEN="; cat "$prompts/cf-api-key"; echo
-          printf "CF_ZONE_API_TOKEN="; cat "$prompts/cf-api-key"; echo
-          printf "CF_API_EMAIL=";  cat "$prompts/cf-email";  echo
-        } > "$out/acme-cf-env"
-      '';
-
-      files.acme-cf-env = {
-        secret = true;
-      };
-      share = true;
     };
   };
 }
