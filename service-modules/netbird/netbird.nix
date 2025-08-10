@@ -40,5 +40,14 @@
       };
     };
   };
-  # roles.client = {};
+  roles.client = {
+    interface = {};
+    perInstance = {...}: {
+      nixosModule = {...}: {
+        imports = [
+          ./client.nix
+        ];
+      };
+    };
+  };
 }

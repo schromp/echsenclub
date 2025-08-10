@@ -57,6 +57,7 @@
           roles.relay.machines.cloudy = {};
           roles.signal.machines.cloudy = {};
           roles.management.machines.cloudy = {};
+          roles.client.machines.sparrow = {};
         };
         acme = {
           module = {
