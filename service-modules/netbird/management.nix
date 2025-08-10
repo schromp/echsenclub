@@ -23,6 +23,9 @@
           Addresses = ["netbird.echsen.club"];
           Secret._secret = config.clan.core.vars.generators."netbird-relay-auth".files."password".path;
         };
+        Signal = {
+          URI = "netbird.echsen.club:443";
+        };
         IdpManagerConfig = {
           ManagerType = "keycloak";
           ClientConfig = {
@@ -53,12 +56,7 @@
             Scope = "openid profile email offline_access api";
             AuthorizationEndpoint = "https://sso.echsen.club/realms/echsenclub/protocol/openid-connect/auth";
             RedirectURLs = [
-              "http://localhost:53000/"
-              "http://localhost:54000/"
-              "https://netbird.echsen.club"
-              "https://netbird.echsen.club/auth"
-              "https://netbird.echsen.club/silent-auth"
-              "https://netbird.echsen.club/#callback"
+               "http://localhost:53000/"
             ];
           };
         };
