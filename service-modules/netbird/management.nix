@@ -10,8 +10,8 @@
       port = 8011;
       package = inputs.netbird-new-module.legacyPackages.${pkgs.system}.netbird-server;
       # package = (inputs.netbird-new-module + "/nixos/pkgs/by-name/ne/netbird-server/package.nix");
-      turnDomain = "netbird.echsen.club";
-      turnPort = 33080;
+      turnDomain = "coturn-cloudy.echsen.club";
+      turnPort = 3478;
       dnsDomain = "netbird.echsen.club";
       domain = "netbird.echsen.club";
 
@@ -25,6 +25,17 @@
         };
         Signal = {
           URI = "netbird.echsen.club:443";
+        };
+        TURNConfig = {
+          Turns = [
+            {
+              Proto = "udp";
+              URI = "turn:coturn-cloudy.echsen.club:3478";
+              Username = "netbird";
+              Password._secret = config.clan.core.vars.generators."coturn-password".files."password".path;
+            }
+          ];
+          Secret._secret = config.clan.core.vars.generators."coturn-password".files."password".path;
         };
         IdpManagerConfig = {
           ManagerType = "keycloak";
@@ -56,7 +67,7 @@
             Scope = "openid profile email offline_access api";
             AuthorizationEndpoint = "https://sso.echsen.club/realms/echsenclub/protocol/openid-connect/auth";
             RedirectURLs = [
-               "http://localhost:53000/"
+              "http://localhost:53000/"
             ];
           };
         };

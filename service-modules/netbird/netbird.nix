@@ -12,6 +12,7 @@
           ./secrets/relay-auth-secret.nix
           ./secrets/services-setup-key.nix
           ./secrets/keycloak-secret.nix
+          ./secrets/coturn-password.nix
           ./management.nix
         ];
       };
@@ -36,6 +37,18 @@
         imports = [
           ./shared.nix
           ./signal.nix
+        ];
+      };
+    };
+  };
+  roles.coturn = {
+    interface = {};
+    perInstance = {...}: {
+      nixosModule = {...}: {
+        imports = [
+          ./shared.nix
+          ./secrets/coturn-password.nix
+          ./coturn.nix
         ];
       };
     };

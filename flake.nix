@@ -57,6 +57,7 @@
           roles.relay.machines.cloudy = {};
           roles.signal.machines.cloudy = {};
           roles.management.machines.cloudy = {};
+          roles.coturn.machines.cloudy = {};
           roles.client.machines.sparrow = {};
         };
         acme = {
@@ -71,6 +72,7 @@
                 "sso.echsen.club"
                 "sso-admin.echsen.club"
                 "netbird.echsen.club"
+                "coturn-cloudy.echsen.club"
               ];
               acceptTerms = true;
             };
