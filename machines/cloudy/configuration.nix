@@ -27,6 +27,17 @@
       22
       80
       443
+
+      # 33080 # netbird relay
+    ];
+    allowedUDPPorts = [
+      3478
+    ];
+    allowedUDPPortRanges = [
+      {
+        from = 49152;
+        to = 65535;
+      }
     ];
   };
 

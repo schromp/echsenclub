@@ -1,8 +1,10 @@
 {pkgs, ...}: {
   clan.core.vars.generators = {
-    "netbird-relay-auth" = {
+    "coturn-password" = {
       files."password" = {
         secret = true;
+        group = "turnserver";
+        mode = "0440";
       };
       runtimeInputs = with pkgs; [
         openssl
