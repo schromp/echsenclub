@@ -5,9 +5,15 @@
       prompts.netbird-services-setup-key.persist = true;
 
       files.netbird-services-setup-key = {
-        secret = false;
+        secret = true;
       };
+
       share = true;
+      # script = ''
+      #   cat > "$out"/secret-envs <<EOF
+      #     NB_SETUP_KEY=$(cat $prompts/netbird-services-setup-key)
+      #   EOF
+      # '';
     };
   };
 }
