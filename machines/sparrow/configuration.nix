@@ -10,12 +10,13 @@
     ./postgres.nix
     # ./nextcloud.nix
     ./jellyfin.nix
-    # ./audiobookshelf.nix
+    ./audiobookshelf.nix
     ./disko.nix
     ./nginx.nix
     ./arr.nix
     ./k3s.nix
     ./kavita.nix
+    ./stirling-pdf.nix
   ];
 
 
@@ -70,11 +71,11 @@
     };
   };
 
-  services.resolved.enable = false;
+  services.resolved.enable = true;
 
-  environment.etc."resolv.conf".text = ''
-    nameserver 192.168.178.3
-  '';
+  # environment.etc."resolv.conf".text = ''
+  #   nameserver 192.168.178.3
+  # '';
 
   services.openssh = {
     enable = true;
