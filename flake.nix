@@ -67,16 +67,37 @@
             name = "acme";
             input = "self";
           };
-          roles.default.machines.cloudy = {
-            settings = {
-              email = "server@echsen.club";
-              domains = [
-                "sso.echsen.club"
-                "sso-admin.echsen.club"
-                "netbird.echsen.club"
-                "coturn-cloudy.echsen.club"
-              ];
-              acceptTerms = true;
+          roles.default.machines = {
+            cloudy = {
+              settings = {
+                email = "server@echsen.club";
+                domains = [
+                  "sso.echsen.club"
+                  "sso-admin.echsen.club"
+                  "netbird.echsen.club"
+                  "coturn-cloudy.echsen.club"
+                ];
+                acceptTerms = true;
+              };
+            };
+            sparrow = {
+              settings = {
+                email = "server@echsen.club";
+                domains = [
+                  "jellyfin.echsen.club"
+                  "audiobookshelf.echsen.club"
+                  "jellyseerr.echsen.club"
+                  "sonarr.echsen.club"
+                  "radarr.echsen.club"
+                  "sabnzbd.echsen.club"
+                  "prowlarr.echsen.club"
+                  "readarr.echsen.club"
+                  "pdf.echsen.club"
+                  "kavita.echsen.club"
+                  "nextcloud.echsen.club"
+                ];
+                acceptTerms = true;
+              };
             };
           };
         };
