@@ -75,6 +75,7 @@
       interface = "nb-echsenclub";
       bind-interfaces = true;
       address = let
+        cloudy = "100.117.81.56";
         sparrow = "100.117.191.45";
       in [
         "/jellyseerr.echsen.club/${sparrow}"
@@ -85,6 +86,7 @@
         "/sabnzbd.echsen.club/${sparrow}"
         "/pdf.echsen.club/${sparrow}"
         "/kavita.echsen.club/${sparrow}"
+        "/netbird.echsen.club/${cloudy}"
       ];
       server = ["1.1.1.1"];
     };
