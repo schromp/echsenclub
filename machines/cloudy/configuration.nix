@@ -75,7 +75,7 @@
       bind-interfaces = true;
       address = let
         cloudy = "100.117.81.56";
-        sparrow = "100.117.191.45";
+        sparrow = "100.117.12.69";
       in [
         "/jellyseerr.echsen.club/${sparrow}"
         "/jellyfin.echsen.club/${sparrow}"

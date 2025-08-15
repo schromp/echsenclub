@@ -8,7 +8,7 @@
     ../../modules/shared.nix
 
     ./postgres.nix
-    # ./nextcloud.nix
+    ./nextcloud.nix
     ./jellyfin.nix
     ./audiobookshelf.nix
     ./disko.nix
