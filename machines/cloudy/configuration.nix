@@ -25,6 +25,7 @@
     enable = true;
     allowedTCPPorts = [
       22
+      53
       80
       443
 
@@ -67,6 +68,31 @@
   services.matrix-synapse.settings = {
     max_upload_size = "100M";
   };
+
+  services.dnsmasq = {
+    enable = true;
+    settings = {
+      interface = "nb-echsenclub";
+      bind-interfaces = true;
+      address = let
+        sparrow = "100.117.191.45";
+      in [
+        "/jellyseerr.echsen.club/${sparrow}"
+        "/jellyfin.echsen.club/${sparrow}"
+        "/radarr.echsen.club/${sparrow}"
+        "/sonarr.echsen.club/${sparrow}"
+        "/prowlarr.echsen.club/${sparrow}"
+        "/sabnzbd.echsen.club/${sparrow}"
+        "/pdf.echsen.club/${sparrow}"
+        "/kavita.echsen.club/${sparrow}"
+      ];
+      server = ["1.1.1.1"];
+    };
+  };
+
+  networking.firewall.interfaces."nb-echsenclub".allowedUDPPorts = [53];
+
+  # services.resolved.enable = false;
 
   # services.netbird = {
   #   server.coturn = {

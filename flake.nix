@@ -58,7 +58,10 @@
           roles.signal.machines.cloudy = {};
           roles.management.machines.cloudy = {};
           roles.coturn.machines.cloudy = {};
-          roles.client.machines.sparrow = {};
+          roles.client.machines = {
+            sparrow = {};
+            cloudy = {};
+          };
         };
         acme = {
           module = {
