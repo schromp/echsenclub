@@ -1,10 +1,9 @@
 {...}: {
   services.audiobookshelf = {
-    enable = false;
-    host = "0.0.0.0";
+    enable = true;
     port = 8097;
     user = "audiobookshelf";
-    group = "audiobookshelf";
+    group = "jellyfin";
   };
 
   users.users.audiobookshelf.extraGroups = ["jellyfin"];
