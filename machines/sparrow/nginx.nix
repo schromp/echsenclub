@@ -21,19 +21,19 @@
           proxyWebsockets = true;
         };
       };
-      # "audiobookshelf.echsen.club" = {
-      #   useACMEHost = "audiobookshelf.echsen.club";
-      #   forceSSL = true;
-      #   locations."/" = {
-      #     proxyPass = "http://0.0.0.0:8097";
-      #     proxyWebsockets = true;
-      #   };
-      # };
+      "audiobookshelf.echsen.club" = {
+        useACMEHost = "audiobookshelf.echsen.club";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8097";
+          proxyWebsockets = true;
+        };
+      };
       "sabnzbd.echsen.club" = {
         useACMEHost = "sabnzbd.echsen.club";
         forceSSL = true;
         locations."/" = {
-          proxyPass = "http://192.168.178.2:8089"; # FIX:
+          proxyPass = "http://127.0.0.1:8089";
         };
       };
       "sonarr.echsen.club" = {
