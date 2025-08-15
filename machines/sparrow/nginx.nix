@@ -134,17 +134,6 @@
       #     proxyWebsockets = true;
       #   };
       # };
-      "zitadel.echsen.club" = {
-        useACMEHost = "zitadel.echsen.club";
-        forceSSL = true;
-        http2 = true;
-        locations."/" = {
-          extraConfig = ''
-            grpc_pass grpc://127.0.0.1:8082;
-            grpc_set_header Host $host;
-          '';
-        };
-      };
       "pdf.echsen.club" = {
         useACMEHost = "pdf.echsen.club";
         forceSSL = true;

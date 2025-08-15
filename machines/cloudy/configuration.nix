@@ -9,7 +9,6 @@
 
     ../../modules/synapse-admin.nix
 
-    # ./zitadel.nix
     ./keycloak.nix
     ./nginx.nix
 

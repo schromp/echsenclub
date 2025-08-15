@@ -8,9 +8,7 @@
     ../../modules/shared.nix
 
     ./postgres.nix
-    # ./netbird.nix
     # ./nextcloud.nix
-    ./hydroxide.nix
     ./jellyfin.nix
     # ./audiobookshelf.nix
     ./disko.nix

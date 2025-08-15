@@ -3,7 +3,6 @@
   inputs.nixpkgs.follows = "clan-core/nixpkgs";
   inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   inputs.netbird-new-module.url = "github:NixOS/nixpkgs/pull/354032/head";
-  inputs.zitadel-new-module.url = "github:schromp/nixpkgs/zitadel-database";
 
   outputs = {
     self,

@@ -78,15 +78,4 @@
       };
     };
   };
-
-  # security.acme = {
-  #   acceptTerms = true;
-  #   defaults.email = "server@echsen.club";
-  #
-  #   certs."zitadel.echsen.club" = {
-  #     group = "nginx";
-  #     dnsProvider = "cloudflare";
-  #     environmentFile = config.clan.core.vars.generators."acme-cloudflare-api-key".files."acme-cf-env".path;
-  #   };
-  # };
 }
