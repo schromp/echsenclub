@@ -87,7 +87,6 @@
         "/kavita.echsen.club/${sparrow}"
         "/audiobookshelf.echsen.club/${sparrow}"
         "/nextcloud.echsen.club/${sparrow}"
-        "/netbird.echsen.club/${cloudy}"
       ];
       server = ["1.1.1.1"];
     };

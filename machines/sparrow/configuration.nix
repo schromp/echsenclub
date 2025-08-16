@@ -19,7 +19,6 @@
     ./stirling-pdf.nix
   ];
 
-
   boot.kernelModules = ["sg"];
 
   clan.core.networking.targetHost = "root@sparrow";
@@ -71,11 +70,11 @@
     };
   };
 
-  services.resolved.enable = true;
-
-  # environment.etc."resolv.conf".text = ''
-  #   nameserver 192.168.178.3
-  # '';
+  services.resolved = {
+    enable = true;
+  #   fallbackDns = ["1.1.1.1" "8.8.8.8"];
+    dnssec = "false";
+  };
 
   services.openssh = {
     enable = true;

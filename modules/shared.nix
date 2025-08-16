@@ -5,7 +5,7 @@
   ...
 }: {
   # Locale service discovery and mDNS
-  services.avahi.enable = true;
+  # services.avahi.enable = false;
 
   users.users."lk" = {
     isNormalUser = true;
