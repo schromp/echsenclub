@@ -17,6 +17,7 @@
     ./k3s.nix
     ./kavita.nix
     ./stirling-pdf.nix
+    ./tt-rss.nix
   ];
 
   boot.kernelModules = ["sg"];
