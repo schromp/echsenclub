@@ -106,6 +106,10 @@
           proxyWebsockets = true;
         };
       };
+      "rss.echsen.club" = {
+        useACMEHost = "rss.echsen.club";
+        forceSSL = true;
+      };
     };
   };
 }

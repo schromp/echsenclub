@@ -95,6 +95,7 @@
                   "pdf.echsen.club"
                   "kavita.echsen.club"
                   "nextcloud.echsen.club"
+                  "rss.echsen.club"
                 ];
                 acceptTerms = true;
               };
