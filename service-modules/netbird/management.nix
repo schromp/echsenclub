@@ -72,7 +72,7 @@
           };
         };
         DeviceAuthorizationFlow = {
-          Provider = "keycloak";
+          Provider = "hosted";
           ProviderConfig = {
             ClientID = "netbird-client";
             Audience = "netbird-client";
