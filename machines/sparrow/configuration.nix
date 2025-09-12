@@ -20,6 +20,12 @@
     ./tt-rss.nix
   ];
 
+  fileSystems."/srv" = {
+    device = "UUID=42879296-884b-46ca-bbc3-0cf0bec3718e";
+    fsType = "btrfs";
+    options = ["defaults" "noatime"];
+  };
+
   boot.kernelModules = ["sg"];
 
   clan.core.networking.targetHost = "root@sparrow";
@@ -73,7 +79,7 @@
 
   services.resolved = {
     enable = true;
-  #   fallbackDns = ["1.1.1.1" "8.8.8.8"];
+    #   fallbackDns = ["1.1.1.1" "8.8.8.8"];
     dnssec = "false";
   };
 

@@ -49,7 +49,7 @@
               content = {
                 type = "btrfs";
                 extraArgs = ["-f"]; # Override existing partition
-                mountpoint = "/srv";
+                mountpoint = "/backup";
               };
             };
           };
