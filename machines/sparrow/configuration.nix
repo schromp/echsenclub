@@ -18,6 +18,7 @@
     ./kavita.nix
     ./stirling-pdf.nix
     ./tt-rss.nix
+    ./immich.nix
   ];
 
   fileSystems."/srv" = {
