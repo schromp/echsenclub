@@ -88,6 +88,7 @@
         "/audiobookshelf.echsen.club/${sparrow}"
         "/nextcloud.echsen.club/${sparrow}"
         "/rss.echsen.club/${sparrow}"
+        "/immich.echsen.club/${sparrow}"
       ];
       server = ["1.1.1.1"];
     };
