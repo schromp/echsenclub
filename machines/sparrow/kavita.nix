@@ -1,7 +1,9 @@
 {config, ...}: {
   services.kavita = {
     enable = true;
-    port = 8101;
+    settings = {
+      Port = 8101;
+    };
     tokenKeyFile = config.clan.core.vars.generators."kavita-token".files."token".path;
   };
 
