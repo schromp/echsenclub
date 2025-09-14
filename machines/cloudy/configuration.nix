@@ -20,9 +20,6 @@
   # This only works however if you have avahi running on your admin machine else use IP
   clan.core.networking.targetHost = "root@cloudy";
 
-  disko.generate = true;
-
-
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
