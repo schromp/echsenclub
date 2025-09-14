@@ -17,12 +17,12 @@
   ];
 
   fileSystems."/" = {
-    device = lib.mkForce "/dev/disk/by-uuid/9affda48-fb81-44cb-8737-e276777bcd1";
+    device = lib.mkForce "/dev/sda3";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = lib.mkForce "/dev/disk/by-uuid/9F63-2F1F";
+    device = lib.mkForce "/dev/sda1";
     fsType = "vfat";
   };
 
