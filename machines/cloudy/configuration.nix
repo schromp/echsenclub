@@ -15,6 +15,16 @@
     ./nginx.nix
   ];
 
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/9affda48-fb81-44cb-8737-e276777bcd1";
+    fsType = "ext4";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/9F63-2F1F";
+    fsType = "vfat";
+  };
+
   # Set this for clan commands use ssh i.e. `clan machines update`
   # If you change the hostname, you need to update this line to root@<new-hostname>
   # This only works however if you have avahi running on your admin machine else use IP
