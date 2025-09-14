@@ -17,12 +17,12 @@
   ];
 
   fileSystems."/" = {
-    device = lib.mkForce "/dev/disk/by-uuid/9affda48-fb81-44cb-8737-e276777bcd71";
+    device = lib.mkForce "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_59179759-part3";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = lib.mkForce "/dev/disk/by-uuid/9F63-2F1F";
+    device = lib.mkForce "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_59179759-part2";
     fsType = "vfat";
   };
 
