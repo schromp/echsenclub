@@ -20,6 +20,18 @@
   # This only works however if you have avahi running on your admin machine else use IP
   clan.core.networking.targetHost = "root@cloudy";
 
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/9affda48-fb81-44cb-8737-e276777bcd1";
+    fsType = "ext4";
+    options = [ "defaults" ];
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/9F63-2F1F";
+    fsType = "vfat";
+    options = [ "defaults" ];
+  };
+
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
@@ -85,7 +97,10 @@
     };
   };
 
-  networking.firewall.interfaces."nb-echsenclub".allowedUDPPorts = [ 53 5353 ];
+  networking.firewall.interfaces."nb-echsenclub".allowedUDPPorts = [
+    53
+    5353
+  ];
 
   # services.resolved.enable = false;
 
