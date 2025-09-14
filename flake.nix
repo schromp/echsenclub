@@ -1,8 +1,13 @@
 {
-  inputs.clan-core.url = "https://git.clan.lol/clan/clan-core/archive/main.tar.gz";
-  inputs.nixpkgs.follows = "clan-core/nixpkgs";
-  inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-  inputs.netbird-new-module.url = "github:NixOS/nixpkgs/pull/354032/head";
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    clan-core = {
+      url = "https://git.clan.lol/clan/clan-core/archive/main.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    netbird-new-module.url = "github:NixOS/nixpkgs/pull/354032/head";
+  };
 
   outputs =
     {
