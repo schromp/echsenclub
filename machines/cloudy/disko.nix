@@ -14,11 +14,13 @@
               start = "1MiB";
               end = "2MiB";
               content = null;
+              name = null;
             };
             esp = {
               type = "EF00";
               start = "2MiB";
               end = "514MiB";
+              name = null;
               content = {
                 type = "filesystem";
                 format = "vfat";
@@ -30,6 +32,7 @@
               type = "8300";
               start = "514MiB";
               end = "100%";
+              name = null;
               content = {
                 type = "filesystem";
                 format = "ext4";
