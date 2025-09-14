@@ -7,8 +7,16 @@
       enable = true;
     };
     mediaLocation = "/srv/media/immich";
-    accelerationDevices = null;
+    accelerationDevices = [
+      "/dev/nvidia0"
+      "/dev/nvidiactl"
+      "/dev/nvidia-uvm"
+    ];
     settings = null;
+  };
+
+  users.users.immich = {
+    home = "/var/cache/immich";
   };
 
   users.users.immich.extraGroups = [

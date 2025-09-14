@@ -7,7 +7,7 @@
     signal = {
       enable = true;
 
-      package = inputs.netbird-new-module.legacyPackages.${pkgs.system}.netbird-server;
+      package = pkgs.netbird-signal;
 
       port = 8012;
     };

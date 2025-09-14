@@ -8,8 +8,7 @@
     management = {
       enable = true;
       port = 8011;
-      package = inputs.netbird-new-module.legacyPackages.${pkgs.system}.netbird-server;
-      # package = (inputs.netbird-new-module + "/nixos/pkgs/by-name/ne/netbird-server/package.nix");
+      package = pkgs.netbird-management;
       turnDomain = "coturn-cloudy.echsen.club";
       turnPort = 3478;
       dnsDomain = "netbird.echsen.club";

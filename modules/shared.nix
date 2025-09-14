@@ -17,6 +17,7 @@
   environment.systemPackages = with pkgs; [
     vim
     git
+    nettools
   ];
   clan.core.settings.state-version.enable = true;
 }

@@ -3,7 +3,7 @@
     relay = {
       enable = true;
 
-      package = inputs.netbird-new-module.legacyPackages.${pkgs.system}.netbird-server;
+      package = pkgs.netbird-relay;
 
       port = 33080;
       authSecretFile = config.clan.core.vars.generators."netbird-relay-auth".files."password".path;
