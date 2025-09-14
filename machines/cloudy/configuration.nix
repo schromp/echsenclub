@@ -43,6 +43,7 @@
     ];
     allowedUDPPorts = [
       3478
+      12312 # temp
     ];
     allowedUDPPortRanges = [
       {
