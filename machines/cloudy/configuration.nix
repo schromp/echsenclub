@@ -3,16 +3,16 @@
   pkgs,
   clan-core,
   ...
-}: {
+}:
+{
   imports = [
     ../../modules/shared.nix
 
     ../../modules/synapse-admin.nix
 
+    ./disko.nix
     ./keycloak.nix
     ./nginx.nix
-
-    clan-core.clanModules.matrix-synapse
   ];
 
   # Set this for clan commands use ssh i.e. `clan machines update`
@@ -52,18 +52,6 @@
     vim
   ];
 
-  clan.nginx.acme.email = "server@echsen.club"; # This is legacy because matrix-synapse module is deprecated
-  clan.matrix-synapse = {
-    app_domain = "matrix.echsen.club";
-    server_tld = "echsen.club";
-    users = {
-      schromp = {
-        name = "schromp";
-        admin = true;
-      };
-    };
-  };
-
   services.matrix-synapse.settings = {
     max_upload_size = "100M";
   };
@@ -73,28 +61,31 @@
     settings = {
       interface = "nb-echsenclub";
       bind-interfaces = true;
-      address = let
-        cloudy = "100.117.81.56";
-        sparrow = "100.117.12.69";
-      in [
-        "/jellyseerr.echsen.club/${sparrow}"
-        "/jellyfin.echsen.club/${sparrow}"
-        "/radarr.echsen.club/${sparrow}"
-        "/sonarr.echsen.club/${sparrow}"
-        "/prowlarr.echsen.club/${sparrow}"
-        "/sabnzbd.echsen.club/${sparrow}"
-        "/pdf.echsen.club/${sparrow}"
-        "/kavita.echsen.club/${sparrow}"
-        "/audiobookshelf.echsen.club/${sparrow}"
-        "/nextcloud.echsen.club/${sparrow}"
-        "/rss.echsen.club/${sparrow}"
-        "/immich.echsen.club/${sparrow}"
-      ];
-      server = ["1.1.1.1"];
+      port = 5353;
+      address =
+        let
+          cloudy = "100.117.81.56";
+          sparrow = "100.117.12.69";
+        in
+        [
+          "/jellyseerr.echsen.club/${sparrow}"
+          "/jellyfin.echsen.club/${sparrow}"
+          "/radarr.echsen.club/${sparrow}"
+          "/sonarr.echsen.club/${sparrow}"
+          "/prowlarr.echsen.club/${sparrow}"
+          "/sabnzbd.echsen.club/${sparrow}"
+          "/pdf.echsen.club/${sparrow}"
+          "/kavita.echsen.club/${sparrow}"
+          "/audiobookshelf.echsen.club/${sparrow}"
+          "/nextcloud.echsen.club/${sparrow}"
+          "/rss.echsen.club/${sparrow}"
+          "/immich.echsen.club/${sparrow}"
+        ];
+      server = [ "1.1.1.1" ];
     };
   };
 
-  networking.firewall.interfaces."nb-echsenclub".allowedUDPPorts = [53];
+  networking.firewall.interfaces."nb-echsenclub".allowedUDPPorts = [ 53 5353 ];
 
   # services.resolved.enable = false;
 
