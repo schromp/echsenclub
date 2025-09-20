@@ -18,13 +18,19 @@
   environment.systemPackages = with pkgs; [
     vim
     git
-    nettools
   ];
 
-  nix.gc.automatic = true;
-  nix.gc.dates = "weekly";
-  nix.optimise.automatic = true;
-  nix.optimise.dates = [ "03:45" ]; # Optional; allows customizing optimisation schedule
+  nix = {
+    optimise = {
+      automatic = true;
+      dates = [ "03:45" ];
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
+  };
 
   clan.core.settings.state-version.enable = true;
 }
