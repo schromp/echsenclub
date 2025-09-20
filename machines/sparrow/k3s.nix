@@ -4,7 +4,7 @@
   ...
 }: {
   services.k3s = {
-    enable = true;
+    enable = false;
     package = pkgs.k3s_1_33;
     role = "server";
     tokenFile = config.clan.core.vars.generators."k3s-token".files."token".path;
