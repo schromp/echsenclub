@@ -92,6 +92,7 @@
           "/nextcloud.echsen.club/${sparrow}"
           "/rss.echsen.club/${sparrow}"
           "/immich.echsen.club/${sparrow}"
+          "/signoz.echsen.club/${sparrow}"
         ];
       server = [ "1.1.1.1" ];
     };
