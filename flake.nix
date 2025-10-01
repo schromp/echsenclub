@@ -101,6 +101,7 @@
                     "sso-admin.echsen.club"
                     "netbird.echsen.club"
                     "coturn-cloudy.echsen.club"
+                    "matrix.echsen.club"
                   ];
                   acceptTerms = true;
                 };
