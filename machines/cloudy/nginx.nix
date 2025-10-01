@@ -1,4 +1,4 @@
-{config, ...}: {
+{config, lib, ...}: {
   imports = [
     ../../shared/cloudflare-api.nix
   ];
@@ -23,6 +23,10 @@
         locations."/" = {
           proxyPass = "http://localhost:8080";
         };
+      };
+      "matrix.echsen.club" = {
+        useACMEHost = "matrix.echsen.club";
+        enableACME = lib.mkForce false;
       };
       "netbird.echsen.club" = {
         forceSSL = true;

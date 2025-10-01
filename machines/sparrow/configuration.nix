@@ -3,7 +3,8 @@
   inputs,
   config,
   ...
-}: {
+}:
+{
   imports = [
     ../../modules/shared.nix
 
@@ -24,10 +25,13 @@
   fileSystems."/srv" = {
     device = "UUID=42879296-884b-46ca-bbc3-0cf0bec3718e";
     fsType = "btrfs";
-    options = ["defaults" "noatime"];
+    options = [
+      "defaults"
+      "noatime"
+    ];
   };
 
-  boot.kernelModules = ["sg"];
+  boot.kernelModules = [ "sg" ];
 
   clan.core.networking.targetHost = "root@sparrow";
 
@@ -84,9 +88,11 @@
     dnssec = "false";
   };
 
+  virtualisation.docker.enable = true;
+
   services.openssh = {
     enable = true;
-    ports = [22];
+    ports = [ 22 ];
     settings = {
       PasswordAuthentication = false;
       AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
@@ -100,11 +106,11 @@
   # nixpkgs.config.nvidia.acceptLicense = true;
   hardware.nvidia.open = false;
   hardware.nvidia-container-toolkit.enable = true;
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [nvidia-vaapi-driver];
+    extraPackages = with pkgs; [ nvidia-vaapi-driver ];
   };
 
   virtualisation.podman = {
