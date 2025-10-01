@@ -123,6 +123,7 @@
                     "nextcloud.echsen.club"
                     "rss.echsen.club"
                     "immich.echsen.club"
+                    "signoz.echsen.club"
                   ];
                   acceptTerms = true;
                 };
