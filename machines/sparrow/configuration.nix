@@ -20,6 +20,7 @@
     ./stirling-pdf.nix
     ./tt-rss.nix
     ./immich.nix
+    ./otelcol.nix
   ];
 
   fileSystems."/srv" = {
