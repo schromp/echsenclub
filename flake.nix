@@ -102,6 +102,8 @@
                     "netbird.echsen.club"
                     "coturn-cloudy.echsen.club"
                     "matrix.echsen.club"
+                    "matrix-admin.echsen.club"
+                    "maubot.echsen.club"
                   ];
                   acceptTerms = true;
                 };

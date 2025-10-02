@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   services.opentelemetry-collector = {
     enable = true;
@@ -19,6 +24,19 @@
             network = { };
             processes = { };
           };
+        };
+        httpcheck = {
+          targets =
+            let
+              nginxVirtualHosts = config.services.nginx.virtualHosts;
+            in
+            lib.mapAttrsToList (
+              name: value:
+              # For each host, create a target object
+              {
+                endpoint = "https://${name}";
+                method = "GET";
+              }) nginxVirtualHosts;
         };
         # prometheus = {
         #   config = {
@@ -69,7 +87,10 @@
         # extensions = [ "file_storage/journald" ];
         pipelines = {
           metrics = {
-            receivers = [ "hostmetrics" ];
+            receivers = [
+              "hostmetrics"
+              "httpcheck"
+            ];
             processors = [
               "resourcedetection"
               "batch"

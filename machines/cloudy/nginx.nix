@@ -1,4 +1,5 @@
-{config, lib, ...}: {
+{ config, lib, ... }:
+{
   imports = [
     ../../shared/cloudflare-api.nix
   ];
@@ -27,6 +28,31 @@
       "matrix.echsen.club" = {
         useACMEHost = "matrix.echsen.club";
         enableACME = lib.mkForce false;
+      };
+      "maubot.echsen.club" = {
+        listenAddresses = [ "100.117.81.56" ]; # Only listen on the NetBird interface
+        useACMEHost = "maubot.echsen.club";
+        forceSSL = true;
+        locations = {
+          "/" = {
+            proxyPass = "http://localhost:29316";
+          };
+          "/_matrix/maubot/v1/logs" = {
+            proxyPass = "http://localhost:29316";
+            extraConfig = ''
+              proxy_http_version 1.1;
+              proxy_set_header Upgrade $http_upgrade;
+              proxy_set_header Connection "Upgrade";
+              proxy_set_header X-Forwarded-For $remote_addr;
+            '';
+          };
+          "/_matrix/maubot" = {
+            proxyPass = "http://localhost:29316";
+            extraConfig = ''
+              proxy_set_header X-Forwarded-For $remote_addr;
+            '';
+          };
+        };
       };
       "netbird.echsen.club" = {
         forceSSL = true;

@@ -14,6 +14,7 @@
     ./disko.nix
     ./keycloak.nix
     ./nginx.nix
+    ./maubot.nix
   ];
 
   fileSystems."/" = {
@@ -93,6 +94,8 @@
           "/rss.echsen.club/${sparrow}"
           "/immich.echsen.club/${sparrow}"
           "/signoz.echsen.club/${sparrow}"
+          "/maubot.echsen.club/${cloudy}"
+          "/matrix-admin.echsen.club/${cloudy}"
         ];
       server = [ "1.1.1.1" ];
     };
@@ -101,6 +104,10 @@
   networking.firewall.interfaces."nb-echsenclub".allowedUDPPorts = [
     53
     5353
+  ];
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "olm-3.2.16"
   ];
 
   # services.resolved.enable = false;

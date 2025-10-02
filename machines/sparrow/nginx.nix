@@ -62,24 +62,11 @@
           proxyPass = "http://127.0.0.1:8092";
         };
       };
-      "readarr.echsen.club" = {
-        useACMEHost = "readarr.echsen.club";
-        forceSSL = true;
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:8094";
-        };
-      };
       "jellyseerr.echsen.club" = {
         useACMEHost = "jellyseerr.echsen.club";
         forceSSL = true;
         locations."/" = {
           proxyPass = "http://127.0.0.1:8091";
-        };
-      };
-      "arm.echsen.club" = {
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:28982";
-          proxyWebsockets = true;
         };
       };
       # "signal-sparrow.netbird.echsen.club" = {
@@ -91,14 +78,14 @@
       #     proxyWebsockets = true;
       #   };
       # };
-      "pdf.echsen.club" = {
-        useACMEHost = "pdf.echsen.club";
-        forceSSL = true;
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:8100";
-          proxyWebsockets = true;
-        };
-      };
+      # "pdf.echsen.club" = {
+      #   useACMEHost = "pdf.echsen.club";
+      #   forceSSL = true;
+      #   locations."/" = {
+      #     proxyPass = "http://127.0.0.1:8100";
+      #     proxyWebsockets = true;
+      #   };
+      # };
       "kavita.echsen.club" = {
         useACMEHost = "kavita.echsen.club";
         forceSSL = true;
