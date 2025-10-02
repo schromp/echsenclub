@@ -17,7 +17,7 @@
     ./arr.nix
     ./k3s.nix
     ./kavita.nix
-    ./stirling-pdf.nix
+    # ./stirling-pdf.nix
     ./tt-rss.nix
     ./immich.nix
     ./otelcol.nix
