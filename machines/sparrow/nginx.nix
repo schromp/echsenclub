@@ -121,6 +121,14 @@
           proxyWebsockets = true;
         };
       };
+      "git.echsen.club" = {
+        useACMEHost = "git.echsen.club";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:3000";
+          proxyWebsockets = true;
+        };
+      };
     };
   };
 }

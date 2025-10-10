@@ -21,6 +21,7 @@
     ./tt-rss.nix
     ./immich.nix
     ./otelcol.nix
+    ./forgejo.nix
   ];
 
   fileSystems."/srv" = {

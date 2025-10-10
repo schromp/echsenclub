@@ -126,6 +126,7 @@
                     "rss.echsen.club"
                     "immich.echsen.club"
                     "signoz.echsen.club"
+                    "git.echsen.club"
                   ];
                   acceptTerms = true;
                 };
