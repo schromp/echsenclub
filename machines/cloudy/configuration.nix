@@ -10,11 +10,13 @@
     ../../modules/shared.nix
 
     ../../modules/synapse-admin.nix
+    ../../shared/packages.nix
 
     ./disko.nix
     ./keycloak.nix
     ./nginx.nix
     ./maubot.nix
+    ./pds.nix
   ];
 
   fileSystems."/" = {

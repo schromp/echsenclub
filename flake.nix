@@ -104,6 +104,7 @@
                     "matrix.echsen.club"
                     "matrix-admin.echsen.club"
                     "maubot.echsen.club"
+                    "pds.echsen.club"
                   ];
                   acceptTerms = true;
                 };
