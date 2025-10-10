@@ -25,14 +25,14 @@
           proxyPass = "http://localhost:8080";
         };
       };
-      "pds.echsen.club" = {
-        useACMEHost = "pds.echsen.club";
-        forceSSL = true;
-        http2 = true;
-        locations."/" = {
-          proxyPass = "http://localhost:3000";
-        };
-      };
+      # "pds.echsen.club" = {
+      #   useACMEHost = "pds.echsen.club";
+      #   forceSSL = true;
+      #   http2 = true;
+      #   locations."/" = {
+      #     proxyPass = "http://localhost:3000";
+      #   };
+      # };
       "matrix.echsen.club" = {
         useACMEHost = "matrix.echsen.club";
         enableACME = lib.mkForce false;

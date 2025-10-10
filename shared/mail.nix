@@ -31,7 +31,7 @@
         urlencode
       ];
       script = ''
-        printf "PDS_EMAIL_SMTP_URL=smtps://%s:%s@%s:%s" \
+        printf "PDS_EMAIL_SMTP_URL=smtps://%s:%s@%s:%s/" \
           "$(cat "$prompts/username" | urlencode)" \
           "$(cat "$prompts/password" | urlencode)" \
           "$(cat "$prompts/url")" \
@@ -41,6 +41,8 @@
 
       files.pds-env-email-url = {
         secret = true;
+        group = "pds";
+        mode = "0440";
       };
       share = true;
     };

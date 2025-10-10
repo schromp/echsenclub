@@ -16,7 +16,7 @@
     ./keycloak.nix
     ./nginx.nix
     ./maubot.nix
-    ./pds.nix
+    # ./pds.nix
   ];
 
   fileSystems."/" = {
