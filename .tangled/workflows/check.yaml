@@ -1,0 +1,11 @@
+when:
+  - event: ["push", "manual"]
+    branch: ["main", "develop"]
+  - event: ["pull_request"]
+    branch: ["main"]
+
+engine: "nixery"
+
+steps:
+  - name: "FLake check"
+    command: "nix flake check"
