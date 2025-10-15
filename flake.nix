@@ -68,14 +68,14 @@
             };
             roles.default.tags.all = { };
           };
-          sshd-basic = {
-            module = {
-              name = "sshd";
-              input = "clan-core";
-            };
-            roles.server.tags.all = { };
-            roles.client.tags.all = { };
-          };
+          # sshd-basic = {
+          #   module = {
+          #     name = "sshd";
+          #     input = "clan-core";
+          #   };
+          #   roles.server.tags.all = { };
+          #   roles.client.tags.all = { };
+          # };
           netbird = {
             module.name = "netbird";
             module.input = "self";

@@ -61,6 +61,8 @@
   #   ''
   # ];
 
+  services.openssh.settings.PasswordAuthentication = false;
+
   environment.systemPackages = with pkgs; [
     git
     vim

@@ -6,7 +6,7 @@
 
   services.tangled-knot = {
     enable = true;
-    gitUser = "Echsmachina";
+    gitUser = "git";
     openFirewall = false;
     motd = ''
       Yarrr write some code
