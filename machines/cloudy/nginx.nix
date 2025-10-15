@@ -29,6 +29,29 @@
         useACMEHost = "matrix.echsen.club";
         enableACME = lib.mkForce false;
       };
+      "knot.echsen.club" = {
+        useACMEHost = "knot.echsen.club";
+        forceSSL = true;
+        http2 = true;
+        locations."/" = {
+          proxyPass = "http://localhost:5555";
+          # extraConfig = ''
+          #   proxy_set_header Host $host;
+          #   proxy_set_header X-Real-IP $remote_addr;
+          #   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          #   proxy_set_header X-Forwarded-Proto $scheme;
+          # '';
+        };
+        locations."/events" = {
+          proxyPass = "http://localhost:5555";
+          # extraConfig = ''
+          #   proxy_set_header X-Forwarded-For $remote_addr;
+          #   proxy_set_header Host $host;
+          #   proxy_set_header Upgrade $http_upgrade;
+          #   proxy_set_header Connection "upgrade";
+          # '';
+        };
+      };
       "maubot.echsen.club" = {
         listenAddresses = [ "100.117.81.56" ]; # Only listen on the NetBird interface
         useACMEHost = "maubot.echsen.club";

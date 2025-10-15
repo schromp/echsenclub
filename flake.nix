@@ -5,6 +5,7 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     netbird-new-module.url = "github:NixOS/nixpkgs/pull/354032/head";
+    tangled.url = "git+https://tangled.org/@tangled.org/core";
   };
 
   outputs =
@@ -104,6 +105,7 @@
                     "matrix.echsen.club"
                     "matrix-admin.echsen.club"
                     "maubot.echsen.club"
+                    "knot.echsen.club"
                   ];
                   acceptTerms = true;
                 };
