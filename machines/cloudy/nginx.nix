@@ -46,7 +46,7 @@
           proxyPass = "http://localhost:5555";
           extraConfig = ''
             proxy_set_header X-Forwarded-For $remote_addr;
-            proxy_set_header Host $host;
+            # proxy_set_header Host $host;
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection "upgrade";
           '';
