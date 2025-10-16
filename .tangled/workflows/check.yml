@@ -6,10 +6,17 @@ when:
 
 engine: "nixery"
 
+clone:
+  skip: false
+  depth: 1
+  submodules: false
+
 dependencies:
   nixpkgs:
     - cowsay
 
 steps:
   - name: "Check flake"
-    command: "cowsay test"
+    command: "cowsay $(cat README.md)"
+  - name: "Check flake"
+    command: "nix flake check"
