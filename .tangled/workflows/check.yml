@@ -6,10 +6,10 @@ when:
 
 engine: "nixery"
 
-# dependencies:
-#   nixpkgs:
-#     - nix
+dependencies:
+  nixpkgs:
+    - cowsay
 
 steps:
   - name: "Check flake"
-    command: "echo test"
+    command: "cowsay test"
