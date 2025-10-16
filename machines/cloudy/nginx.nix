@@ -32,7 +32,6 @@
       "knot.echsen.club" = {
         useACMEHost = "knot.echsen.club";
         forceSSL = true;
-        http2 = true;
         locations."/" = {
           proxyPass = "http://localhost:5555";
           proxyWebsockets = true;
@@ -45,18 +44,13 @@
       "spindle.echsen.club" = {
         useACMEHost = "spindle.echsen.club";
         forceSSL = true;
-        http2 = true;
         locations."/" = {
-          proxyPass = "http://localhost:6555";
+          proxyPass = "http://localhost:5555";
+          proxyWebsockets = true;
         };
         locations."/events" = {
-          proxyPass = "http://localhost:6555";
-          extraConfig = ''
-            proxy_set_header X-Forwarded-For $remote_addr;
-            proxy_set_header Host $host;
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection "upgrade";
-          '';
+          proxyPass = "http://localhost:5555";
+          proxyWebsockets = true;
         };
       };
       "maubot.echsen.club" = {
