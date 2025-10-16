@@ -47,12 +47,16 @@
         forceSSL = true;
         http2 = true;
         locations."/" = {
-          proxyPass = "http://localhost:5555";
-          proxyWebsockets = true;
+          proxyPass = "http://localhost:6555";
         };
         locations."/events" = {
-          proxyPass = "http://localhost:5555";
-          proxyWebsockets = true;
+          proxyPass = "http://localhost:6555";
+          extraConfig = ''
+            proxy_set_header X-Forwarded-For $remote_addr;
+            proxy_set_header Host $host;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+          '';
         };
       };
       "maubot.echsen.club" = {
