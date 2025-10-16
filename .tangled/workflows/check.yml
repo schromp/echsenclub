@@ -6,6 +6,10 @@ when:
 
 engine: "nixery"
 
+dependencies:
+  nixpkgs:
+    - nix
+
 steps:
   - name: "Check flake"
     command: "nix flake check"
