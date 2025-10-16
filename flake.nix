@@ -106,6 +106,7 @@
                     "matrix-admin.echsen.club"
                     "maubot.echsen.club"
                     "knot.echsen.club"
+                    "spindle.echsen.club"
                   ];
                   acceptTerms = true;
                 };

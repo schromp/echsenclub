@@ -52,6 +52,14 @@
           '';
         };
       };
+      "spindle.echsen.club" = {
+        useACMEHost = "spindle.echsen.club";
+        forceSSL = true;
+        http2 = true;
+        locations."/" = {
+          proxyPass = "http://localhost:6555";
+        };
+      };
       "maubot.echsen.club" = {
         listenAddresses = [ "100.117.81.56" ]; # Only listen on the NetBird interface
         useACMEHost = "maubot.echsen.club";
