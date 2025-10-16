@@ -58,6 +58,21 @@
         http2 = false;
         locations."/" = {
           proxyPass = "http://localhost:6555";
+          extraConfig = ''
+            # proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+          '';
+        };
+        locations."/events" = {
+          proxyPass = "http://localhost:6555";
+          extraConfig = ''
+            proxy_set_header X-Forwarded-For $remote_addr;
+            # proxy_set_header Host $host;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+          '';
         };
       };
       "maubot.echsen.club" = {
