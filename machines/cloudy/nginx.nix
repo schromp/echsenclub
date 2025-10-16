@@ -32,7 +32,7 @@
       "knot.echsen.club" = {
         useACMEHost = "knot.echsen.club";
         forceSSL = true;
-        http2 = false;
+        http2 = true;
         locations."/" = {
           proxyPass = "http://localhost:5555";
           proxyWebsockets = true;
@@ -45,7 +45,7 @@
       "spindle.echsen.club" = {
         useACMEHost = "spindle.echsen.club";
         forceSSL = true;
-        http2 = false;
+        http2 = true;
         locations."/" = {
           proxyPass = "http://localhost:5555";
           proxyWebsockets = true;
