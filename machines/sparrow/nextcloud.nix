@@ -18,7 +18,7 @@
   services.nextcloud = {
     enable = true;
     https = true;
-    package = pkgs.nextcloud31;
+    package = pkgs.nextcloud32;
     hostName = "nextcloud.echsen.club";
     extraApps = {
       inherit (config.services.nextcloud.package.packages.apps) news contacts calendar tasks;
