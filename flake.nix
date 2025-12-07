@@ -82,7 +82,6 @@
             roles.relay.machines.cloudy = { };
             roles.signal.machines.cloudy = { };
             roles.management.machines.cloudy = { };
-            roles.coturn.machines.cloudy = { };
             roles.client.machines = {
               sparrow = { };
               cloudy = { };
@@ -130,6 +129,8 @@
                     "immich.echsen.club"
                     "signoz.echsen.club"
                     "git.echsen.club"
+                    "freshrss.echsen.club"
+                    "grocy.echsen.club"
                   ];
                   acceptTerms = true;
                 };
