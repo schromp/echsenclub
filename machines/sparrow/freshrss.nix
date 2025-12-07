@@ -1,4 +1,4 @@
-{ pkgs, config, clan, ... }:
+{ pkgs, config, ... }:
 {
   services.freshrss = {
     enable = true;
@@ -7,7 +7,7 @@
     passwordFile = config.clan.core.vars.generators."freshrss-password".files."password".path;
   };
 
-services.phpfpm.pools.freshrss = {
+  services.phpfpm.pools.freshrss = {
     phpEnv = {
       OIDC_ENABLED = "1";
       OIDC_PROVIDER_METADATA_URL = "https://sso.echsen.club/realms/echsenclub/.well-known/openid-configuration";
@@ -47,12 +47,12 @@ services.phpfpm.pools.freshrss = {
       };
 
       runtimeInputs = with pkgs; [
+        openssl
       ];
       script = ''
         {
-          printf "OIDC_CLIENT_SECRET=";  cat "$prompts/client-secret";  echo
+          printf "OIDC_CLIENT_SECRET=";  openssl rand -base64 32;  echo
           printf "OIDC_CLIENT_CRYPTO_KEY=";  cat "$prompts/client-secret";  echo
-
         } > "$out/client-secret-env"
       '';
     };
