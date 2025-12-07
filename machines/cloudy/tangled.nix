@@ -5,7 +5,7 @@
     inputs.tangled.nixosModules.spindle
   ];
 
-  services.tangled-knot = {
+  services.tangled.knot = {
     enable = true;
     gitUser = "git";
     openFirewall = false;
@@ -18,7 +18,7 @@
     };
   };
 
-  services.tangled-spindle = {
+  services.tangled.spindle = {
     enable = true;
 
     server = {

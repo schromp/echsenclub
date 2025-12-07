@@ -19,22 +19,11 @@
       settings = {
         DataStoreEncryptionKey._secret = config.clan.core.vars.generators."netbird-data-store-encryption-key".files."encryption-key".path;
         Relay = {
-          Addresses = ["netbird.echsen.club"];
+          Addresses = ["rels://netbird.echsen.club:443"];
           Secret._secret = config.clan.core.vars.generators."netbird-relay-auth".files."password".path;
         };
         Signal = {
           URI = "netbird.echsen.club:443";
-        };
-        TURNConfig = {
-          Turns = [
-            {
-              Proto = "udp";
-              URI = "turn:coturn-cloudy.echsen.club:3478";
-              Username = "netbird";
-              Password._secret = config.clan.core.vars.generators."coturn-password".files."password".path;
-            }
-          ];
-          Secret._secret = config.clan.core.vars.generators."coturn-password".files."password".path;
         };
         IdpManagerConfig = {
           ManagerType = "keycloak";
