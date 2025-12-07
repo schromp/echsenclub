@@ -20,6 +20,7 @@
     ./immich.nix
     ./otelcol.nix
     ./forgejo.nix
+    ./grocy.nix
   ];
 
   fileSystems."/srv" = {

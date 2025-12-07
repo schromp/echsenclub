@@ -1,11 +1,12 @@
 {...}: {
   services.grocy = {
     enable = true;
-    hostname = "https://grocy.echsen.club";
-    enableNginx = false;
+    hostName = "grocy.echsen.club";
+    nginx.enableSSL = false;
     settings = {
+      culture = "de";
       currency = "EUR";
-      firstDayOfWeek = 1;
+      calendar.firstDayOfWeek = 1;
     };
   };
 }

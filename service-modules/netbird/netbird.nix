@@ -12,7 +12,6 @@
           ./secrets/relay-auth-secret.nix
           ./secrets/services-setup-key.nix
           ./secrets/keycloak-secret.nix
-          # ./secrets/coturn-password.nix
           ./management.nix
         ];
       };
