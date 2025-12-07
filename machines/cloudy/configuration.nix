@@ -45,7 +45,7 @@
     ];
     allowedUDPPorts = [
       3478
-      12312 # temp
+      # 12312 # temp
     ];
     allowedUDPPortRanges = [
       {
@@ -98,6 +98,7 @@
           "/immich.echsen.club/${sparrow}"
           "/signoz.echsen.club/${sparrow}"
           "/git.echsen.club/${sparrow}"
+          "/freshrss.echsen.club/${sparrow}"
           "/grocy.echsen.club/${sparrow}"
           "/maubot.echsen.club/${cloudy}"
           "/matrix-admin.echsen.club/${cloudy}"
