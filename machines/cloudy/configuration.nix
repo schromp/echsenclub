@@ -98,6 +98,7 @@
           "/immich.echsen.club/${sparrow}"
           "/signoz.echsen.club/${sparrow}"
           "/git.echsen.club/${sparrow}"
+          "/grocy.echsen.club/${sparrow}"
           "/maubot.echsen.club/${cloudy}"
           "/matrix-admin.echsen.club/${cloudy}"
         ];

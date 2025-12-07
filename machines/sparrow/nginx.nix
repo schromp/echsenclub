@@ -129,6 +129,10 @@
           proxyWebsockets = true;
         };
       };
+      "grocy.echsen.club" = {
+        useACMEHost = "grocy.echsen.club";
+        forceSSL = true;
+      };
     };
   };
 }
