@@ -17,6 +17,7 @@
     ./arr.nix
     ./k3s.nix
     ./kavita.nix
+    ./freshrss.nix
     ./immich.nix
     ./otelcol.nix
     ./forgejo.nix
