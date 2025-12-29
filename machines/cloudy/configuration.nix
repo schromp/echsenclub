@@ -16,6 +16,7 @@
     ./nginx.nix
     ./maubot.nix
     ./tangled.nix
+    ./clickhouse.nix
   ];
 
   fileSystems."/" = {
