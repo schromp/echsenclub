@@ -6,6 +6,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     netbird-new-module.url = "github:NixOS/nixpkgs/pull/354032/head";
     tangled.url = "git+https://tangled.org/@tangled.org/core";
+    copyparty.url = "github:9001/copyparty";
   };
 
   outputs =
@@ -18,6 +19,7 @@
     let
       clan = clan-core.lib.clan {
         inherit self;
+
         # imports = [ ./clan/clan.nix ];
         # Ensure this is unique among all clans you want to use.
         meta.name = "echsenclub";
@@ -131,6 +133,7 @@
                     "git.echsen.club"
                     "freshrss.echsen.club"
                     "grocy.echsen.club"
+                    "copyparty.echsen.club"
                   ];
                   acceptTerms = true;
                 };
