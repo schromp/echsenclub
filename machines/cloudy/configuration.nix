@@ -76,7 +76,8 @@
   services.dnsmasq = {
     enable = true;
     settings = {
-      interface = "nb-echsenclub";
+      interface = "nb-echsenclub"; # when broken, remove this, update, add again, update again.
+      # Also please fix this dns setup soon
       bind-interfaces = true;
       port = 5353;
       address =
@@ -101,6 +102,7 @@
           "/git.echsen.club/${sparrow}"
           "/freshrss.echsen.club/${sparrow}"
           "/grocy.echsen.club/${sparrow}"
+          "/copyparty.echsen.club/${sparrow}"
           "/maubot.echsen.club/${cloudy}"
           "/matrix-admin.echsen.club/${cloudy}"
         ];
