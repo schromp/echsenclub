@@ -22,6 +22,7 @@
     ./otelcol.nix
     ./forgejo.nix
     ./grocy.nix
+    ./copyparty.nix
   ];
 
   fileSystems."/srv" = {
@@ -46,6 +47,7 @@
         80
         443
         1025
+        3923
         5433
         6443 # K3s
         8011 # Netbird API

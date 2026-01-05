@@ -137,6 +137,37 @@
         useACMEHost = "grocy.echsen.club";
         forceSSL = true;
       };
+      "copyparty.echsen.club" = {
+        useACMEHost = "copyparty.echsen.club";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:3923";
+          proxyWebsockets = true;
+          extraConfig = ''
+            auth_request /internal-auth;
+
+            # 2. Extract the user identity from the IdP response headers
+            # Assuming your IdP sends 'Remote-User'
+            auth_request_set $auth_user $upstream_http_remote_user;
+            
+            # 3. Inject it into the request sent to Copyparty
+            proxy_set_header X-Remote-User $auth_user;
+            
+            # Security: Clear the header from the incoming client request 
+            # so they can't spoof it
+            proxy_set_header X-Remote-User $auth_user; 
+          '';
+        };
+        locations."/internal-auth" = {
+            proxyPass = "http://127.0.0.1:9091/api/verify"; # Example: Authelia/Middleware port
+            extraConfig = ''
+              internal;
+              proxy_pass_request_body off;
+              proxy_set_header Content-Length "";
+              proxy_set_header X-Original-URI $request_uri;
+            '';
+          };
+      };
     };
   };
 }
