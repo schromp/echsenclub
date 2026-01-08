@@ -23,6 +23,7 @@
     ./forgejo.nix
     ./grocy.nix
     ./copyparty.nix
+    ./clickhouse.nix
   ];
 
   fileSystems."/srv" = {

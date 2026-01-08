@@ -25,6 +25,13 @@
           proxyPass = "http://localhost:8080";
         };
       };
+      "grafana.echsen.club" = {
+        useACMEHost = "grafana.echsen.club";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://localhost:3000";
+        };
+      };
       "matrix.echsen.club" = {
         useACMEHost = "matrix.echsen.club";
         enableACME = lib.mkForce false;

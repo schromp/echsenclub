@@ -137,6 +137,14 @@
         useACMEHost = "grocy.echsen.club";
         forceSSL = true;
       };
+      "clickhouse.echsen.club" = {
+        useACMEHost = "clickhouse.echsen.club";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:9901";
+          proxyWebsockets = true;
+        };
+      };
       "copyparty.echsen.club" = {
         useACMEHost = "copyparty.echsen.club";
         forceSSL = true;

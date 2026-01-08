@@ -16,7 +16,7 @@
     ./nginx.nix
     ./maubot.nix
     ./tangled.nix
-    ./clickhouse.nix
+    ./grafana.nix
   ];
 
   fileSystems."/" = {
@@ -103,6 +103,7 @@
           "/freshrss.echsen.club/${sparrow}"
           "/grocy.echsen.club/${sparrow}"
           "/copyparty.echsen.club/${sparrow}"
+          "/clickhouse.echsen.club/${sparrow}"
           "/maubot.echsen.club/${cloudy}"
           "/matrix-admin.echsen.club/${cloudy}"
         ];
