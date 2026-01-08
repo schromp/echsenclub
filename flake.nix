@@ -108,6 +108,7 @@
                     "maubot.echsen.club"
                     "knot.echsen.club"
                     "spindle.echsen.club"
+                    "grafana.echsen.club"
                   ];
                   acceptTerms = true;
                 };
@@ -134,6 +135,7 @@
                     "freshrss.echsen.club"
                     "grocy.echsen.club"
                     "copyparty.echsen.club"
+                    "clickhouse.echsen.club"
                   ];
                   acceptTerms = true;
                 };
