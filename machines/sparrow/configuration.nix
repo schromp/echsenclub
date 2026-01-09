@@ -59,6 +59,8 @@
         8090 # Sonarr
         8093
         9092 # Prowlarr
+        9900 # Clickhouse
+        9901 # Clickhouse
         8096
         8097
         9091
