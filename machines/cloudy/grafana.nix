@@ -8,7 +8,7 @@
       };
       "auth.generic_oauth" = {
         enabled = true;
-        name = "Keycloak-OAuth";
+        name = "0.0.0.0";
         allow_sign_up = true;
         client_id = "grafana";
         scopes = "openid email profile offline_access roles";
@@ -18,7 +18,9 @@
         auth_url = "https://sso.echsen.club/realms/echsenclub/protocol/openid-connect/auth";
         token_url = "https://sso.echsen.club/realms/echsenclub/protocol/openid-connect/token";
         api_url = "https://sso.echsen.club/realms/echsenclub/protocol/openid-connect/userinfo";
-        role_attribute_path = "contains(realm_access.roles[*], 'admin') && 'Admin' || contains(realm_access.roles[*], 'editor') && 'Editor' || 'Viewer'";
+        role_attribute_path = "contains(resource_access.grafana.roles[*], 'admin') && 'Admin' || contains(resource_access.grafana.roles[*], 'editor') && 'Editor' || 'Viewer'";
+        grafana_admin_attribute_path = "contains(resource_access.grafana.roles[*], 'server_admin')";
+        allow_assign_grafana_admin = true;
       };
     };
     declarativePlugins = with pkgs.grafanaPlugins; [
@@ -31,14 +33,15 @@
           name = "Clickhouse";
           type = "grafana-clickhouse-datasource";
           uid = "clickhouse";
-          url = "https://clickhouse.echsen.club";
+          url = "sparrow.internal.echsen.club"; 
           jsonData = {
-              defaultDatabase = "default";
-              port = 9901;
-              server = "127.0.0.1";
-              username = "default";
-              tlsSkipVerify = true;
-            };
+            defaultDatabase = "default";
+            port = 9901;
+            protocol = "http";
+            server = "sparrow.internal.echsen.club";
+            username = "default";
+            tlsSkipVerify = true;
+          };
         }
       ];
     };

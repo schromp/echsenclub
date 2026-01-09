@@ -4,6 +4,8 @@ services.clickhouse = {
     serverConfig = {
       tcp_port = 9900;
       http_port = 9901;
+
+      listen_host = "::";
       
       mark_cache_size = 104857600; 
       
