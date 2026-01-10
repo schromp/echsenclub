@@ -33,5 +33,7 @@
     };
   };
 
+  time.timeZone = "Europe/Berlin";
+
   clan.core.settings.state-version.enable = true;
 }
