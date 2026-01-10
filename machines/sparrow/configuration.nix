@@ -9,18 +9,15 @@
     ../../modules/shared.nix
 
     ./postgres.nix
-    ./nextcloud.nix
     ./jellyfin.nix
     ./audiobookshelf.nix
     ./disko.nix
     ./nginx.nix
     ./arr.nix
     ./k3s.nix
-    ./kavita.nix
     ./freshrss.nix
     ./immich.nix
     ./otelcol.nix
-    ./forgejo.nix
     ./grocy.nix
     ./copyparty.nix
     ./clickhouse.nix

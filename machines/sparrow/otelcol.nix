@@ -12,14 +12,33 @@
       receivers = {
         journald = {
           # storage = "file_storage/journald";
+          convert_message_bytes = true;
         };
         hostmetrics = {
           collection_interval = "30s";
           scrapers = {
-            cpu = { };
+            cpu = { 
+              metrics = {
+                "system.cpu.utilization" = {
+                  enabled = true;
+                };
+              };
+            };
             load = { };
-            memory = { };
-            filesystem = { };
+            memory = {
+              metrics = {
+                "system.memory.utilization" = {
+                  enabled = true;
+                };
+              };
+            };
+            filesystem = { 
+              metrics = {
+                "system.filesystem.utilization" = {
+                  enabled = true;
+                };
+              };
+            };
             disk = { };
             network = { };
             processes = { };
@@ -38,22 +57,11 @@
                 method = "GET";
               }) nginxVirtualHosts;
         };
-        # prometheus = {
-        #   config = {
-        #     scrape_configs = [
-        #       {
-        #         job_name = "";
-        #       }
-        #     ];
-        #   };
-        # };
       };
       exporters = {
-        otlp = {
-          endpoint = "http://localhost:4317";
-          tls = {
-            insecure = true;
-          };
+        clickhouse = {
+          endpoint = "tcp://0.0.0.0:9900";
+          create_schema = true;
         };
       };
       processors = {
@@ -70,9 +78,12 @@
             {
               context = "log";
               statements = [
-                ''set(resource.attributes["service.name"], body["SYSLOG_IDENTIFIER"])''
-                ''set(attributes["message"], body["MESSAGE"])''
-                # "delete(body)"
+                # Copy all journald fields to attributes
+                ''merge_maps(attributes, body, "insert")''
+                # Set service name from SYSLOG_IDENTIFIER if available
+                ''set(resource.attributes["service.name"], attributes["SYSLOG_IDENTIFIER"])''
+                # Set the main log body to the message content
+                ''set(body, attributes["MESSAGE"])''
               ];
             }
           ];
@@ -95,7 +106,9 @@
               "resourcedetection"
               "batch"
             ];
-            exporters = [ "otlp" ];
+            exporters = [
+              "clickhouse"
+            ];
           };
           logs = {
             receivers = [ "journald" ];
@@ -103,7 +116,9 @@
               "transform/journald"
               "batch"
             ];
-            exporters = [ "otlp" ];
+            exporters = [
+              "clickhouse"
+            ];
           };
         };
       };
