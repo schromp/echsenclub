@@ -28,6 +28,7 @@
 
         modules."netbird" = ./service-modules/netbird/netbird.nix;
         modules."acme" = ./service-modules/acme/acme.nix;
+        modules."opentelemetry" = ./service-modules/opentelemetry/collector.nix;
         inventory.instances = {
           # borgbackup = import ./clan/borgbackup.nix;
           matrix-synapse = {
@@ -88,6 +89,16 @@
               sparrow = { };
               cloudy = { };
             };
+          };
+          opentelemetry = {
+            module.name = "opentelemetry";
+            module.input = "self";
+            roles.default.settings = {
+              clickhouse = "tcp://sparrow.internal.echsen.club:9900";
+              monitorNginx = true;
+              monitorJournald = true;
+            };
+            roles.default.tags.all = {};
           };
           acme = {
             module = {
