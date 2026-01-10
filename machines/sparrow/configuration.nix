@@ -17,7 +17,6 @@
     ./k3s.nix
     ./freshrss.nix
     ./immich.nix
-    ./otelcol.nix
     ./grocy.nix
     ./copyparty.nix
     ./clickhouse.nix
