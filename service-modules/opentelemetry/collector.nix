@@ -44,6 +44,9 @@
                       "system.cpu.utilization" = {
                         enabled = true;
                       };
+                      "system.cpu.logical.count" = {
+                        enabled = true;
+                      };
                     };
                   };
                   load = { };
@@ -134,6 +137,7 @@
                 logs = {
                   receivers = [] ++ lib.optionals settings.monitorJournald [ "journald" ];
                   processors = [
+                    "resourcedetection"
                     "batch"
                   ] ++ lib.optionals settings.monitorJournald [ "transform/journald" ];
                   exporters = [
