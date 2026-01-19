@@ -4,7 +4,7 @@
     nixpkgs.follows = "clan-core/nixpkgs";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    netbird-new-module.url = "github:NixOS/nixpkgs/pull/354032/head";
+    netbird-new-module.url = "github:schromp/nixpkgs/fix-netbird";
     tangled.url = "git+https://tangled.org/@tangled.org/core";
     copyparty.url = "github:9001/copyparty";
   };

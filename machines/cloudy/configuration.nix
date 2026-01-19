@@ -74,7 +74,7 @@
   };
 
   services.dnsmasq = {
-    enable = true;
+    enable = false;
     settings = {
       interface = "nb-echsenclub"; # when broken, remove this, update, add again, update again.
       # Also please fix this dns setup soon
@@ -94,7 +94,6 @@
           "/sabnzbd.echsen.club/${sparrow}"
           "/pdf.echsen.club/${sparrow}"
           "/kavita.echsen.club/${sparrow}"
-          "/audiobookshelf.echsen.club/${sparrow}"
           "/nextcloud.echsen.club/${sparrow}"
           "/rss.echsen.club/${sparrow}"
           "/immich.echsen.club/${sparrow}"
