@@ -20,6 +20,8 @@
     ./grocy.nix
     ./copyparty.nix
     ./clickhouse.nix
+    ./chaptarr.nix
+    ./caddy.nix
   ];
 
   fileSystems."/srv" = {

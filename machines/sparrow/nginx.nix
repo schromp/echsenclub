@@ -2,6 +2,7 @@
   clan-core,
   pkgs,
   config,
+  lib,
   ...
 }:
 {
@@ -10,7 +11,7 @@
   ];
 
   services.nginx = {
-    enable = true;
+    enable = lib.mkForce false;
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
     virtualHosts = {
@@ -143,6 +144,13 @@
         locations."/" = {
           proxyPass = "http://127.0.0.1:9901";
           proxyWebsockets = true;
+        };
+      };
+      "chaptarr.echsen.club" = {
+        # useACMEHost = "chaptarr.echsen.club";
+        # forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8789";
         };
       };
       "copyparty.echsen.club" = {

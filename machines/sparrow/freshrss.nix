@@ -3,6 +3,7 @@
   services.freshrss = {
     enable = true;
     virtualHost = "freshrss.echsen.club";
+    webserver = "caddy";
     baseUrl = "https://freshrss.echsen.club";
     passwordFile = config.clan.core.vars.generators."freshrss-password".files."password".path;
   };

@@ -31,23 +31,23 @@
         modules."opentelemetry" = ./service-modules/opentelemetry/collector.nix;
         inventory.instances = {
           # borgbackup = import ./clan/borgbackup.nix;
-          matrix-synapse = {
-            module = {
-              name = "matrix-synapse";
-              input = "clan-core";
-            };
-            roles.default.machines.cloudy.settings = {
-              acmeEmail = "server@echsen.club";
-              app_domain = "matrix.echsen.club";
-              server_tld = "echsen.club";
-              users = {
-                schromp = {
-                  name = "schromp";
-                  admin = true;
-                };
-              };
-            };
-          };
+          # matrix-synapse = {
+          #   module = {
+          #     name = "matrix-synapse";
+          #     input = "clan-core";
+          #   };
+          #   roles.default.machines.cloudy.settings = {
+          #     acmeEmail = "server@echsen.club";
+          #     app_domain = "matrix.echsen.club";
+          #     server_tld = "echsen.club";
+          #     users = {
+          #       schromp = {
+          #         name = "schromp";
+          #         admin = true;
+          #       };
+          #     };
+          #   };
+          # };
           user-lk = {
             module = {
               name = "users";
@@ -124,33 +124,34 @@
                   acceptTerms = true;
                 };
               };
-              sparrow = {
-                settings = {
-                  email = "server@echsen.club";
-                  domains = [
-                    "jellyfin.echsen.club"
-                    "audiobookshelf.echsen.club"
-                    "jellyseerr.echsen.club"
-                    "sonarr.echsen.club"
-                    "radarr.echsen.club"
-                    "sabnzbd.echsen.club"
-                    "prowlarr.echsen.club"
-                    "readarr.echsen.club"
-                    "pdf.echsen.club"
-                    "kavita.echsen.club"
-                    "nextcloud.echsen.club"
-                    "rss.echsen.club"
-                    "immich.echsen.club"
-                    "signoz.echsen.club"
-                    "git.echsen.club"
-                    "freshrss.echsen.club"
-                    "grocy.echsen.club"
-                    "copyparty.echsen.club"
-                    "clickhouse.echsen.club"
-                  ];
-                  acceptTerms = true;
-                };
-              };
+              # sparrow = {
+              #   settings = {
+              #     email = "server@echsen.club";
+              #     domains = [
+              #       "jellyfin.echsen.club"
+              #       "audiobookshelf.echsen.club"
+              #       "jellyseerr.echsen.club"
+              #       "sonarr.echsen.club"
+              #       "radarr.echsen.club"
+              #       "sabnzbd.echsen.club"
+              #       "prowlarr.echsen.club"
+              #       "readarr.echsen.club"
+              #       "pdf.echsen.club"
+              #       "kavita.echsen.club"
+              #       "nextcloud.echsen.club"
+              #       "rss.echsen.club"
+              #       "immich.echsen.club"
+              #       "signoz.echsen.club"
+              #       "git.echsen.club"
+              #       "freshrss.echsen.club"
+              #       "grocy.echsen.club"
+              #       "copyparty.echsen.club"
+              #       "clickhouse.echsen.club"
+              #       # "chaptarr.echsen.club"
+              #     ];
+              #     acceptTerms = true;
+              #   };
+              # };
             };
           };
         };
