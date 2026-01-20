@@ -13,11 +13,11 @@
 
     ./disko.nix
     ./keycloak.nix
-    ./nginx.nix
+    # ./nginx.nix
     ./maubot.nix
     ./tangled.nix
     ./grafana.nix
-    # ./caddy.nix
+    ./caddy.nix
   ];
 
   fileSystems."/" = {
