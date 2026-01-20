@@ -17,6 +17,7 @@
     ./maubot.nix
     ./tangled.nix
     ./grafana.nix
+    # ./caddy.nix
   ];
 
   fileSystems."/" = {
