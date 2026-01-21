@@ -2,7 +2,6 @@
   inputs,
   pkgs,
   config,
-  lib,
   ...
 }: {
   services.netbird.server = {
@@ -10,14 +9,14 @@
       enable = true;
       port = 8011;
       package = pkgs.netbird-management.overrideAttrs (oldAttrs: rec {
-        version = "0.63.0";
+        version = "0.64.0";
         src = oldAttrs.src.override {
           tag = "v${version}";
-          hash = "sha256-PNxwbqehDtBNKkoR5MtnmW49AYC+RdiXpImGGeO/TPg=";
+          hash = "sha256-3E8kdSJLturNxUoG66LxqWudVTGOObLtimmdoKZiKPs=";
         };
-        vendorHash = "sha256-iTfwu6CsYQYwyfCax2y/DbMFsnfGZE7TlWE/0Fokvy4=";
+        vendorHash = "sha256-LeY6bnn3aZdG+NeVlvzByvump03A6GhGJW4Bld2bGoc=";
       });
-      turnDomain = "coturn-cloudy.echsen.club";
+      turnDomain = "netbird.echsen.club";
       turnPort = 3478;
       dnsDomain = "netbird.echsen.club";
       domain = "netbird.echsen.club";
@@ -30,6 +29,12 @@
           Addresses = ["rels://netbird.echsen.club:443"];
           Secret._secret = config.clan.core.vars.generators."netbird-relay-auth".files."password".path;
         };
+        Stuns = [
+          {
+            Proto = "udp";
+            URI = "stun:netbird.echsen.club:3478";
+          }
+        ];
         Signal = {
           URI = "netbird.echsen.club:443";
         };
@@ -85,14 +90,14 @@
       enable = true;
       package = pkgs.netbird-dashboard.overrideAttrs (
         finalAttrs: prevAttrs: {
-          version = "2.27.2";
+          version = "2.28.0";
 
           src = prevAttrs.src.override {
             rev = "v${finalAttrs.version}";
-            hash = "sha256-lwPPXDN2hj4QDI5lKTrmC+NnWuGuGS0CEgsL/VfOQk0=";
+            hash = "sha256-GBGfH3YWqdAsQiezCY9oFanoWtU4PcepokgozEgcBiQ=";
           };
 
-          npmDepsHash = "sha256-e4Uxy1bwR3a+thIkaNWpAwDvIJyTbM5TwVy+YVD0CQQ";
+          npmDepsHash = "sha256-e4Uxy1bwR3a+thIkaNWpAwDvIJyTbM5TwVy+YVD0CQQ=";
 
           npmDeps = pkgs.fetchNpmDeps {
             inherit (finalAttrs) src;

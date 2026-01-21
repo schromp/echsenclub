@@ -1,33 +1,39 @@
-{config, pkgs, ...}: {
+{config, ...}: {
   services.caddy = {
     enable = true;
     # package = pkgs.caddy.withPlugins {
     #   plugins = [ "github.com/caddy-dns/bunny@v1.2.0" ];
     #   hash = "sha256-OkyyPKPKu5C4cASU3r/Uw/vtCVMNRVBnAau4uu+WVp8="; 
     # };
+
+    globalConfig = ''
+      servers {
+        protocols h1 h2c h2 h3
+      }
+    '';
     virtualHosts = {
       "sso.echsen.club".extraConfig = ''
-        reverse_proxy http://localhost:8080
+        reverse_proxy http://127.0.0.1:8080
       '';
       "sso-admin.echsen.club".extraConfig = ''
-        reverse_proxy http://localhost:8080
+        reverse_proxy http://127.0.0.1:8080
       '';
       "grafana.echsen.club".extraConfig = ''
-        reverse_proxy http://localhost:3000
+        reverse_proxy http://127.0.0.1:3000
       '';
       "matrix.echsen.club".extraConfig = ''
-        reverse_proxy http://localhost:3000
+        reverse_proxy http://127.0.0.1:3000
         # TODO
       '';
       "knot.echsen.club".extraConfig = ''
-        reverse_proxy http://localhost:5555
+        reverse_proxy http://127.0.0.1:5555
       '';
       # This seems wrong?
       "spindle.echsen.club".extraConfig = ''
-        reverse_proxy http://localhost:5555
+        reverse_proxy http://127.0.0.1:5555
       '';
       # "maubot.echsen.club".extraConfig = ''
-      #   reverse_proxy http://localhost:5555
+      #   reverse_proxy http://127.0.0.1:5555
       # '';
       "netbird.echsen.club".extraConfig = ''
         root * ${config.services.netbird.server.dashboard.finalDrv}
@@ -38,7 +44,7 @@
             # Match these first. If matched, Caddy proxies and STOPS.
             reverse_proxy /api* 127.0.0.1:8011
             reverse_proxy /management.ManagementService/* h2c://127.0.0.1:8011
-            reverse_proxy /signalexchange.SignalExchange/* h2c://127.0.0.1:8012
+            reverse_proxy /signalexchange.SignalExchange/* h2c://127.0.0.1:10000
             reverse_proxy /relay* 127.0.0.1:33080
 
             # 2. Static Assets
