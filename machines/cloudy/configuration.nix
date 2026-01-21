@@ -49,12 +49,12 @@
       3478
       # 12312 # temp
     ];
-    allowedUDPPortRanges = [
-      {
-        from = 49152;
-        to = 65535;
-      }
-    ];
+    # allowedUDPPortRanges = [
+    #   {
+    #     from = 49152;
+    #     to = 65535;
+    #   }
+    # ];
   };
 
   # users.users.root.openssh.authorizedKeys.keys = [

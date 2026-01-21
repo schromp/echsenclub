@@ -66,7 +66,7 @@
         tls {
           dns bunny {env.BUNNY_API_KEY}
         }
-        reverse_proxy http://localhost:9789
+        reverse_proxy http://localhost:8789
       '';
       "copyparty.echsen.club".extraConfig = ''
         tls {

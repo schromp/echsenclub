@@ -8,7 +8,7 @@
   ];
 
   services.netbird.package = pkgs.netbird.overrideAttrs (oldAttrs: rec {
-    version = "0.63.0";
+    version = "0.64.0";
     src = oldAttrs.src.override {
       tag = "v${version}";
       hash = "sha256-PNxwbqehDtBNKkoR5MtnmW49AYC+RdiXpImGGeO/TPg=";
