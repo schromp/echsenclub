@@ -23,6 +23,7 @@
     ./chaptarr.nix
     ./caddy.nix
     ./homeassistant.nix
+    ./ocis.nix
   ];
 
   fileSystems."/srv" = {
