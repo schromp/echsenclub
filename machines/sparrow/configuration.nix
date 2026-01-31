@@ -22,6 +22,7 @@
     ./clickhouse.nix
     ./chaptarr.nix
     ./caddy.nix
+    ./homeassistant.nix
   ];
 
   fileSystems."/srv" = {
