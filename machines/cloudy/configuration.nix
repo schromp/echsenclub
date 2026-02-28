@@ -18,6 +18,7 @@
     ./tangled.nix
     ./grafana.nix
     ./caddy.nix
+    ./jellyswarm.nix
   ];
 
   fileSystems."/" = {

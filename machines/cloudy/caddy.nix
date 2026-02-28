@@ -32,6 +32,10 @@
       "spindle.echsen.club".extraConfig = ''
         reverse_proxy http://127.0.0.1:5555
       '';
+      "jellyswarm.echsen.club".extraConfig = ''
+        bind 100.117.81.56
+        reverse_proxy http://127.0.0.1:3030
+      '';
       # "maubot.echsen.club".extraConfig = ''
       #   reverse_proxy http://127.0.0.1:5555
       # '';

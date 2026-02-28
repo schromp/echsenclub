@@ -175,9 +175,27 @@
         "type": "github"
       }
     },
+    "flake-utils_3": {
+      "inputs": {
+        "systems": "systems_3"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "gomod2nix": {
       "inputs": {
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils_3",
         "nixpkgs": [
           "tangled",
           "nixpkgs"
@@ -261,6 +279,28 @@
       "original": {
         "type": "tarball",
         "url": "https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip"
+      }
+    },
+    "jellyswarm": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay"
+      },
+      "locked": {
+        "lastModified": 1771795446,
+        "narHash": "sha256-aTXP1LqPJ+pvXRbSLJUg9czPBLfE5ar/ctsze9fwR4Y=",
+        "owner": "LLukas22",
+        "repo": "Jellyswarrm",
+        "rev": "a5ace1a33362d6a5b735b542634d8957b59ba2dc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LLukas22",
+        "repo": "Jellyswarrm",
+        "type": "github"
       }
     },
     "lucide-src": {
@@ -390,6 +430,7 @@
       "inputs": {
         "clan-core": "clan-core",
         "copyparty": "copyparty",
+        "jellyswarm": "jellyswarm",
         "netbird-new-module": "netbird-new-module",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": [
@@ -397,6 +438,27 @@
           "nixpkgs"
         ],
         "tangled": "tangled"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "jellyswarm",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1765680428,
+        "narHash": "sha256-fyPmRof9SZeI14ChPk5rVPOm7ISiiGkwGCunkhM+eUg=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "eb3898d8ef143d4bf0f7f2229105fc51c7731b2f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     },
     "sops-nix": {
@@ -449,6 +511,21 @@
       }
     },
     "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_3": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",

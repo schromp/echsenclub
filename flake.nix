@@ -7,6 +7,10 @@
     netbird-new-module.url = "github:schromp/nixpkgs/fix-netbird";
     tangled.url = "git+https://tangled.org/@tangled.org/core";
     copyparty.url = "github:9001/copyparty";
+    jellyswarm = {
+      url = "github:LLukas22/Jellyswarrm";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -41,6 +45,7 @@
               prompt = true;
               groups = [
                 "wheel"
+                "libvirtd"
               ];
             };
           };
