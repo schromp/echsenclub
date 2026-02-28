@@ -1,17 +1,31 @@
 {...}: {
-  virtualisation.oci-containers = {
-    backend = "podman";
-    containers.homeassistant = {
-      volumes = [ "home-assistant:/config" ];
-      environment.TZ = "Europe/Berlin";
-      # Note: The image will not be updated on rebuilds, unless the version label changes
-      image = "ghcr.io/home-assistant/home-assistant:stable";
-      extraOptions = [ 
-        # Use the host network namespace for all sockets
-        "--network=host"
-        # Pass devices into the container, so Home Assistant can discover and make use of them
-        # "--device=/dev/ttyACM0:/dev/ttyACM0"
-      ];
-    };
+  services.home-assistant = {
+    enable = true;
+    config = {
+      default_config = {};
+      http = {
+        use_x_forwarded_for = true;
+        trusted_proxies = [
+          "::1"
+          "127.0.0.1"
+        ];
+      };
+   };
+    extraComponents = [
+      # Components required to complete the onboarding
+      "analytics"
+      "apple_tv"
+      "cast"
+      "google_translate"
+      "met"
+      "radio_browser"
+      "shopping_list"
+      "zha"
+      "ipp"
+      "shelly"
+      # Recommended for fast zlib compression
+      # https://www.home-assistant.io/integrations/isal
+      "isal"
+    ];
   };
 }
