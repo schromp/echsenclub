@@ -23,7 +23,7 @@
     let
       clan = clan-core.lib.clan {
         inherit self;
-        imports = [ ./clan/clan.nix ];
+        imports = [ ./clan.nix ];
         specialArgs = { inherit inputs; };
       };
     in
