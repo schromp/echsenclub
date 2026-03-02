@@ -4,6 +4,9 @@
       "name": "sparrow",
       "tags": [],
       "deploy": {}
+    },
+    "doorman": {
+      "installedAt": 1772487362
     }
   }
 }
