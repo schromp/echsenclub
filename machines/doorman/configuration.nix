@@ -1,7 +1,8 @@
 {
   imports = [
-
+    ./caddy.nix
+    ./lldap.nix
   ];
 
-  # New machine!
+  clan.core.networking.targetHost = "root@doorman";
 }
