@@ -5,6 +5,7 @@
   };
 
   modules."netbird" = ./service-modules/netbird/netbird.nix;
+  modules."netbird2" = ./service-modules/netbird2/netbird.nix;
   modules."acme" = ./service-modules/acme/acme.nix;
   modules."opentelemetry" = ./service-modules/opentelemetry/collector.nix;
 
@@ -45,6 +46,16 @@
         cloudy = { };
       };
     };
+    netbird2 = {
+      module.name = "netbird2";
+      module.input = "self";
+      roles.management.settings = {
+        domain = "netbird2.echsen.club";
+      };
+      roles.relay.machines.doorman = { };
+      roles.signal.machines.doorman = { };
+      roles.management.machines.doorman = { };
+    };
 
     opentelemetry = {
       module.name = "opentelemetry";
@@ -54,7 +65,10 @@
         monitorNginx = true;
         monitorJournald = true;
       };
-      roles.default.tags.all = {};
+      roles.default.tags.all = { };
+      roles.default.machines.cloudy.settings = {
+        prometheusTargets = [ "localhost:9090" ];
+      };
     };
   };
 }
