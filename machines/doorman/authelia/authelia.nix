@@ -60,14 +60,16 @@
           };
           claims_policies = {
             netbird = {
-              id_token = [ "email" ];
-              access_token = [ "email" ];
-              custom_claims = {
-                email = {
-                  name = "email";
-                  attribute = "email";
-                };
-              };
+              id_token = [
+                "email"
+                "name"
+                "preferred_username"
+              ];
+              access_token = [
+                "email"
+                "name"
+                "preferred_username"
+              ];
             };
           };
           clients = [
@@ -141,7 +143,6 @@
           implementation = "lldap";
           base_dn = "dc=echsen,dc=club";
           user = "UID=authelia,OU=people,DC=echsen,DC=club";
-          users_filter = "(&(|({username_attribute}={input})(mail={input}))(objectClass=person))";
           attributes = {
             username = "uid";
             display_name = "displayName";

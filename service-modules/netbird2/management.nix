@@ -50,7 +50,6 @@
                     AuthIssuer = "https://sso2.echsen.club";
                     AuthAudience = "netbird";
                     AuthKeysLocation = "https://sso2.echsen.club/jwks.json";
-                    AuthUserIDClaim = "sub";
                     IdpSignKeyRefreshEnabled = true;
                     OIDCConfigEndpoint = "https://sso2.echsen.club/.well-known/openid-configuration";
                   };
