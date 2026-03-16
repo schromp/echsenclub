@@ -17,6 +17,7 @@
               vim
               git
               net-tools
+              ghostty.terminfo
             ];
 
             nix = {
