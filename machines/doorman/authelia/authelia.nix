@@ -103,32 +103,6 @@
               userinfo_signed_response_alg = "none";
               token_endpoint_auth_method = "none";
             }
-            # {
-            #   client_id = "netbird-pub";
-            #   client_name = "NetBird Public";
-            #   public = true;
-            #   redirect_uris = [
-            #     "https://netbird2.echsen.club/auth"
-            #     "https://netbird2.echsen.club/silent-auth"
-            #     "http://localhost:53000"
-            #   ];
-            #   audience = [ "netbird" ];
-            #   scopes = [
-            #     "openid"
-            #     "profile"
-            #     "email"
-            #   ];
-            #   grant_types = [
-            #     "refresh_token"
-            #     "urn:ietf:params:oauth:grant-type:device_code"
-            #   ];
-            #   client_secret =
-            #     config.clan.core.vars.generators."netbird-client-secret".files."netbird-client-hash".value;
-            #   authorization_policy = "one_factor";
-            #   require_pkce = true;
-            #   pkce_challenge_method = "S256";
-            #   token_endpoint_auth_method = "none";
-            # }
           ];
         };
       };
