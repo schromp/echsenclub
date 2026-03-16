@@ -3,10 +3,8 @@
     enable = true;
     package = pkgs.caddy.withPlugins {
       plugins = [ "github.com/caddy-dns/bunny@v1.2.0" ];
-      hash = "sha256-OkyyPKPKu5C4cASU3r/Uw/vtCVMNRVBnAau4uu+WVp8="; 
+      hash = "sha256-PPx2TSIDks5NOTKfzwgoLUTm9uCSArE7otSzBNEC7ZQ="; 
     };
-    # globalConfig = ''
-    # '';
     virtualHosts = {
       "jellyfin.echsen.club".extraConfig = ''
         tls {
@@ -67,18 +65,6 @@
           dns bunny {env.BUNNY_API_KEY}
         }
         reverse_proxy http://localhost:8789
-      '';
-      "copyparty.echsen.club".extraConfig = ''
-        tls {
-          dns bunny {env.BUNNY_API_KEY}
-        }
-        reverse_proxy http://localhost:3923
-      '';
-      "ha.echsen.club".extraConfig = ''
-        tls {
-          dns bunny {env.BUNNY_API_KEY}
-        }
-        reverse_proxy http://localhost:8123
       '';
       "ocis.echsen.club".extraConfig = ''
         tls {

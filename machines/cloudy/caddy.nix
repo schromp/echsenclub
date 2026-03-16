@@ -1,4 +1,4 @@
-{config, ...}: {
+{...}: {
   services.caddy = {
     enable = true;
     # package = pkgs.caddy.withPlugins {
@@ -21,10 +21,6 @@
       "grafana.echsen.club".extraConfig = ''
         reverse_proxy http://127.0.0.1:3000
       '';
-      "matrix.echsen.club".extraConfig = ''
-        reverse_proxy http://127.0.0.1:3000
-        # TODO
-      '';
       "knot.echsen.club".extraConfig = ''
         reverse_proxy http://127.0.0.1:5555
       '';
@@ -32,14 +28,14 @@
       "spindle.echsen.club".extraConfig = ''
         reverse_proxy http://127.0.0.1:5555
       '';
-      "jellyswarm.echsen.club".extraConfig = ''
-        bind 100.117.81.56
-        reverse_proxy http://127.0.0.1:3030
-      '';
-      "ha.echsen.club".extraConfig = ''
-        bind 100.117.81.56
-        reverse_proxy http://100.117.246.32:8123
-      '';
+      # "jellyswarm.echsen.club".extraConfig = ''
+      #   bind 100.117.81.56
+      #   reverse_proxy http://127.0.0.1:3030
+      # '';
+      # "ha.echsen.club".extraConfig = ''
+      #   bind 100.117.81.56
+      #   reverse_proxy http://100.117.246.32:8123
+      # '';
     };
   };
 }
