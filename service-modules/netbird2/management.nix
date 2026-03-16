@@ -76,7 +76,7 @@
                       TokenEndpoint = "https://sso2.echsen.club/api/oidc/token";
                       Scope = "openid profile email";
                       RedirectURLs = [
-                        "http://localhost:53000/"
+                        "http://localhost:53000"
                       ];
                       UseIDToken = true;
                     };
@@ -92,7 +92,7 @@
                   AUTH_REDIRECT_URI = "/auth";
                   AUTH_SILENT_REDIRECT_URI = "/silent-auth";
                   NETBIRD_TOKEN_SOURCE = "accessToken";
-                  AUTH_CLIENT_ID = "netbird";
+                  AUTH_CLIENT_ID = "netbird-dashboard";
                   AUTH_SUPPORTED_SCOPES = "openid profile email";
                   USE_AUTH0 = false;
                 };
