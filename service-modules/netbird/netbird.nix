@@ -1,53 +1,54 @@
 {
   _class = "clan.service";
   manifest.name = "netbird";
-  roles.management = {
-    interface = {};
-    perInstance = {...}: {
-      nixosModule = {...}: {
-        imports = [
-          ./shared.nix
-          ./secrets/admin-password.nix
-          ./secrets/datastore-encryption-key.nix
-          ./secrets/relay-auth-secret.nix
-          ./secrets/services-setup-key.nix
-          ./secrets/keycloak-secret.nix
-          ./management.nix
-        ];
-      };
-    };
-  };
+  manifest.readme = builtins.readFile ./README.md;
   roles.relay = {
-    interface = {};
-    perInstance = {...}: {
-      nixosModule = {...}: {
-        imports = [
-          ./shared.nix
-          ./secrets/relay-auth-secret.nix
-          ./relay.nix
-        ];
+    description = "NetBird relay machines, which handle data plane traffic and relay it between clients and the management plane.";
+    interface = { };
+    perInstance =
+      { ... }:
+      {
+        nixosModule =
+          { ... }:
+          {
+            imports = [
+              ./secrets/relay-auth-secret.nix
+              ./relay.nix
+            ];
+          };
       };
-    };
   };
   roles.signal = {
-    interface = {};
-    perInstance = {...}: {
-      nixosModule = {...}: {
-        imports = [
-          ./shared.nix
-          ./signal.nix
-        ];
+    description = "NetBird signal machines, which handle control plane traffic and device management.";
+    interface = { };
+    perInstance =
+      { ... }:
+      {
+        nixosModule =
+          { ... }:
+          {
+            imports = [
+              ./signal.nix
+            ];
+          };
       };
-    };
   };
   roles.client = {
-    interface = {};
-    perInstance = {...}: {
-      nixosModule = {...}: {
-        imports = [
-          ./client.nix
-        ];
+    description = "NetBird client machines, e.g., desktops and laptops.";
+    interface = { };
+    perInstance =
+      { ... }:
+      {
+        nixosModule =
+          { ... }:
+          {
+            imports = [
+              ./client.nix
+            ];
+          };
       };
-    };
   };
+  imports = [
+    ./management.nix
+  ];
 }

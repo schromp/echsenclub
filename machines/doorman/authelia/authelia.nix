@@ -81,8 +81,8 @@
               consent_mode = "implicit";
               public = false;
               redirect_uris = [
-                "https://netbird2.echsen.club/auth"
-                "https://netbird2.echsen.club/silent-auth"
+                "https://netbird.echsen.club/auth"
+                "https://netbird.echsen.club/silent-auth"
                 "http://localhost:53000"
               ];
               audience = [ "netbird" ];
@@ -111,8 +111,8 @@
               consent_mode = "implicit";
               public = true;
               redirect_uris = [
-                "https://netbird2.echsen.club/auth"
-                "https://netbird2.echsen.club/silent-auth"
+                "https://netbird.echsen.club/auth"
+                "https://netbird.echsen.club/silent-auth"
                 "http://localhost:53000"
               ];
               audience = [ "netbird" ];

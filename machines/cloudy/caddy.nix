@@ -36,30 +36,9 @@
         bind 100.117.81.56
         reverse_proxy http://127.0.0.1:3030
       '';
-      # "maubot.echsen.club".extraConfig = ''
-      #   reverse_proxy http://127.0.0.1:5555
-      # '';
-      "netbird.echsen.club".extraConfig = ''
-        root * ${config.services.netbird.server.dashboard.finalDrv}
-
-        # route FORCES Caddy to follow this exact order, no reordering!
-        route {
-            # 1. API & Backends (Top priority)
-            # Match these first. If matched, Caddy proxies and STOPS.
-            reverse_proxy /api* 127.0.0.1:8011
-            reverse_proxy /management.ManagementService/* h2c://127.0.0.1:8011
-            reverse_proxy /signalexchange.SignalExchange/* h2c://127.0.0.1:10000
-            reverse_proxy /relay* 127.0.0.1:33080
-
-            # 2. Static Assets
-            # If it's a real file (CSS, JS, Image), serve it and STOP.
-            file_server
-
-            # 3. SPA Fallback (The Catch-All)
-            # If we reach this point, it wasn't an API call and isn't a real file.
-            # It must be a React route (like /peers), so serve index.html.
-            try_files {path} /index.html
-        }
+      "ha.echsen.club".extraConfig = ''
+        bind 100.117.81.56
+        reverse_proxy http://100.117.246.32:8123
       '';
     };
   };

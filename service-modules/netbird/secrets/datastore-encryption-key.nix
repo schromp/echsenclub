@@ -8,7 +8,7 @@
         openssl
       ];
       script = ''
-        openssl rand -base64 32 > $out-server/encryption-key
+        openssl rand -base64 32 > $out/encryption-key
       '';
     };
   };

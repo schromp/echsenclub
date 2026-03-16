@@ -6,7 +6,6 @@
 
   modules."common" = ./service-modules/common/common.nix;
   modules."netbird" = ./service-modules/netbird/netbird.nix;
-  modules."netbird2" = ./service-modules/netbird2/netbird.nix;
   modules."acme" = ./service-modules/acme/acme.nix;
   modules."opentelemetry" = ./service-modules/opentelemetry/collector.nix;
 
@@ -62,19 +61,8 @@
     netbird = {
       module.name = "netbird";
       module.input = "self";
-      roles.relay.machines.cloudy = { };
-      roles.signal.machines.cloudy = { };
-      roles.management.machines.cloudy = { };
-      roles.client.machines = {
-        sparrow = { };
-        cloudy = { };
-      };
-    };
-    netbird2 = {
-      module.name = "netbird2";
-      module.input = "self";
       roles.management.settings = {
-        domain = "netbird2.echsen.club";
+        domain = "netbird.echsen.club";
       };
       roles.relay.machines.doorman = { };
       roles.signal.machines.doorman = { };

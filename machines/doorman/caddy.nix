@@ -14,7 +14,7 @@
       "sso2.echsen.club".extraConfig = ''
         reverse_proxy http://127.0.0.1:9091
       '';
-      "netbird2.echsen.club" = {
+      "netbird.echsen.club" = {
         extraConfig = ''
           root * ${config.services.netbird.server.dashboard.finalDrv}
 

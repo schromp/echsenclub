@@ -1,120 +1,104 @@
 {
-  inputs,
-  pkgs,
-  config,
-  ...
-}: {
-  services.netbird.server = {
-    management = {
-      enable = true;
-      port = 8011;
-      package = pkgs.netbird-management.overrideAttrs (oldAttrs: rec {
-        version = "0.64.0";
-        src = oldAttrs.src.override {
-          tag = "v${version}";
-          hash = "sha256-3E8kdSJLturNxUoG66LxqWudVTGOObLtimmdoKZiKPs=";
+  roles.management = {
+    description = "NetBird management machines, which run the NetBird management server and dashboard.";
+    interface =
+      {
+        lib,
+        ...
+      }:
+      {
+        options = {
+          domain = lib.mkOption {
+            type = lib.types.str;
+            description = "Domain for NetBird SSO integration (e.g., echsen.club)";
+          };
         };
-        vendorHash = "sha256-LeY6bnn3aZdG+NeVlvzByvump03A6GhGJW4Bld2bGoc=";
-      });
-      turnDomain = "netbird.echsen.club";
-      turnPort = 3478;
-      dnsDomain = "netbird.echsen.club";
-      domain = "netbird.echsen.club";
-
-      oidcConfigEndpoint = "https://sso.echsen.club/realms/echsenclub/.well-known/openid-configuration";
-      # logLevel = "DEBUG";
-      settings = {
-        DataStoreEncryptionKey._secret = config.clan.core.vars.generators."netbird-data-store-encryption-key".files."encryption-key".path;
-        Relay = {
-          Addresses = ["rels://netbird.echsen.club:443"];
-          Secret._secret = config.clan.core.vars.generators."netbird-relay-auth".files."password".path;
-        };
-        Stuns = [
+      };
+    perInstance =
+      { settings, ... }:
+      {
+        nixosModule =
+          { config, ... }:
           {
-            Proto = "udp";
-            URI = "stun:netbird.echsen.club:3478";
-          }
-        ];
-        Signal = {
-          URI = "netbird.echsen.club:443";
-        };
-        IdpManagerConfig = {
-          ManagerType = "keycloak";
-          ClientConfig = {
-            Issuer = "https://sso.echsen.club/realms/echsenclub";
-            TokenEndpoint = "https://sso.echsen.club/realms/echsenclub/protocol/openid-connect/token";
-            ClientID = "netbird-backend";
-            ClientSecret = {
-              _secret = config.clan.core.vars.generators."keycloak-netbird-backend-client-secret".files."keycloak-netbird-backend-client-secret".path;
-            };
-            GrantType = "client_credentials";
-            Scope = "openid profile email offline_access api";
-            Audience = "netbird-client";
-          };
-          ExtraConfig = {
-            ManagementEndpoint = "https://sso.echsen.club/admin/realms/echsenclub";
-            AdminEndpoint = "https://sso.echsen.club/admin/realms/echsenclub";
-          };
-          SignkeyRefresh = true;
-        };
-        ExtraConfig = {
-          Password._secret = config.clan.core.vars.generators."netbird-admin-password".files."password".path;
-          Username = "admin";
-        };
-        PKCEAuthorizationFlow = {
-          ProviderConfig = {
-            Audience = "netbird-client";
-            ClientID = "netbird-client";
-            Scope = "openid profile email offline_access api";
-            AuthorizationEndpoint = "https://sso.echsen.club/realms/echsenclub/protocol/openid-connect/auth";
-            RedirectURLs = [
-              "http://localhost:53000/"
+            imports = [
+              ./secrets/admin-password.nix
+              ./secrets/datastore-encryption-key.nix
+              ./secrets/relay-auth-secret.nix
+              ./secrets/services-setup-key.nix
+              ../../machines/doorman/authelia/client-secrets/netbird-client-secret.nix
             ];
+
+            services.netbird.server = {
+              management = {
+                enable = true;
+                logLevel = "DEBUG";
+                port = 8011;
+                turnDomain = settings.domain;
+                turnPort = 3478;
+                dnsDomain = settings.domain;
+                domain = settings.domain;
+                oidcConfigEndpoint = "https://sso2.echsen.club/.well-known/openid-configuration";
+                disableSingleAccountMode = true;
+
+                settings = {
+                  DataStoreEncryptionKey._secret =
+                    config.clan.core.vars.generators."netbird-data-store-encryption-key".files."encryption-key".path;
+                  Relay = {
+                    Secret._secret = config.clan.core.vars.generators."netbird-relay-auth".files."password".path;
+                  };
+                  HttpConfig = {
+                    AuthIssuer = "https://sso2.echsen.club";
+                    AuthAudience = "netbird";
+                    AuthKeysLocation = "https://sso2.echsen.club/jwks.json";
+                    IdpSignKeyRefreshEnabled = true;
+                    OIDCConfigEndpoint = "https://sso2.echsen.club/.well-known/openid-configuration";
+                  };
+                  IdpManagerConfig = { };
+                  DeviceAuhorizationFlow = {
+                    Provider = "hosted";
+                    ProviderConfig = {
+                      ClientID = "netbird";
+                      ClientSecret._secret =
+                        config.clan.core.vars.generators."netbird-client-secret".files."netbird-client-secret".path;
+                      Scope = "openid profile email";
+                      UseIDToken = true;
+                    };
+                  };
+                  PKCEAuthorizationFlow = {
+                    ProviderConfig = {
+                      Audience = "netbird";
+                      ClientID = "netbird";
+                      ClientSecret._secret =
+                        config.clan.core.vars.generators."netbird-client-secret".files."netbird-client-secret".path;
+                      Domain = "";
+                      AuthorizationEndpoint = "https://sso2.echsen.club/api/oidc/authorization";
+                      TokenEndpoint = "https://sso2.echsen.club/api/oidc/token";
+                      Scope = "openid profile email";
+                      RedirectURLs = [
+                        "http://localhost:53000"
+                      ];
+                      UseIDToken = true;
+                    };
+                  };
+                };
+              };
+              dashboard = {
+                enable = true;
+                domain = "${settings.domain}";
+                managementServer = "https://${settings.domain}";
+                settings = {
+                  AUTH_AUTHORITY = "https://sso2.echsen.club";
+                  AUTH_REDIRECT_URI = "/auth";
+                  AUTH_SILENT_REDIRECT_URI = "/silent-auth";
+                  NETBIRD_TOKEN_SOURCE = "accessToken";
+                  AUTH_CLIENT_ID = "netbird-dashboard";
+                  AUTH_SUPPORTED_SCOPES = "openid profile email";
+                  USE_AUTH0 = false;
+                };
+              };
+
+            };
           };
-        };
-        DeviceAuthorizationFlow = {
-          Provider = "hosted";
-          ProviderConfig = {
-            ClientID = "netbird-client";
-            Audience = "netbird-client";
-            Domain = "https://sso.echsen.club/realms/echsenclub";
-            TokenEndpoint = "https://sso.echsen.club/realms/echsenclub/protocol/openid-connect/token";
-            DeviceAuthEndpoint = "https://sso.echsen.club/realms/echsenclub/protocol/openid-connect/auth/device";
-            Scope = "openid profile email offline_access api";
-            # UseIDToken = false;
-          };
-        };
       };
-    };
-    dashboard = {
-      enable = true;
-      package = pkgs.netbird-dashboard.overrideAttrs (
-        finalAttrs: prevAttrs: {
-          version = "2.28.0";
-
-          src = prevAttrs.src.override {
-            rev = "v${finalAttrs.version}";
-            hash = "sha256-GBGfH3YWqdAsQiezCY9oFanoWtU4PcepokgozEgcBiQ=";
-          };
-
-          npmDepsHash = "sha256-e4Uxy1bwR3a+thIkaNWpAwDvIJyTbM5TwVy+YVD0CQQ=";
-
-          npmDeps = pkgs.fetchNpmDeps {
-            inherit (finalAttrs) src;
-            name = "${finalAttrs.pname}-${finalAttrs.version}-npm-deps";
-            hash = finalAttrs.npmDepsHash;
-          };
-        }
-      );
-      # enableNginx = true;
-      domain = "netbird.echsen.club";
-      managementServer = "https://netbird.echsen.club";
-      settings = {
-        AUTH_AUTHORITY = "https://sso.echsen.club/realms/echsenclub";
-        AUTH_CLIENT_ID = "netbird-client";
-        AUTH_SUPPORTED_SCOPES = "openid profile email api";
-        USE_AUTH0 = false;
-      };
-    };
   };
 }

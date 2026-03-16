@@ -1,3 +1,0 @@
-# Netbird Module
-
-WIP
