@@ -36,6 +36,7 @@
                 turnDomain = settings.domain;
                 turnPort = 3478;
                 dnsDomain = settings.domain;
+                metricsPort = 9095;
                 domain = settings.domain;
                 oidcConfigEndpoint = "https://sso2.echsen.club/.well-known/openid-configuration";
                 disableSingleAccountMode = true;
@@ -44,6 +45,7 @@
                   DataStoreEncryptionKey._secret =
                     config.clan.core.vars.generators."netbird-data-store-encryption-key".files."encryption-key".path;
                   Relay = {
+                    CredentialsTTL = "24h";
                     Secret._secret = config.clan.core.vars.generators."netbird-relay-auth".files."password".path;
                   };
                   HttpConfig = {
@@ -73,7 +75,7 @@
                       Domain = "";
                       AuthorizationEndpoint = "https://sso2.echsen.club/api/oidc/authorization";
                       TokenEndpoint = "https://sso2.echsen.club/api/oidc/token";
-                      Scope = "openid profile email";
+                      Scope = "openid profile email groups";
                       RedirectURLs = [
                         "http://localhost:53000"
                       ];

@@ -64,11 +64,13 @@
                 "email"
                 "name"
                 "preferred_username"
+                "groups"
               ];
               access_token = [
                 "email"
                 "name"
                 "preferred_username"
+                "groups"
               ];
             };
           };
@@ -90,6 +92,7 @@
                 "openid"
                 "profile"
                 "email"
+                "groups"
               ];
               grant_types = [
                 "authorization_code"
