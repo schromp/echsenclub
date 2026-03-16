@@ -3,24 +3,37 @@
   services.caddy = {
     enable = true;
     email = "server@echsen.club";
-    # TODO: bind all proxies to lldap to netbird interface
-    extraConfig = ''
-      {
-        # Allow Caddy to handle unencrypted HTTP/2 locally
-        servers {
-          protocol {
-            allow_h2c
-          }
-        }
-      }
-    '';
     virtualHosts = {
-      # "lldap-admin.echsen.club".extraConfig = ''
-      #   reverse_proxy http://127.0.0.1:17170
-      # '';
-      # "lldap.echsen.club".extraConfig = ''
-      #   reverse_proxy http://127.0.0.1:3890
-      # '';
+      "lldap.echsen.club".extraConfig = ''
+        @netbird {
+          remote_ip 100.74.0.0/16
+        }
+
+        # Only proxy if the IP matches
+        handle @netbird {
+          reverse_proxy http://127.0.0.1:3890
+        }
+
+        # Fallback handle for everyone else
+        handle {
+          respond "Forbidden" 403
+        }
+      '';
+      "lldap-admin.echsen.club".extraConfig = ''
+        @netbird {
+          remote_ip 100.74.0.0/16
+        }
+
+        # Only proxy if the IP matches
+        handle @netbird {
+          reverse_proxy http://127.0.0.1:17170
+        }
+
+        # Fallback handle for everyone else
+        handle {
+          respond "Forbidden" 403
+        }
+      '';
       "sso2.echsen.club".extraConfig = ''
         reverse_proxy http://127.0.0.1:9091
       '';
@@ -73,6 +86,21 @@
           }
         '';
       };
+      "ha.echsen.club".extraConfig = ''
+        @netbird {
+          remote_ip 100.74.0.0/16
+        }
+
+        # Only proxy if the IP matches
+        handle @netbird {
+          reverse_proxy http://100.74.252.10:8123
+        }
+
+        # Fallback handle for everyone else
+        handle {
+          respond "Forbidden" 403
+        }
+      '';
     };
   };
 }
