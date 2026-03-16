@@ -13,12 +13,11 @@
         config.clan.core.vars.generators."authelia-ldap-password".files."authelia-ldap-password".path;
     };
     settings = {
-      log.level = "debug";
       server = {
         address = "tcp://127.0.0.1:9091/";
       };
       access_control = {
-        default_policy = "one_factor"; # TODO:
+        default_policy = "one_factor";
       };
       session = {
         cookies = [
@@ -51,7 +50,6 @@
       identity_providers = {
         oidc = {
           cors = {
-            # allowed_origins_from_client_redirect_uris = true;
             endpoints = [
               "userinfo"
               "token"
