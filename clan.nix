@@ -67,6 +67,8 @@
       roles.relay.machines.doorman = { };
       roles.signal.machines.doorman = { };
       roles.management.machines.doorman = { };
+
+      roles.client.tags.all = { };
     };
 
     opentelemetry = {
