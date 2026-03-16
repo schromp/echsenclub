@@ -18,7 +18,6 @@
       };
       files."username" = {
         secret = false;
-        group = "smtp-secret";
       };
       files."password" = {
         secret = true;

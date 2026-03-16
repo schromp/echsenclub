@@ -1,6 +1,5 @@
 {
   imports = [
-    ../../modules/shared.nix 
     ./caddy.nix
     ./lldap.nix
     ./authelia/authelia.nix

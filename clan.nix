@@ -4,12 +4,21 @@
     domain = "echsen.club";
   };
 
+  modules."common" = ./service-modules/common/common.nix;
   modules."netbird" = ./service-modules/netbird/netbird.nix;
   modules."netbird2" = ./service-modules/netbird2/netbird.nix;
   modules."acme" = ./service-modules/acme/acme.nix;
   modules."opentelemetry" = ./service-modules/opentelemetry/collector.nix;
 
   inventory.instances = {
+    common = {
+      module = {
+        name = "common";
+        input = "self";
+      };
+      roles.default.tags.all = { };
+    };
+
     user-lk = {
       module = {
         name = "users";
@@ -22,17 +31,32 @@
         groups = [
           "wheel"
         ];
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRat12+538VwG/IAv5R4AjdNYz/GATO7ULQnXtYC2HK lk@tower"
+        ];
       };
     };
 
-    admin = {
-      module.name = "admin";
-      roles.default.settings = {
-        allowedKeys = {
-          key1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRat12+538VwG/IAv5R4AjdNYz/GATO7ULQnXtYC2HK lk@tower ";
-        };
+    root-user = {
+      module = {
+        name = "users";
+        input = "clan-core";
       };
       roles.default.tags.all = { };
+      roles.default.settings = {
+        user = "root";
+        prompt = true;
+      };
+    };
+
+    sshd = {
+      roles.server.settings = {
+        authorizedKeys = {
+          "schromp-key" =
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRat12+538VwG/IAv5R4AjdNYz/GATO7ULQnXtYC2HK lk@tower";
+        };
+      };
+      roles.server.tags.all = { };
     };
 
     netbird = {

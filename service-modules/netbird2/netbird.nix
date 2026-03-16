@@ -1,7 +1,9 @@
 {
   _class = "clan.service";
   manifest.name = "netbird";
+  manifest.readme = builtins.readFile ./README.md;
   roles.relay = {
+    description = "NetBird relay machines, which handle data plane traffic and relay it between clients and the management plane.";
     interface = { };
     perInstance =
       { ... }:
@@ -17,6 +19,7 @@
       };
   };
   roles.signal = {
+    description = "NetBird signal machines, which handle control plane traffic and device management.";
     interface = { };
     perInstance =
       { ... }:
@@ -31,6 +34,7 @@
       };
   };
   roles.client = {
+    description = "NetBird client machines, e.g., desktops and laptops.";
     interface = { };
     perInstance =
       { ... }:

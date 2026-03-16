@@ -9,7 +9,6 @@
         };
         "netbird-client-hash" = {
           secret = false;
-          owner = "authelia-EchsenSSO";
         };
       };
       runtimeInputs = with pkgs; [

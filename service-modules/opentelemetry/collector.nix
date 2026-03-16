@@ -1,7 +1,9 @@
 {
   _class = "clan.service";
   manifest.name = "opentelemetry";
+  manifest.readme = builtins.readFile ./README.md;
   roles.default = {
+    description = "OpenTelemetry Collector for metrics and logs collection and export to Clickhouse";
     interface =
       { lib, ... }:
       {

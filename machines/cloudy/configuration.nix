@@ -7,10 +7,6 @@
 }:
 {
   imports = [
-    ../../modules/shared.nix
-
-    ../../modules/synapse-admin.nix
-
     ./disko.nix
     ./keycloak.nix
     # ./nginx.nix

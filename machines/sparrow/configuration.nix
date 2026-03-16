@@ -6,8 +6,6 @@
 }:
 {
   imports = [
-    ../../modules/shared.nix
-
     ./postgres.nix
     ./jellyfin.nix
     ./audiobookshelf.nix
@@ -22,7 +20,6 @@
     ./clickhouse.nix
     ./chaptarr.nix
     ./caddy.nix
-    ./homeassistant.nix
     ./ocis.nix
   ];
 

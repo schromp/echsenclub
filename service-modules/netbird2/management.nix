@@ -1,5 +1,6 @@
 {
   roles.management = {
+    description = "NetBird management machines, which run the NetBird management server and dashboard.";
     interface =
       {
         lib,
