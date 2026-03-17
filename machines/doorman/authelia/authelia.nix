@@ -106,7 +106,7 @@
               response_types = [ "code" ];
               access_token_signed_response_alg = "RS256";
               userinfo_signed_response_alg = "none";
-              token_endpoint_auth_method = "client_secret_post";
+              token_endpoint_auth_method = "client_secret_basic";
             }
             {
               client_id = "netbird-dashboard";

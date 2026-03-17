@@ -4,24 +4,9 @@
     enable = true;
     email = "server@echsen.club";
     virtualHosts = {
-      "lldap.echsen.club".extraConfig = ''
-        @netbird {
-          remote_ip 100.74.0.0/16
-        }
-
-        # Only proxy if the IP matches
-        handle @netbird {
-          reverse_proxy http://127.0.0.1:3890
-        }
-
-        # Fallback handle for everyone else
-        handle {
-          respond "Forbidden" 403
-        }
-      '';
       "lldap-admin.echsen.club".extraConfig = ''
         @netbird {
-          remote_ip 100.74.0.0/16
+          remote_ip 100.111.0.0/16
         }
 
         # Only proxy if the IP matches
@@ -88,12 +73,12 @@
       };
       "ha.echsen.club".extraConfig = ''
         @netbird {
-          remote_ip 100.74.0.0/16
+          remote_ip 100.111.0.0/16
         }
 
         # Only proxy if the IP matches
         handle @netbird {
-          reverse_proxy http://100.74.252.10:8123
+          reverse_proxy http://100.111.203.220:8123
         }
 
         # Fallback handle for everyone else

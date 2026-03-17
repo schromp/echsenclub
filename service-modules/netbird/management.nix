@@ -38,7 +38,7 @@
                 metricsPort = 9095;
                 domain = settings.domain;
                 oidcConfigEndpoint = "https://sso2.echsen.club/.well-known/openid-configuration";
-                disableSingleAccountMode = true;
+                disableSingleAccountMode = false;
 
                 settings = {
                   DataStoreEncryptionKey._secret =
