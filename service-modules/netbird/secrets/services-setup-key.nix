@@ -6,7 +6,6 @@
 
       files.netbird-services-setup-key = {
         secret = true;
-        owner = "netbird-echsenclub";
       };
 
       share = true;

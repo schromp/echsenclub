@@ -9,6 +9,7 @@
 
   services.netbird.clients."echsenclub" = {
     port = 51820;
+    hardened = false;
     config = {
       ManagementURL = {
         Host = "netbird.echsen.club:443";

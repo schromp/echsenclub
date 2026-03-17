@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  clan-core,
   lib,
   ...
 }:
@@ -10,7 +8,6 @@
     ./disko.nix
     ./keycloak.nix
     # ./nginx.nix
-    ./maubot.nix
     ./tangled.nix
     ./grafana.nix
     ./caddy.nix
@@ -108,23 +105,5 @@
     };
   };
 
-  networking.firewall.interfaces."nb-echsenclub".allowedUDPPorts = [
-    53
-    5353
-  ];
-
-  nixpkgs.config.permittedInsecurePackages = [
-    "olm-3.2.16"
-  ];
-
-  # services.resolved.enable = false;
-
-  # services.netbird = {
-  #   server.coturn = {
-  #     enable = true;
-  #     domain = "coturn-cloudy.netbird.echsen.club";
-  #     passwordFile = config.clan.core.vars.generators."netbird-turn-cloudy-password".files."turn-cloudy-password".path;
-  #     useAcmeCertificates = true;
-  #   };
-  # };
+  services.resolved.enable = true;
 }

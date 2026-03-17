@@ -43,32 +43,32 @@
 
           # Relay (WebSocket)
           handle /relay* {
-            reverse_proxy 127.0.0.1:33080
+            reverse_proxy [::1]:33080
           }
 
           # Signal WebSocket
           handle /ws-proxy/signal* {
-            reverse_proxy 127.0.0.1:8012
+            reverse_proxy [::1]:8012
           }
 
           # Signal gRPC (h2c for plaintext HTTP/2)
           handle /signalexchange.SignalExchange/* {
-            reverse_proxy h2c://127.0.0.1:${toString config.services.netbird.server.signal.port}
+            reverse_proxy h2c://[::1]:${toString config.services.netbird.server.signal.port}
           }
 
           # Management API
           handle /api/* {
-            reverse_proxy 127.0.0.1:${toString config.services.netbird.server.management.port}
+            reverse_proxy [::1]:${toString config.services.netbird.server.management.port}
           }
 
           # Management WebSocket
           handle /ws-proxy/management* {
-            reverse_proxy 127.0.0.1:${toString config.services.netbird.server.management.port}
+            reverse_proxy [::1]:${toString config.services.netbird.server.management.port}
           }
 
           # Management gRPC
           handle /management.ManagementService/* {
-            reverse_proxy h2c://127.0.0.1:${toString config.services.netbird.server.management.port}
+            reverse_proxy h2c://[::1]:${toString config.services.netbird.server.management.port}
           }
 
           # Dashboard (catch-all)

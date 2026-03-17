@@ -88,8 +88,6 @@
 
   services.resolved = {
     enable = true;
-    #   fallbackDns = ["1.1.1.1" "8.8.8.8"];
-    dnssec = "false";
   };
 
   virtualisation.docker.enable = true;
