@@ -18,7 +18,7 @@
       { settings, ... }:
       {
         nixosModule =
-          { config, ... }:
+          { config, lib, ... }:
           {
             imports = [
               ./secrets/admin-password.nix
@@ -34,7 +34,6 @@
                 logLevel = "DEBUG";
                 port = 8011;
                 turnDomain = settings.domain;
-                turnPort = 3478;
                 dnsDomain = settings.domain;
                 metricsPort = 9095;
                 domain = settings.domain;
@@ -47,7 +46,15 @@
                   Relay = {
                     CredentialsTTL = "24h";
                     Secret._secret = config.clan.core.vars.generators."netbird-relay-auth".files."password".path;
+                    Addresses = [ "rels://netbird.echsen.club:443" ];
                   };
+                  Stuns = [
+                    {
+                      Proto = "udp";
+                      URI = "stun:netbird.echsen.club:3478";
+                    }
+                  ];
+                  TURNConfig.Turns = lib.mkForce [ ];
                   HttpConfig = {
                     AuthIssuer = "https://sso2.echsen.club";
                     AuthAudience = "netbird";

@@ -8,8 +8,6 @@ let
   package = pkgs.netbird-relay;
   port = 33080;
   exposedAddress = "rel://netbird.echsen.club:443";
-  # logLevel = "info";
-  # stunPorts = [ 3478 ];
 in
 {
   systemd.services.netbird-relay = {
@@ -18,10 +16,11 @@ in
     environment = {
       NB_EXPOSED_ADDRESS = exposedAddress;
       NB_LISTEN_ADDRESS = ":${toString port}";
+      NB_ENABLE_STUN = "true";
     };
 
     script = ''
-      export NB_AUTH_SECRET="$(<${toString config.clan.core.vars.generators."netbird-relay-auth".files."password".path})"
+      export NB_AUTH_SECRET="$(<${config.clan.core.vars.generators."netbird-relay-auth".files."password".path})"
       ${lib.getExe package}
     '';
 
