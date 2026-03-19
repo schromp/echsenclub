@@ -1,7 +1,5 @@
 {
   pkgs,
-  inputs,
-  config,
   ...
 }:
 {
@@ -48,7 +46,6 @@
         3923
         5433
         6443 # K3s
-        8011 # Netbird API
         8013
         8082
         8080
@@ -61,8 +58,6 @@
         8096
         8097
         9091
-        10000 # Netbird Signal
-        33073 # Netbird Management
       ];
       allowedUDPPorts = [
         53
@@ -80,10 +75,10 @@
       ];
     };
 
-    defaultGateway = {
-      address = "192.168.178.1";
-      interface = "enp0s31f6";
-    };
+    # defaultGateway = {
+    #   address = "192.168.178.1";
+    #   interface = "enp0s31f6";
+    # };
   };
 
   services.resolved = {

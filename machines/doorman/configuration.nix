@@ -16,13 +16,6 @@
     ];
   };
 
-  networking.hosts = {
-    "127.0.0.1" = [
-      "netbird.echsen.club"
-      "sso2.echsen.club"
-    ];
-  };
-
   services.resolved = {
     enable = true;
   };
