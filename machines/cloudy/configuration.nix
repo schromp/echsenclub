@@ -4,6 +4,8 @@
   ...
 }:
 {
+  clan.core.sops.defaultGroups = [ "admins" ];
+
   imports = [
     ./disko.nix
     ./keycloak.nix

@@ -1,5 +1,7 @@
 { lib, ... }:
 {
+  clan.core.sops.defaultGroups = [ "admins" ];
+
   imports = [
     ./caddy.nix
     ./lldap.nix
