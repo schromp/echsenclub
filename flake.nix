@@ -24,7 +24,10 @@
       clan = clan-core.lib.clan {
         inherit self;
         imports = [ ./clan.nix ];
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs; 
+          libC = import ./lib { config = clan.config; };
+        };
       };
     in
     {

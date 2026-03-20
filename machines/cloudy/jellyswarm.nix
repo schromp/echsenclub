@@ -24,9 +24,9 @@
     username = "admin";
     passwordFile = config.clan.core.vars.generators."jellyswarm-admin-password".files."password".path;
     extraEnvironment = {
-      JELLYSWARM_SERVER_NAME = "echsflix";
+      JELLYSWARM_SERVER_NAME = "Echsflix";
       JELLYSWARM_INCLUDE_SERVER_NAME_IN_MEDIA = "true";
-      JELLYSWARRM_PUBLIC_ADDRESS = "jellyswarm.echsen.club";
+      JELLYSWARRM_PUBLIC_ADDRESS = "flix.echsen.club";
       # JELLYSWARRM_PRECONFIGURED_SERVERS = [];
     };
   };

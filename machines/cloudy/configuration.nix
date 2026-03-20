@@ -7,7 +7,6 @@
   imports = [
     ./disko.nix
     ./keycloak.nix
-    # ./nginx.nix
     ./tangled.nix
     ./grafana.nix
     ./caddy.nix
@@ -36,26 +35,8 @@
       53
       80
       443
-
-      # 33080 # netbird relay
     ];
-    allowedUDPPorts = [
-      3478
-      # 12312 # temp
-    ];
-    # allowedUDPPortRanges = [
-    #   {
-    #     from = 49152;
-    #     to = 65535;
-    #   }
-    # ];
   };
-
-  # users.users.root.openssh.authorizedKeys.keys = [
-  #   ''
-  #     ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRat12+538VwG/IAv5R4AjdNYz/GATO7ULQnXtYC2HK lk@tower
-  #   ''
-  # ];
 
   services.openssh.settings.PasswordAuthentication = false;
 

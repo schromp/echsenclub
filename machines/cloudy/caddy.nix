@@ -1,11 +1,7 @@
-{ ... }:
+{libC,  ... }:
 {
   services.caddy = {
     enable = true;
-    # package = pkgs.caddy.withPlugins {
-    #   plugins = [ "github.com/caddy-dns/bunny@v1.2.0" ];
-    #   hash = "sha256-OkyyPKPKu5C4cASU3r/Uw/vtCVMNRVBnAau4uu+WVp8=";
-    # };
 
     globalConfig = ''
       servers {
@@ -29,21 +25,7 @@
       "spindle.echsen.club".extraConfig = ''
         reverse_proxy http://127.0.0.1:5555
       '';
-      "jellyswarm.echsen.club".extraConfig = ''
-        @netbird {
-          remote_ip 100.74.0.0/16
-        }
-
-        # Only proxy if the IP matches
-        handle @netbird {
-          reverse_proxy http://127.0.0.1:3030
-        }
-
-        # Fallback handle for everyone else
-        handle {
-          respond "Forbidden" 403
-        }
-      '';
+      "flix.echsen.club".extraConfig = (libC.onlyNetbird "http://127.0.0.1:3030");
     };
   };
 }

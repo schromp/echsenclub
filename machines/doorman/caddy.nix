@@ -1,24 +1,10 @@
-{ config, ... }:
+{ config, libC, ... }:
 {
   services.caddy = {
     enable = true;
     email = "server@echsen.club";
     virtualHosts = {
-      "lldap-admin.echsen.club".extraConfig = ''
-        @netbird {
-          remote_ip 100.111.0.0/16
-        }
-
-        # Only proxy if the IP matches
-        handle @netbird {
-          reverse_proxy http://127.0.0.1:17170
-        }
-
-        # Fallback handle for everyone else
-        handle {
-          respond "Forbidden" 403
-        }
-      '';
+      "lldap-admin.echsen.club".extraConfig = (libC.onlyNetbird "http://127.0.0.1:17170");
       "sso2.echsen.club".extraConfig = ''
         reverse_proxy http://127.0.0.1:9091
       '';
@@ -71,21 +57,6 @@
           }
         '';
       };
-      "ha.echsen.club".extraConfig = ''
-        @netbird {
-          remote_ip 100.111.0.0/16
-        }
-
-        # Only proxy if the IP matches
-        handle @netbird {
-          reverse_proxy http://100.111.203.220:8123
-        }
-
-        # Fallback handle for everyone else
-        handle {
-          respond "Forbidden" 403
-        }
-      '';
     };
   };
 }

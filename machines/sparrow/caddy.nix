@@ -72,6 +72,13 @@
         }
         reverse_proxy http://localhost:9200
       '';
+      "ha.echsen.club".extraConfig = ''
+        tls {
+          dns bunny {env.BUNNY_API_KEY}
+        }
+
+        reverse_proxy http://192.168.178.3:8123
+      '';
       "grocy.echsen.club".extraConfig = ''
         tls {
           dns bunny {env.BUNNY_API_KEY}
