@@ -7,10 +7,11 @@
     enable = true;
     package = inputs.jellyswarm.packages.${pkgs.system}.default.overrideAttrs 
       (finalAttrs: previousAttrs: {      
+        version = "0.2.1";
         src = pkgs.fetchFromGitHub {
           owner = "LLukas22";
           repo = "Jellyswarrm";
-          rev = "v0.2.0";
+          rev = "v0.2.1";
           sha256 = "sha256-bf+HiZLS54abDV9wW/MZQT/UJrtUQMlmFcmN+5T2FYU=";
         };
         cargoDeps = pkgs.rustPlatform.importCargoLock {
