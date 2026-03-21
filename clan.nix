@@ -9,6 +9,29 @@
   modules."acme" = ./service-modules/acme/acme.nix;
   modules."opentelemetry" = ./service-modules/opentelemetry/collector.nix;
 
+  inventory.machines = {
+    cloudy = {
+      deploy.targetHost = "root@157.180.37.119";
+      tags = [
+        "shared"
+      ];
+    };
+
+    doorman = {
+      deploy.targetHost = "root@195.201.96.101";
+      tags = [
+        "shared"
+      ];
+    };
+
+    sparrow = {
+      deploy.targetHost = "root@sparrow.internal.echsen.club";
+      tags = [
+        "personal-schromp"
+      ];
+    };
+  };
+
   inventory.instances = {
     common = {
       module = {
@@ -23,7 +46,8 @@
         name = "users";
         input = "clan-core";
       };
-      roles.default.tags.all = { };
+      roles.default.tags."personal-schromp" = { };
+      roles.default.tags.shared = { };
       roles.default.settings = {
         user = "lk";
         prompt = true;
@@ -41,7 +65,7 @@
         name = "users";
         input = "clan-core";
       };
-      roles.default.tags.all = { };
+      roles.default.tags.shared = { };
       roles.default.settings = {
         user = "goshva";
         prompt = true;
@@ -53,7 +77,6 @@
         ];
       };
     };
-
 
     root-user = {
       module = {
@@ -67,7 +90,11 @@
       };
     };
 
-    sshd = {
+    sshd-shared = {
+      module = {
+        name = "sshd";
+        input = "clan-core";
+      };
       roles.server.settings = {
         authorizedKeys = {
           "schromp-key" =
@@ -76,7 +103,21 @@
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHAUuSmWi39PhH40pw49q6TGgRAMwmxsFdDSLWHgNQ73 goshva@galahad";
         };
       };
-      roles.server.tags.all = { };
+      roles.server.tags.shared = { };
+    };
+
+    sshd-private-schromp = {
+      module = {
+        name = "sshd";
+        input = "clan-core";
+      };
+      roles.server.settings = {
+        authorizedKeys = {
+          "schromp-key" =
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRat12+538VwG/IAv5R4AjdNYz/GATO7ULQnXtYC2HK lk@tower";
+        };
+      };
+      roles.server.tags."personal-schromp" = { };
     };
 
     netbird = {
