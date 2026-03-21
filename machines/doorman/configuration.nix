@@ -21,6 +21,7 @@
   services.resolved = {
     enable = true;
   };
+  services.fail2ban.enable = true;
 
   # this is needed because the management server runs on the same server as the client
   services.netbird.clients."echsenclub".config.ManagementURL.Host = lib.mkForce "[::]:8011";
