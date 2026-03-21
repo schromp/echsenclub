@@ -36,6 +36,25 @@
       };
     };
 
+    user-goshva = {
+      module = {
+        name = "users";
+        input = "clan-core";
+      };
+      roles.default.tags.all = { };
+      roles.default.settings = {
+        user = "goshva";
+        prompt = true;
+        groups = [
+          "wheel"
+        ];
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHAUuSmWi39PhH40pw49q6TGgRAMwmxsFdDSLWHgNQ73 goshva@galahad"
+        ];
+      };
+    };
+
+
     root-user = {
       module = {
         name = "users";
@@ -53,6 +72,8 @@
         authorizedKeys = {
           "schromp-key" =
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRat12+538VwG/IAv5R4AjdNYz/GATO7ULQnXtYC2HK lk@tower";
+          "goshva-key" =
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHAUuSmWi39PhH40pw49q6TGgRAMwmxsFdDSLWHgNQ73 goshva@galahad";
         };
       };
       roles.server.tags.all = { };
