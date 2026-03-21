@@ -55,6 +55,7 @@
                     }
                   ];
                   TURNConfig.Turns = lib.mkForce [ ];
+                  TURNConfig.Secret = null;
                   HttpConfig = {
                     AuthIssuer = "https://sso2.echsen.club";
                     AuthAudience = "netbird";
