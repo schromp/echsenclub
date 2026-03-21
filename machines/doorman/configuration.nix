@@ -26,5 +26,5 @@
   # this is needed because the management server runs on the same server as the client
   services.netbird.clients."echsenclub".config.ManagementURL.Host = lib.mkForce "[::]:8011";
 
-  clan.core.networking.targetHost = "root@doorman";
+  clan.core.networking.targetHost = "root@195.201.96.101";
 }
