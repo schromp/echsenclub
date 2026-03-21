@@ -6,6 +6,7 @@
       jwt_secret_file = "/run/credentials/lldap.service/jwt_secret";
       ldap_base_dn = "dc=echsen,dc=club";
       http_url = "https://lldap.echsen.club";
+      force_ldap_user_pass_reset = "always";
     };
   };
 
