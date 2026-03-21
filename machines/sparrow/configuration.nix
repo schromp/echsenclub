@@ -4,7 +4,6 @@
 }:
 {
   imports = [
-    ./postgres.nix
     ./jellyfin.nix
     ./audiobookshelf.nix
     ./disko.nix
