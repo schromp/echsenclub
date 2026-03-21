@@ -3,7 +3,7 @@
     enable = true;
     port = 8097;
     user = "audiobookshelf";
-    group = "jellyfin";
+    group = "media";
   };
 
   users.users.audiobookshelf.extraGroups = ["jellyfin"];

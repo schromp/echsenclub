@@ -79,6 +79,13 @@
 
         reverse_proxy http://192.168.178.3:8123
       '';
+      "storyteller.echsen.club".extraConfig = ''
+        tls {
+          dns bunny {env.BUNNY_API_KEY}
+        }
+
+        reverse_proxy http://127.0.0.1:8001
+      '';
       "grocy.echsen.club".extraConfig = ''
         tls {
           dns bunny {env.BUNNY_API_KEY}

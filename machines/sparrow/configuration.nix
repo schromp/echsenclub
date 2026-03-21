@@ -18,6 +18,7 @@
     ./chaptarr.nix
     ./caddy.nix
     ./ocis.nix
+    ./storyteller.nix
   ];
 
   fileSystems."/srv" = {
@@ -112,6 +113,10 @@
   virtualisation.podman = {
     enable = true;
     autoPrune.enable = true;
+  };
+
+  users.groups.media = {
+    gid = 1500;
   };
   # virtualisation.docker.storageDriver = "btrfs";
   # virtualisation.oci-containers.backend = "docker";
