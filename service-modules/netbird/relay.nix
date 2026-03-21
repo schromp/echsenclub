@@ -16,7 +16,6 @@ in
     environment = {
       NB_EXPOSED_ADDRESS = exposedAddress;
       NB_LISTEN_ADDRESS = ":${toString port}";
-      NB_ENABLE_STUN = "true";
     };
 
     script = ''
