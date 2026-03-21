@@ -5,6 +5,7 @@
     ../../../shared/secrets/smtp-secret.nix
     
     ./clients/netbird.nix
+    ./clients/storyteller-sparrow.nix
   ];
 
   services.authelia.instances."EchsenSSO" = {
