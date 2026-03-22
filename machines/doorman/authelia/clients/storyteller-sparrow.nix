@@ -34,11 +34,6 @@
           "email"
           "groups"
         ];
-        grant_types = [
-          "authorization_code"
-          "refresh_token"
-          "urn:ietf:params:oauth:grant-type:device_code"
-        ];
         claims_policy = "storyteller-sparrow";
         authorization_policy = "one_factor";
       }

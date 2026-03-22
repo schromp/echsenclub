@@ -40,7 +40,6 @@
         ];
         grant_types = [
           "authorization_code"
-          "refresh_token"
           "urn:ietf:params:oauth:grant-type:device_code"
         ];
         claims_policy = "netbird";
@@ -70,7 +69,6 @@
         ];
         grant_types = [
           "authorization_code"
-          "refresh_token"
         ];
         claims_policy = "netbird";
         authorization_policy = "one_factor";

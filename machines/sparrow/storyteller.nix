@@ -4,7 +4,7 @@
     image = "registry.gitlab.com/storyteller-platform/storyteller:latest";
     autoStart = true;
 
-    user = "2000:1500";
+    user = "1000:1500";
     environment = {
       AUTH_URL = "https://storyteller.echsen.club/api/v2/auth";
       ENABLE_WEB_READER = "true";
@@ -20,6 +20,10 @@
     volumes = [
       "/var/lib/storyteller:/data"
       "/srv/media/audiobooks:/audiobooks:rw"
+    ];
+
+    devices = [
+        "/dev/nvidia0:/dev/nvidia0"
     ];
   };
 
