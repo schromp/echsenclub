@@ -48,6 +48,12 @@
                     Secret._secret = config.clan.core.vars.generators."netbird-relay-auth".files."password".path;
                     Addresses = [ "rels://netbird.echsen.club:443" ];
                   };
+                  Stuns = [
+                    {
+                      Proto = "udp";
+                      URI = "stun:netbird.echsen.club:3478";
+                    }
+                  ];
                   TURNConfig.Turns = lib.mkForce [ ];
                   TURNConfig.Secret = null;
                   HttpConfig = {
