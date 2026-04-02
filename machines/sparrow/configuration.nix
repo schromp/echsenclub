@@ -9,7 +9,6 @@
     ./disko.nix
     ./nginx.nix
     ./arr.nix
-    ./k3s.nix
     ./freshrss.nix
     ./immich.nix
     ./grocy.nix

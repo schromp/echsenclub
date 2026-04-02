@@ -25,6 +25,8 @@
     };
     declarativePlugins = with pkgs.grafanaPlugins; [
       grafana-clickhouse-datasource
+      grafana-exploretraces-app
+      grafana-lokiexplore-app
     ];
     provision = {
       enable = true;
