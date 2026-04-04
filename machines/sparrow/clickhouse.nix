@@ -1,24 +1,18 @@
-{config, pkgs, ...}: {
-services.clickhouse = {
+{ config, pkgs, ... }:
+{
+  services.clickhouse = {
     enable = true;
     serverConfig = {
       tcp_port = 9900;
       http_port = 9901;
 
       listen_host = "::";
-      
-      mark_cache_size = 104857600; 
-      
+
+      mark_cache_size = 104857600;
+
       max_server_memory_usage_to_ram_ratio = 0.75;
       background_pool_size = 2;
       max_thread_pool_size = 2000;
-
-      metric_log = { enabled = "false"; };
-      asynchronous_metric_log = { enabled = "false"; };
-      text_log = { enabled = "false"; };
-      trace_log = { enabled = "false"; };
-      query_log = { enabled = "false"; };
-      query_thread_log = { enabled = "false"; };
 
       merge_tree = {
         number_of_free_entries_in_pool_to_lower_max_size_of_merge = 2;
@@ -26,6 +20,17 @@ services.clickhouse = {
         number_of_free_entries_in_pool_to_execute_optimize_entire_partition = 2;
       };
     };
+    extraServerConfig = ''
+      <clickhouse>
+          <query_log remove="1" />
+          <trace_log remove="1" />
+          <metric_log remove="1" />
+          <asynchronous_metric_log remove="1" />
+          <part_log remove="1" />
+          <background_schedule_pool_log remove="1" />
+          <text_log remove="1" />
+      </clickhouse>
+    '';
 
     usersConfig = {
       profiles = {
@@ -48,7 +53,7 @@ services.clickhouse = {
   # };
 
   clan.core.vars.generators."clickhouse-default-user" = {
-    files."password" ={
+    files."password" = {
       secret = true;
       owner = "clickhouse";
       group = "clickhouse";
