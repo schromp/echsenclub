@@ -1,4 +1,8 @@
-{config, pkgs, ...}: {
+{ config, pkgs, ... }:
+{
+  imports = [
+    ../doorman/authelia/client-secrets/grafana-client-secret.nix
+  ];
   services.grafana = {
     enable = true;
     settings = {
@@ -8,19 +12,21 @@
       };
       "auth.generic_oauth" = {
         enabled = true;
-        name = "0.0.0.0";
+        name = "EchsenSSO";
         allow_sign_up = true;
         client_id = "grafana";
-        scopes = "openid email profile offline_access roles";
-        email_attribute_path = "email";
-        login_attribute_path = "username";
-        name_attribute_path = "full_name";
-        auth_url = "https://sso.echsen.club/realms/echsenclub/protocol/openid-connect/auth";
-        token_url = "https://sso.echsen.club/realms/echsenclub/protocol/openid-connect/token";
-        api_url = "https://sso.echsen.club/realms/echsenclub/protocol/openid-connect/userinfo";
-        role_attribute_path = "contains(resource_access.grafana.roles[*], 'admin') && 'Admin' || contains(resource_access.grafana.roles[*], 'editor') && 'Editor' || 'Viewer'";
-        grafana_admin_attribute_path = "contains(resource_access.grafana.roles[*], 'server_admin')";
+        scopes = "openid email profile roles groups";
+        login_attribute_path = "preferred_username";
+        name_attribute_path = "name";
+        groups_attribute_path = "groups";
+        auth_url = "https://sso2.echsen.club/api/oidc/authorization";
+        token_url = "https://sso2.echsen.club/api/oidc/token";
+        api_url = "https://sso2.echsen.club/api/oidc/userinfo";
+        role_attribute_path = "contains(groups[*], 'GrafanaAdmins') && 'Admin' || contains(groups[*], 'GrafanaEditors') && 'Editor' || 'Viewer'";
         allow_assign_grafana_admin = true;
+        auth_style = "InHeader";
+        empty_scopes = false;
+        use_pkce = true;
       };
     };
     declarativePlugins = with pkgs.grafanaPlugins; [
@@ -35,7 +41,7 @@
           name = "Clickhouse";
           type = "grafana-clickhouse-datasource";
           uid = "clickhouse";
-          url = "sparrow.internal.echsen.club"; 
+          url = "sparrow.internal.echsen.club";
           jsonData = {
             defaultDatabase = "default";
             port = 9901;
@@ -48,24 +54,6 @@
       ];
     };
   };
-  systemd.services.grafana.serviceConfig.EnvironmentFile = config.clan.core.vars.generators."keycloak-grafana".files."client-secret".path;
-  clan.core.vars.generators = {
-    "keycloak-grafana" = {
-      prompts.client-secret-prompt.description = "The keycloak client secret for grafana";
-      prompts.client-secret-prompt.persist = true;
-      prompts.client-secret-prompt.type = "hidden";
-
-      script = ''
-        {
-          printf "GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET="; cat "$prompts/client-secret-prompt"; echo
-        } > "$out/client-secret"
-      '';
-
-      files.client-secret = {
-        secret = true;
-        owner = "grafana";
-        group = "grafana";
-      };
-    };
-  };
+  systemd.services.grafana.serviceConfig.EnvironmentFile =
+    config.clan.core.vars.generators."grafana-client-secret".files."secret".path;
 }
