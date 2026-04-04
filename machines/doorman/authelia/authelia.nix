@@ -7,6 +7,7 @@
     ./clients/netbird.nix
     ./clients/storyteller-sparrow.nix
     ./clients/audiobookshelf.nix
+    ./clients/grafana.nix
   ];
 
   services.authelia.instances."EchsenSSO" = {
