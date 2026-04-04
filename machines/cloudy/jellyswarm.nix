@@ -12,7 +12,7 @@
           owner = "LLukas22";
           repo = "Jellyswarrm";
           rev = "v0.2.1";
-          sha256 = "sha256-bf+HiZLS54abDV9wW/MZQT/UJrtUQMlmFcmN+5T2FYU=";
+          sha256 = "sha256-Mfbd5imny3fqv9SS7zcxiJFBbpbW+g+QyzPu/cHNMC4=";
         };
         cargoDeps = pkgs.rustPlatform.importCargoLock {
           lockFile = finalAttrs.src + "/Cargo.lock";
