@@ -6,6 +6,7 @@
   services.grafana = {
     enable = true;
     settings = {
+      security.secret_key = "$__file{${config.clan.core.vars.generators."grafana-secret".files."key".path}}";
       server = {
         root_url = "https://grafana.echsen.club";
         http_port = 3000;
@@ -56,4 +57,18 @@
   };
   systemd.services.grafana.serviceConfig.EnvironmentFile =
     config.clan.core.vars.generators."grafana-client-secret".files."secret".path;
+
+  clan.core.vars.generators."grafana-secret" = {
+    files."key" = {
+      secret = true;
+      owner = "grafana";
+      group = "grafana";
+    };
+    runtimeInputs = with pkgs; [
+      openssl
+    ];
+    script = ''
+      openssl rand -hex 32 > $out/key
+    '';
+  };
 }

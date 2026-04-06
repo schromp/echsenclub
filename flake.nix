@@ -1,14 +1,14 @@
 {
   inputs = {
     clan-core.url = "https://git.clan.lol/clan/clan-core/archive/main.tar.gz";
-    nixpkgs.follows = "clan-core/nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     netbird-new-module.url = "github:schromp/nixpkgs/fix-netbird";
     tangled.url = "git+https://tangled.org/@tangled.org/core";
     copyparty.url = "github:9001/copyparty";
     jellyswarm = {
-      url = "github:LLukas22/Jellyswarrm";
+      url = "github:LLukas22/Jellyswarrm/v0.2.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
