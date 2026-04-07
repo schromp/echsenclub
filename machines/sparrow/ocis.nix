@@ -11,13 +11,9 @@
       TLS_INSECURE = "true";
       PROXY_TLS = "false";
 
-      OCIS_OIDC_ISSUER = "https://sso.echsen.club/realms/echsenclub";
-      WEB_OIDC_METADATA_URL = "https://sso.echsen.club/realms/echsenclub/.well-known/openid-configuration";
-      WEB_OIDC_AUTHORITY = "https://sso.echsen.club/realms/echsenclub";
-      PROXY_OIDC_ISSUER = "https://sso.echsen.club/realms/echsenclub";
-
+      OCIS_OIDC_ISSUER = "https://sso2.echsen.club";
       PROXY_OIDC_REWRITE_WELLKNOWN = "true";
-      WEB_OIDC_CLIENT_ID = "ocis";
+      WEB_OIDC_CLIENT_ID = "ocis-sparrow";
       PROXY_AUTOPROVISION_ACCOUNTS = "true";
       PROXY_ROLE_ASSIGNMENT_DRIVER = "oidc";
       PROXY_ROLE_ASSIGNMENT_OIDC_CLAIM = "roles";

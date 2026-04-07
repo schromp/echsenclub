@@ -41,6 +41,12 @@
             ...
           }:
           {
+            systemd.services.opentelemetry-collector = {
+              serviceConfig = {
+                AmbientCapabilities = [ "CAP_DAC_READ_SEARCH" ];
+                CapabilityBoundingSet = [ "CAP_DAC_READ_SEARCH" ];
+              };
+            };
             services.opentelemetry-collector = {
               enable = true;
               package = pkgs.opentelemetry-collector-contrib;

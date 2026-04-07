@@ -8,6 +8,7 @@
     ./clients/storyteller-sparrow.nix
     ./clients/audiobookshelf.nix
     ./clients/grafana.nix
+    ./clients/ocis.nix
   ];
 
   services.authelia.instances."EchsenSSO" = {
