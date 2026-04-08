@@ -18,6 +18,7 @@
     ./caddy.nix
     ./ocis.nix
     ./storyteller.nix
+    ./ollama.nix
   ];
 
   fileSystems."/srv" = {
@@ -57,6 +58,7 @@
         8096
         8097
         9091
+        11434 # ollama
       ];
       allowedUDPPorts = [
         53

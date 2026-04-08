@@ -86,6 +86,32 @@
 
         reverse_proxy http://127.0.0.1:8001
       '';
+      "ollama.echsen.club".extraConfig = ''
+        tls {
+          dns bunny {env.BUNNY_API_KEY}
+        }
+
+        reverse_proxy http://127.0.0.1:11434 {
+          header_up Host localhost:11434
+          flush_interval -1
+
+          transport http {
+              # Avoid upstream gzip negotiation if it interferes with streaming.
+              compression off
+
+              # Give Ollama time to load a model and produce the first chunk.
+              response_header_timeout 10m
+              dial_timeout 10s
+          }
+        }
+      '';
+      "openwebui.echsen.club".extraConfig = ''
+        tls {
+          dns bunny {env.BUNNY_API_KEY}
+        }
+
+        reverse_proxy http://127.0.0.1:11435
+      '';
       "grocy.echsen.club".extraConfig = ''
         tls {
           dns bunny {env.BUNNY_API_KEY}
