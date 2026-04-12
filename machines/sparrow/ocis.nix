@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   services.ocis = {
     enable = true;
     url = "https://ocis.echsen.club";
@@ -15,9 +16,9 @@
       PROXY_OIDC_REWRITE_WELLKNOWN = "true";
       WEB_OIDC_CLIENT_ID = "ocis-sparrow";
       PROXY_AUTOPROVISION_ACCOUNTS = "true";
-      PROXY_ROLE_ASSIGNMENT_DRIVER = "oidc";
-      PROXY_ROLE_ASSIGNMENT_OIDC_CLAIM = "roles";
-      PROXY_OIDC_ALLOWED_CLIENTS = "ocis,ownCloud";
+      PROXY_ROLE_ASSIGNMENT_DRIVER = "default";
+      PROXY_OIDC_ACCESS_TOKEN_VERIFY_METHOD = "none";
+      PROXY_OIDC_ALLOWED_CLIENTS = "ocis-sparrow";
       OCIS_ADMIN_USER_ID = "";
       WEB_OIDC_SCOPE = "openid profile email acr";
       PROXY_USER_OIDC_CLAIM = "sub";

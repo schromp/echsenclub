@@ -14,12 +14,14 @@
         public = true;
         require_pkce = true;
         pkce_challenge_method = "S256";
+        authorization_policy = "one_factor";
         scopes = [
           "openid"
           "profile"
           "email"
           "groups"
           "offline_access"
+          "acr"
         ];
         redirect_uris = [
           "https://ocis.echsen.club/"
@@ -41,6 +43,7 @@
       {
         client_id = "ocis-desktop-sparrow";
         client_name = "ocis Desktop Sparrow";
+        authorization_policy = "one_factor";
         client_secret = config.clan.core.vars.generators."ocis-sparrow-desktop-client-secret".files."hash".value;
         public = false;
         require_pkce = true;
@@ -68,7 +71,8 @@
         token_endpoint_auth_method = "client_secret_basic";
       }
       {
-        client_id = "ocis-android-sparrow";
+        client_id = "e4rAsNUSIUs0lF4nbv9FmCeUkTlV9GdgTLDH1b5uie7syb90SzEVrbN7HIpmWJeD";
+        authorization_policy = "one_factor";
         client_name = "ocis Android Sparrow";
         client_secret = config.clan.core.vars.generators."ocis-sparrow-android-client-secret".files."hash".value;
         public = false;
@@ -93,10 +97,11 @@
         ];
         access_token_signed_response_alg = "none";
         userinfo_signed_response_alg = "none";
-        token_endpoint_auth_method = "client_secret_basic";
+        token_endpoint_auth_method = "client_secret_post";
       }
       {
         client_id = "ocis-ios-sparrow";
+        authorization_policy = "one_factor";
         client_name = "ocis IOS Sparrow";
         client_secret = config.clan.core.vars.generators."ocis-sparrow-ios-client-secret".files."hash".value;
         public = false;
