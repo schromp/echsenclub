@@ -28,6 +28,15 @@
           inherit inputs; 
           libC = import ./lib { config = clan.config; };
         };
+        pkgsForSystem =
+          system:
+          import nixpkgs {
+            inherit system;
+            config = {
+              allowUnfree = true;
+            };
+            # overlays = [];
+          };
       };
     in
     {

@@ -100,7 +100,6 @@
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
   # nixpkgs.config.nvidia.acceptLicense = true;
   hardware.nvidia.open = false;
   hardware.nvidia-container-toolkit.enable = true;
