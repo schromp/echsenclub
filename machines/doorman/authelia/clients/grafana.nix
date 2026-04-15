@@ -23,6 +23,7 @@
         client_secret = config.clan.core.vars.generators."grafana-client-secret".files."hash".value;
         public = false;
         require_pkce = true;
+        consent_mode = "implicit";
         pkce_challenge_method = "S256";
         redirect_uris = [
           "https://grafana.echsen.club/login/generic_oauth"

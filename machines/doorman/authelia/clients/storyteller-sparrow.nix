@@ -22,6 +22,7 @@
       {
         client_id = "storyteller-sparrow";
         client_name = "StoryTeller Sparrow";
+        consent_mode = "implicit";
         client_secret =
           config.clan.core.vars.generators."storyteller-sparrow-client-secret".files."hash".value;
         public = false;

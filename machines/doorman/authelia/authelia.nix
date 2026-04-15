@@ -32,9 +32,9 @@
             authelia_url = "https://sso2.echsen.club";
             name = "authelia_session";
             same_site = "lax";
-            inactivity = "5m";
-            expiration = "1h";
-            remember_me = "1d";
+            inactivity = "7d";
+            expiration = "30d";
+            remember_me = "90d";
           }
         ];
       };

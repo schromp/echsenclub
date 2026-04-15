@@ -10,6 +10,7 @@
       {
         client_id = "ocis-sparrow";
         client_name = "ocis Sparrow";
+        consent_mode = "implicit";
         lifespan = "ocis";
         public = true;
         require_pkce = true;
@@ -43,6 +44,7 @@
       {
         client_id = "ocis-desktop-sparrow";
         client_name = "ocis Desktop Sparrow";
+        consent_mode = "implicit";
         authorization_policy = "one_factor";
         client_secret = config.clan.core.vars.generators."ocis-sparrow-desktop-client-secret".files."hash".value;
         public = false;
@@ -75,6 +77,7 @@
         authorization_policy = "one_factor";
         client_name = "ocis Android Sparrow";
         client_secret = config.clan.core.vars.generators."ocis-sparrow-android-client-secret".files."hash".value;
+        consent_mode = "implicit";
         public = false;
         require_pkce = true;
         pkce_challenge_method = "S256";
@@ -102,6 +105,7 @@
       {
         client_id = "ocis-ios-sparrow";
         authorization_policy = "one_factor";
+        consent_mode = "implicit";
         client_name = "ocis IOS Sparrow";
         client_secret = config.clan.core.vars.generators."ocis-sparrow-ios-client-secret".files."hash".value;
         public = false;

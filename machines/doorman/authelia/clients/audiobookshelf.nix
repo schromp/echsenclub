@@ -8,6 +8,7 @@
         client_secret =
           config.clan.core.vars.generators."audiobookshelf-sparrow-client-secret".files."hash".value;
         public = false;
+        consent_mode = "implicit";
         require_pkce = true;
         pkce_challenge_method = "S256";
         redirect_uris = [
