@@ -1,4 +1,4 @@
-{ ... }:
+{ config, lib, ... }:
 {
   services.immich = {
     enable = true;
@@ -23,4 +23,26 @@
     "video"
     "render"
   ];
+
+  clan.core.state.immich = {
+    folders = [
+      "/srv/media/immich/upload"
+      "/srv/media/immich/library"
+      "/srv/media/immich/profile"
+      "/srv/media/immich/backups"
+    ];
+
+    preBackupScript = ''
+      export PATH=${lib.makeBinPath [ config.systemd.package ]}
+
+      systemctl stop immich-machine-learning.service
+      systemctl stop immich-server.service
+    '';
+    postBackupScript = ''
+      export PATH=${lib.makeBinPath [ config.systemd.package ]}
+
+      systemctl start immich-server.service
+      systemctl start immich-machine-learning.service
+    '';
+  };
 }

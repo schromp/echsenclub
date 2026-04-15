@@ -146,5 +146,27 @@
         prometheusTargets = [ "localhost:9090" ];
       };
     };
+
+    borgbackup = {
+      module = {
+        name = "borgbackup";
+        input = "clan-core";
+      };
+
+      roles.client.machines.sparrow.settings = {
+        destinations.sparrow = {
+          repo = "/backup/borgbackup/sparrow";
+        };
+
+        startAt = "*-*-* 02:30:00";
+      };
+
+      roles.server.machines = {
+        sparrow.settings = {
+          address = "sparrow.internal.echsen.club";
+          directory = "/backup/borgbackup";
+        };
+      };
+    };
   };
 }
