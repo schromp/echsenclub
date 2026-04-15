@@ -622,17 +622,18 @@
         "sqlite-lib-src": "sqlite-lib-src"
       },
       "locked": {
-        "lastModified": 1775806124,
-        "narHash": "sha256-K0Th4lG2eqwjnMbsJOw05qAtQn/BQHykfzheH0MZN5U=",
-        "ref": "refs/heads/master",
-        "rev": "7ef0e37220e456e23b12e112a2608b6585966d2e",
-        "revCount": 2217,
+        "lastModified": 1775125115,
+        "narHash": "sha256-cN0RrnfsY3TR5Xj9nc5JV0M9aDRsQfN1PAUNakiQbtU=",
+        "ref": "refs/tags/v1.13.0-alpha",
+        "rev": "c3f60dc17fd6cc709159974f2815a6d14044a106",
+        "revCount": 2157,
         "type": "git",
-        "url": "https://tangled.org/@tangled.org/core"
+        "url": "https://tangled.org/tangled.org/core"
       },
       "original": {
+        "ref": "refs/tags/v1.13.0-alpha",
         "type": "git",
-        "url": "https://tangled.org/@tangled.org/core"
+        "url": "https://tangled.org/tangled.org/core"
       }
     },
     "treefmt-nix": {

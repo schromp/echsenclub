@@ -12,7 +12,7 @@
     ./tangled.nix
     ./grafana.nix
     ./caddy.nix
-    ./jellyswarm.nix
+    # ./jellyswarm.nix
   ];
 
   fileSystems."/" = {
@@ -44,43 +44,6 @@
 
   services.matrix-synapse.settings = {
     max_upload_size = "100M";
-  };
-
-  services.dnsmasq = {
-    enable = false;
-    settings = {
-      interface = "nb-echsenclub"; # when broken, remove this, update, add again, update again.
-      # Also please fix this dns setup soon
-      bind-interfaces = true;
-      port = 5353;
-      address =
-        let
-          cloudy = "100.117.81.56";
-          sparrow = "100.117.12.69";
-        in
-        [
-          "/jellyseerr.echsen.club/${sparrow}"
-          "/jellyfin.echsen.club/${sparrow}"
-          "/radarr.echsen.club/${sparrow}"
-          "/sonarr.echsen.club/${sparrow}"
-          "/prowlarr.echsen.club/${sparrow}"
-          "/sabnzbd.echsen.club/${sparrow}"
-          "/pdf.echsen.club/${sparrow}"
-          "/kavita.echsen.club/${sparrow}"
-          "/nextcloud.echsen.club/${sparrow}"
-          "/rss.echsen.club/${sparrow}"
-          "/immich.echsen.club/${sparrow}"
-          "/signoz.echsen.club/${sparrow}"
-          "/git.echsen.club/${sparrow}"
-          "/freshrss.echsen.club/${sparrow}"
-          "/grocy.echsen.club/${sparrow}"
-          "/copyparty.echsen.club/${sparrow}"
-          "/clickhouse.echsen.club/${sparrow}"
-          "/maubot.echsen.club/${cloudy}"
-          "/matrix-admin.echsen.club/${cloudy}"
-        ];
-      server = [ "1.1.1.1" ];
-    };
   };
 
   services.resolved.enable = true;

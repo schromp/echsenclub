@@ -5,7 +5,7 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     netbird-new-module.url = "github:schromp/nixpkgs/fix-netbird";
-    tangled.url = "git+https://tangled.org/@tangled.org/core";
+    tangled.url = "git+https://tangled.org/tangled.org/core?ref=refs/tags/v1.13.0-alpha";
     copyparty.url = "github:9001/copyparty";
     jellyswarm = {
       url = "github:LLukas22/Jellyswarrm/v0.2.1";

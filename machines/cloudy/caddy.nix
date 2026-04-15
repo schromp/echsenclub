@@ -25,7 +25,6 @@
       "spindle.echsen.club".extraConfig = ''
         reverse_proxy http://127.0.0.1:5555
       '';
-      "flix.echsen.club".extraConfig = (libC.onlyNetbird "http://127.0.0.1:3030");
     };
   };
 }
