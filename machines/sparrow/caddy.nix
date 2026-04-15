@@ -42,7 +42,7 @@
         }
         reverse_proxy http://localhost:8092
       '';
-      "jellyseerr.echsen.club".extraConfig = ''
+      "seerr.echsen.club".extraConfig = ''
         tls {
           dns bunny {env.BUNNY_API_KEY}
         }

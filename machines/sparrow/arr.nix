@@ -38,7 +38,7 @@
       };
     };
 
-    jellyseerr = {
+    seerr = {
       enable = true;
       port = 8091;
       openFirewall = true;
