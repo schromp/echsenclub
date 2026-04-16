@@ -19,6 +19,7 @@
     ./ocis.nix
     ./storyteller.nix
     ./ollama.nix
+    ./wyoming.nix
   ];
 
   fileSystems."/srv" = {
@@ -58,6 +59,8 @@
         8096
         8097
         9091
+        10200 # piper
+        10300 # whisper
         11434 # ollama
       ];
       allowedUDPPorts = [
