@@ -13,6 +13,15 @@
     };
   };
 
+  nixConfig = {
+    substituters = [
+      "https://cache.nixos-cuda.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+    ];
+  };
+
   outputs =
     {
       self,
@@ -25,7 +34,7 @@
         inherit self;
         imports = [ ./clan.nix ];
         specialArgs = {
-          inherit inputs; 
+          inherit inputs;
           libC = import ./lib { config = clan.config; };
         };
         pkgsForSystem =

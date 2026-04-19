@@ -154,10 +154,6 @@
       };
 
       roles.client.machines.sparrow.settings = {
-        destinations.sparrow = {
-          repo = "/backup/borgbackup/sparrow";
-        };
-
         startAt = "*-*-* 02:30:00";
       };
 
